@@ -1,15 +1,14 @@
 import { Router } from "express";
 import { firstController } from "../app/controller/FirstController";
 import jwt from "jsonwebtoken";
+import { authMiddleware } from "./middleware/auth";
 
 const router: Router = Router();
 
-//Routes
-router.get("/", firstController.home);
+router.get("/", authMiddleware, firstController.home);
 
 router.post("/login", async (req, res) => {
   try {
-    // Get user input
     const { email, password } = req.body;
 
     // Validate user input
@@ -23,7 +22,6 @@ router.post("/login", async (req, res) => {
     };
 
     if (user) {
-      // Create token
       const token = jwt.sign(
         { email: user.email },
         'KyHaIILsnmIaYWu',
@@ -31,7 +29,7 @@ router.post("/login", async (req, res) => {
           expiresIn: "2h",
         }
       );
-      res.status(200).json(token);
+      res.status(200).json({token});
     }
   } catch (err) {
     console.log(err);
