@@ -2,6 +2,7 @@ import { Router } from "express";
 import { firstController } from "../app/controller/FirstController";
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "./middleware/auth";
+import { JWT_SECRET } from "./config/env";
 
 const router: Router = Router();
 
@@ -24,7 +25,7 @@ router.post("/login", async (req, res) => {
     if (user) {
       const token = jwt.sign(
         { email: user.email },
-        'KyHaIILsnmIaYWu',
+        JWT_SECRET!,
         {
           expiresIn: "2h",
         }
