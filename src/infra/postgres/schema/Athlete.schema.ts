@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { User } from "./User.schema";
 
 @Entity()
 export class Athlete {
@@ -9,16 +10,14 @@ export class Athlete {
   name!: string;
 
   @Column()
-  email!: string;
-
-  @Column()
   document!: string;
 
-  @Column({name: "birth_date"})
+  @Column({ name: "birth_date" })
   birthDate!: Date;
 
-  @Column()
-  password!: string;
+  @OneToOne(() => User, (user) => user.athlete)
+  @JoinColumn()
+  user!: User;
 
   @Column({ name: "created_at" })
   createdAt?: Date;

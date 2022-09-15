@@ -3,10 +3,14 @@ import { firstController } from "../app/controller/FirstController";
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "./middleware/auth";
 import { JWT_SECRET } from "./config/env";
+import { registerController } from "../app/controller/RegisterController";
 
 const router: Router = Router();
 
 router.get("/", authMiddleware, firstController.home);
+
+router.post("/register", registerController.registerAthlete);
+
 
 router.post("/login", async (req, res) => {
   try {
