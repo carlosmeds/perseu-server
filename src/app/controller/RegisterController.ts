@@ -11,4 +11,5 @@ class RegisterController {
     });
   }
 }
+
 export const registerController = new RegisterController();
