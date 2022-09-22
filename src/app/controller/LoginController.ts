@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
 import { JWT_SECRET } from "../../main/config/env";
 import jwt from "jsonwebtoken";
+import { CryptoService } from "../service/crypto.service";
 
 class LoginController {
   async login(req: Request, res: Response) {
@@ -15,6 +16,11 @@ class LoginController {
       const user = await userRepo.getUser(email);
 
       if (user) {
+        const isPasswordCorrect = await CryptoService.compare(password, user.password);
+        if (!isPasswordCorrect) {
+          return res.status(400).send("Invalid Credentials");
+        }
+
         const token = jwt.sign({ email: user.email }, JWT_SECRET!, {
           expiresIn: "2h",
         });
