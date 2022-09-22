@@ -12,10 +12,9 @@ export class Athlete {
   @Column()
   document!: string;
 
-  @Column({ name: "birth_date" })
-  birthDate!: Date;
+  @Column({ name: "birthdate" })
+  birthdate!: Date;
 
-  @OneToOne(() => User, (user) => user.athlete)
   @JoinColumn()
   user!: User;
 

@@ -12,10 +12,6 @@ export class User {
   @Column()
   password!: string;
 
-  @OneToOne(() => Athlete, (athlete) => athlete.user)
-  @JoinColumn()
-  athlete!: Athlete;
-
   @Column({ name: "created_at" })
   createdAt?: Date;
 
