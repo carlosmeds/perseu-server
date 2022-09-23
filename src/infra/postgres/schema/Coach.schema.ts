@@ -3,7 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   JoinColumn,
+  OneToOne,
 } from "typeorm";
+import { Team } from "./Team.schema";
 import { User } from "./User.schema";
 
 @Entity()
@@ -25,6 +27,9 @@ export class Coach {
 
   @JoinColumn()
   user!: User;
+
+  @OneToOne(() => Team, (team) => team.coach)
+  team!: Team;
 
   @Column({ name: "created_at" })
   createdAt?: Date;
