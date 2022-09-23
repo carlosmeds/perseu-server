@@ -20,6 +20,7 @@ class RegisterController {
     );
 
     return res.json({
+      id: athlete.id,
       name: athlete.name,
       email: athlete.user.email,
       document: athlete.document,
