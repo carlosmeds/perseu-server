@@ -22,9 +22,12 @@ export class RequestRepo {
     if (!team) {
       throw new Error("Team not found");
     }
-    const requests = await AppDataSource.manager.findBy(Request, {
-      team,
+    const requests = await AppDataSource.manager.find(Request, {
+      relations: ['athlete'],
+      where: { team },
     });
+
+  
     return requests;
   }
 }
