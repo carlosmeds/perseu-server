@@ -1,5 +1,6 @@
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
+import { Team } from "../schema/Team.schema";
 import { User } from "../schema/User.schema";
 
 export class AthleteRepo {
@@ -9,7 +10,18 @@ export class AthleteRepo {
     return result;
   }
 
-  async createAthlete(name: string, document: string, birthdate: Date, user: User) {
+  async updateTeam(athlete: Athlete, team: Team) {
+    athlete.team = team;
+    athlete.updatedAt = new Date();
+    await AppDataSource.manager.save(athlete);
+  }
+
+  async createAthlete(
+    name: string,
+    document: string,
+    birthdate: Date,
+    user: User
+  ) {
     const athlete = new Athlete();
     athlete.name = name;
     athlete.document = document;

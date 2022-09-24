@@ -44,18 +44,5 @@ class TeamController {
 
     return res.json(athletes);
   }
-
-  async getRequestsByTeam(req: Request, res: Response) {
-    const { id } = req.params;
-    const requestRepo = new RequestRepo();
-    const requests = await requestRepo.getRequestsByTeam(Number(id));
-    if (!requests) {
-      return res.status(400).json({
-        message: "Falha ao buscar solicitações",
-      });
-    }
-
-    return res.json(requests);
-  }
 }
 export const teamController = new TeamController();

@@ -5,6 +5,7 @@ import { loginController } from "../app/controller/LoginController";
 import { athleteController } from "../app/controller/AthleteController";
 import { coachController } from "../app/controller/CoachController";
 import { teamController } from "../app/controller/TeamController";
+import { requestController } from "../app/controller/RequestController";
 
 const router: Router = Router();
 
@@ -15,7 +16,7 @@ router.get("/athlete/:id", authMiddleware, athleteController.getAthlete);
 router.post(
   "/athlete/:id/request",
   authMiddleware,
-  athleteController.createRequest
+  requestController.createRequest
 );
 
 router.post("/coach", authMiddleware, registerController.registerCoach);
@@ -31,8 +32,17 @@ router.get(
 router.get(
   "/team/:id/request",
   authMiddleware,
-  teamController.getRequestsByTeam
+  requestController.getRequestsByTeam
 );
-
+router.patch(
+  "/team/:teamId/athlete/:athleteId/request/accept",
+  authMiddleware,
+  requestController.acceptRequest
+);
+router.patch(
+  "/team/:teamId/athlete/:athleteId/request/decline",
+  authMiddleware,
+  requestController.declineRequest
+);
 
 export { router };

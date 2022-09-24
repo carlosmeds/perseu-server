@@ -23,11 +23,23 @@ export class RequestRepo {
       throw new Error("Team not found");
     }
     const requests = await AppDataSource.manager.find(Request, {
-      relations: ['athlete'],
-      where: { team },
+      relations: ["athlete"],
+      where: { team, status: RequestStatus.PENDING },
     });
 
-  
     return requests;
+  }
+
+  async updateRequestStatus(athlete: Athlete, team: Team, status: RequestStatus) {
+    const request = await AppDataSource.manager.findOneBy(Request, {
+      athlete,
+      team,
+    });
+    if (!request) {
+      throw new Error("Request not found");
+    }
+    request.status = status;
+    request.updatedAt = new Date();
+    await AppDataSource.manager.save(request);
   }
 }
