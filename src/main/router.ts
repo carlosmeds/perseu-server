@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { firstController } from "../app/controller/FirstController";
 import { authMiddleware } from "./middleware/auth";
 import { registerController } from "../app/controller/RegisterController";
 import { loginController } from "../app/controller/LoginController";
@@ -8,8 +7,6 @@ import { coachController } from "../app/controller/CoachController";
 import { teamController } from "../app/controller/TeamController";
 
 const router: Router = Router();
-
-router.get("/", authMiddleware, firstController.home);
 
 router.post("/athlete", authMiddleware, registerController.registerAthlete);
 router.post("/coach", authMiddleware, registerController.registerCoach);
