@@ -8,13 +8,17 @@ import { teamController } from "../app/controller/TeamController";
 
 const router: Router = Router();
 
-router.post("/athlete", authMiddleware, registerController.registerAthlete);
-router.post("/coach", authMiddleware, registerController.registerCoach);
-
 router.post("/login", loginController.login);
 
+router.post("/athlete", authMiddleware, registerController.registerAthlete);
 router.get("/athlete/:id", authMiddleware, athleteController.getAthlete);
+router.post(
+  "/athlete/:id/request",
+  authMiddleware,
+  athleteController.createRequest
+);
 
+router.post("/coach", authMiddleware, registerController.registerCoach);
 router.get("/coach/:id", authMiddleware, coachController.getCoach);
 
 router.post("/team/:id", authMiddleware, teamController.createTeam);
@@ -30,10 +34,5 @@ router.get(
   teamController.getRequestsByTeam
 );
 
-router.post(
-  "/athlete/:id/request",
-  authMiddleware,
-  athleteController.createRequest
-);
 
 export { router };
