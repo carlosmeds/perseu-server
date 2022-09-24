@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
+import { Request } from "./Request.schema";
 import { Team } from "./Team.schema";
 import { User } from "./User.schema";
 
@@ -22,6 +23,9 @@ export class Athlete {
   @ManyToOne(() => Team, (team) => team.athletes)
   @JoinColumn()
   team!: Team;
+
+  @OneToMany(() => Request, (request) => request.athlete)
+  requests!: Request[];
 
   @Column({ name: "created_at" })
   createdAt?: Date;

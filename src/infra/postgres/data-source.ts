@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Athlete } from "./schema/Athlete.schema";
 import { Coach } from "./schema/Coach.schema";
+import { Request } from "./schema/Request.schema";
 import { Team } from "./schema/Team.schema";
 import { User } from "./schema/User.schema";
 
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
   database: "test",
   synchronize: true,
   logging: false,
-  entities: [Athlete, User, Coach, Team],
+  entities: [Athlete, User, Coach, Team, Request],
   migrations: [],
   subscribers: [],
 });
