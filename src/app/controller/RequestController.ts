@@ -18,6 +18,35 @@ class RequestController {
     return res.json(requests);
   }
 
+  async getRequestByAthlete(req: Request, res: Response) {
+    const { teamId, athleteId } = req.params;
+
+    const athleteRepo = new AthleteRepo();
+    const athlete = await athleteRepo.getAthlete(Number(athleteId));
+    if (!athlete) {
+      return res.status(404).json({
+        message: "Atleta não encontrado",
+      });
+    }
+
+    const teamRepo = new TeamRepo();
+    const team = await teamRepo.getTeam(Number(teamId));
+    if (!team) {
+      return res.status(404).json({
+        message: "Time não encontrado por código",
+      });
+    }
+    const requestRepo = new RequestRepo();
+    const requests = await requestRepo.getRequestByAthlete(athlete, team);
+    if (!requests) {
+      return res.status(400).json({
+        message: "Falha ao buscar solicitações",
+      });
+    }
+
+    return res.json(requests);
+  }
+
   async createRequest(req: Request, res: Response) {
     const { id } = req.params;
     const { code } = req.body;

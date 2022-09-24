@@ -1,3 +1,4 @@
+import { request } from "http";
 import { RequestStatus } from "../../../domain/enum/RequestStatus";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
@@ -30,7 +31,11 @@ export class RequestRepo {
     return requests;
   }
 
-  async updateRequestStatus(athlete: Athlete, team: Team, status: RequestStatus) {
+  async updateRequestStatus(
+    athlete: Athlete,
+    team: Team,
+    status: RequestStatus
+  ) {
     const request = await AppDataSource.manager.findOneBy(Request, {
       athlete,
       team,
@@ -41,5 +46,14 @@ export class RequestRepo {
     request.status = status;
     request.updatedAt = new Date();
     await AppDataSource.manager.save(request);
+  }
+
+  async getRequestByAthlete(athlete: Athlete, team: Team) {
+    const request = await AppDataSource.manager.findOne(Request, {
+      order: { updatedAt: "DESC" },
+      where: { athlete, team },
+    });
+
+    return request;
   }
 }

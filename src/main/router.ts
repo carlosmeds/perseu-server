@@ -34,6 +34,11 @@ router.get(
   authMiddleware,
   requestController.getRequestsByTeam
 );
+router.get(
+  "/team/:teamId/athlete/:athleteId/request/",
+  authMiddleware,
+  requestController.getRequestByAthlete
+);
 router.patch(
   "/team/:teamId/athlete/:athleteId/request/accept",
   authMiddleware,
