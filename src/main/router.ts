@@ -11,20 +11,32 @@ const router: Router = Router();
 
 router.get("/", authMiddleware, firstController.home);
 
-router.post("/athlete", registerController.registerAthlete);
-router.post("/coach", registerController.registerCoach);
+router.post("/athlete", authMiddleware, registerController.registerAthlete);
+router.post("/coach", authMiddleware, registerController.registerCoach);
 
 router.post("/login", loginController.login);
 
-router.get("/athlete/:id", athleteController.getAthlete);
+router.get("/athlete/:id", authMiddleware, athleteController.getAthlete);
 
-router.get("/coach/:id", coachController.getCoach);
+router.get("/coach/:id", authMiddleware, coachController.getCoach);
 
-router.post("/team/:id", teamController.createTeam);
-router.get("/team/:id", teamController.getTeam);
-router.get("/team/:id/athletes", teamController.getAthletesByTeam);
-router.get("/team/:id/request", teamController.getRequestsByTeam);
+router.post("/team/:id", authMiddleware, teamController.createTeam);
+router.get("/team/:id", authMiddleware, teamController.getTeam);
+router.get(
+  "/team/:id/athletes",
+  authMiddleware,
+  teamController.getAthletesByTeam
+);
+router.get(
+  "/team/:id/request",
+  authMiddleware,
+  teamController.getRequestsByTeam
+);
 
-router.post("/athlete/:id/request", athleteController.createRequest);
+router.post(
+  "/athlete/:id/request",
+  authMiddleware,
+  athleteController.createRequest
+);
 
 export { router };
