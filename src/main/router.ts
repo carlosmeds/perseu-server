@@ -21,5 +21,6 @@ router.get("/athlete/:id", athleteController.getAthlete);
 router.get("/coach/:id", coachController.getCoach);
 
 router.post("/team/:id", teamController.createTeam);
+router.get("/team/:id", teamController.getTeam);
 
 export { router };

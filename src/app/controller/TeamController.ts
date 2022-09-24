@@ -16,5 +16,18 @@ class TeamController {
 
     return res.json(team);
   }
+
+  async getTeam(req: Request, res: Response) {
+    const { id } = req.params;
+    const teamRepo = new TeamRepo();
+    const team = await teamRepo.getTeam(Number(id));
+    if (!team) {
+      return res.status(400).json({
+        message: "Falha ao buscar equipe",
+      });
+    }
+
+    return res.json(team);
+  }
 }
 export const teamController = new TeamController();
