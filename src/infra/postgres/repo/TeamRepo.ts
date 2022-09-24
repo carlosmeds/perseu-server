@@ -24,4 +24,16 @@ export class TeamRepo {
 
     return result;
   }
+
+  async getAthletesByTeam(id: number) {
+    const team = await AppDataSource.manager.findOneBy(Team, { id });
+    if (!team) {
+      throw new Error("Team not found");
+    }
+    const athletes = await AppDataSource.manager.findBy(Athlete, {
+      team,
+    });
+
+    return athletes;
+  }
 }
