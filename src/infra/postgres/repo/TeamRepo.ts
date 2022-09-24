@@ -4,10 +4,10 @@ import { Coach } from "../schema/Coach.schema";
 import { Team } from "../schema/Team.schema";
 
 export class TeamRepo {
-  async createTeam(coachId: number, name: string) {
+  async createTeam(coachId: number, name: string, code: string) {
     const team = new Team();
     team.name = name;
-    team.code = "T1";
+    team.code = code;
     const coach = await AppDataSource.manager.findOneBy(Coach, { id: coachId });
     if (!coach) {
       throw new Error("Coach not found");

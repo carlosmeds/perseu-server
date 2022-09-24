@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
+import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 
 class TeamController {
   async createTeam(req: Request, res: Response) {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, code } = req.body;
     const teamRepo = new TeamRepo();
-    const team = await teamRepo.createTeam(Number(id), name);
+    const team = await teamRepo.createTeam(Number(id), name, code);
     if (!team) {
       return res.status(400).json({
         message: "Falha ao criar equipe",
@@ -41,6 +41,19 @@ class TeamController {
     }
 
     return res.json(athletes);
+  }
+
+  async getRequestsByTeam(req: Request, res: Response) {
+    const { id } = req.params;
+    const requestRepo = new RequestRepo();
+    const requests = await requestRepo.getRequestsByTeam(Number(id));
+    if (!requests) {
+      return res.status(400).json({
+        message: "Falha ao buscar solicitações",
+      });
+    }
+
+    return res.json(requests);
   }
 }
 export const teamController = new TeamController();

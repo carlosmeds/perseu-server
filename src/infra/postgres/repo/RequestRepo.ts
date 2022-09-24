@@ -16,4 +16,15 @@ export class RequestRepo {
     await AppDataSource.manager.save(request);
     return request;
   }
+
+  async getRequestsByTeam(id: number) {
+    const team = await AppDataSource.manager.findOneBy(Team, { id });
+    if (!team) {
+      throw new Error("Team not found");
+    }
+    const requests = await AppDataSource.manager.findBy(Request, {
+      team,
+    });
+    return requests;
+  }
 }

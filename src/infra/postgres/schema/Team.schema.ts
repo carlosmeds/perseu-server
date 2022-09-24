@@ -22,6 +22,7 @@ export class Team {
   athletes!: Athlete[];
 
   @OneToMany(() => Request, (request) => request.team)
+  @JoinColumn()
   requests!: Request[];
 
   @Column({ name: "created_at" })

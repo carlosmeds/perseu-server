@@ -18,9 +18,11 @@ export class Request {
   status!: string;
 
   @ManyToOne(() => Athlete, (athlete) => athlete.requests)
+  @JoinColumn()
   athlete!: Athlete;
 
   @ManyToOne(() => Team, (team) => team.requests)
+  @JoinColumn()
   team!: Team;
 
   @Column({ name: "created_at" })
