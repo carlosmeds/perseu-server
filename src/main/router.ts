@@ -11,15 +11,15 @@ const router: Router = Router();
 
 router.get("/", authMiddleware, firstController.home);
 
-router.post("/register-athlete", registerController.registerAthlete);
-router.post("/register-coach", registerController.registerCoach);
+router.post("/athlete", registerController.registerAthlete);
+router.post("/coach", registerController.registerCoach);
 
 router.post("/login", loginController.login);
 
-router.get("/get-athlete/:id", athleteController.getAthlete);
+router.get("/athlete/:id", athleteController.getAthlete);
 
-router.get("/get-coach/:id", coachController.getCoach);
+router.get("/coach/:id", coachController.getCoach);
 
-router.post("/create-team/:id", teamController.createTeam);
+router.post("/team/:id", teamController.createTeam);
 
 export { router };
