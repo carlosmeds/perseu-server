@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
+import { Code } from "../service/code.service";
 
 class TeamController {
   async createTeam(req: Request, res: Response) {
     const { id } = req.params;
-    const { name, code } = req.body;
+    const { name } = req.body;
     const teamRepo = new TeamRepo();
+    const code = Code.generate()
     const team = await teamRepo.createTeam(Number(id), name, code);
     if (!team) {
       return res.status(400).json({
