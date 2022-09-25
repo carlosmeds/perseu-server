@@ -23,13 +23,13 @@ export class Coach {
   birthdate!: Date;
 
   @Column()
-  cref!: string;
+  cref: string;
 
   @JoinColumn()
   user!: User;
 
   @OneToOne(() => Team, (team) => team.coach)
-  team!: Team;
+  team: Team;
 
   @Column({ name: "created_at" })
   createdAt?: Date;

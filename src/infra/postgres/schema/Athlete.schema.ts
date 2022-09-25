@@ -17,16 +17,22 @@ export class Athlete {
   @Column({ name: "birthdate" })
   birthdate!: Date;
 
+  @Column({default: 10})
+  height: number
+
+  @Column({default: 10})
+  weight: number
+
   @JoinColumn()
   user!: User;
 
   @ManyToOne(() => Team, (team) => team.athletes)
   @JoinColumn()
-  team!: Team;
+  team: Team;
 
   @OneToMany(() => Request, (request) => request.athlete)
   @JoinColumn()
-  requests!: Request[];
+  requests: Request[];
 
   @Column({ name: "created_at" })
   createdAt?: Date;

@@ -19,11 +19,11 @@ export class Team {
   coach!: Coach;
 
   @OneToMany(() => Athlete, (athlete) => athlete.team)
-  athletes!: Athlete[];
+  athletes: Athlete[];
 
   @OneToMany(() => Request, (request) => request.team)
   @JoinColumn()
-  requests!: Request[];
+  requests: Request[];
 
   @Column({ name: "created_at" })
   createdAt?: Date;
