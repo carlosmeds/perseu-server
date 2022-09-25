@@ -5,24 +5,22 @@ import {
   JoinColumn,
   ManyToOne,
 } from "typeorm";
-import { Athlete } from "./Athlete.schema";
-import { Team } from "./Team.schema";
+import { Session } from "./Session.schema";
 
 @Entity()
-export class Request {
+export class Exercise {
   @PrimaryGeneratedColumn()
   id!: number;
-  
+
   @Column()
-  status!: string;
+  name!: string;
 
-  @ManyToOne(() => Athlete, (athlete) => athlete.requests)
-  @JoinColumn()
-  athlete!: Athlete;
+  @Column()
+  description!: string;
 
-  @ManyToOne(() => Team, (team) => team.requests)
+  @ManyToOne(() => Session, (session) => session.exercises)
   @JoinColumn()
-  team!: Team;
+  session!: Session;
 
   @Column({ name: "created_at" })
   createdAt?: Date;
