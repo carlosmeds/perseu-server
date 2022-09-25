@@ -25,6 +25,7 @@ router.patch("/athlete/:athleteId/request/decline", auth, handle(reqCtl.declineR
 
 router.post("/coach", registerCtl.registerCoach);
 router.get("/coach/:id", auth, handle(coachCtl.getCoach));
+router.put("/coach/:id", auth, handle(coachCtl.updateCoach));
 
 router.post("/team/:id", auth, handle(teamCtl.createTeam));
 router.get("/team/:id", auth, handle(teamCtl.getTeam));

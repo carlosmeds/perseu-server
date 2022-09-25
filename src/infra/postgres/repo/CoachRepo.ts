@@ -27,4 +27,20 @@ export class CoachRepo {
     await AppDataSource.manager.save(coach);
     return coach;
   }
+
+  async updateCoach(
+    coach: Coach,
+    name: string,
+    document: string,
+    birthdate: Date,
+    cref: string
+  ) {
+    coach.name = name;
+    coach.document = document;
+    coach.birthdate = new Date(birthdate);
+    coach.cref = cref;
+    coach.updatedAt = new Date();
+    await AppDataSource.manager.save(coach);
+    return coach;
+  }
 }
