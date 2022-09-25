@@ -13,7 +13,7 @@ const router: Router = Router();
 
 router.post("/login", handle(loginCtl.login));
 
-router.post("/user/:id/password", auth, handle(userCtl.updatePassword));
+router.put("/user/:id/password", auth, handle(userCtl.updatePassword));
 
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
