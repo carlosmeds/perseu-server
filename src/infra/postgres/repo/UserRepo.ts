@@ -2,7 +2,7 @@ import { AppDataSource } from "../data-source";
 import { User } from "../schema/User.schema";
 
 export class UserRepo {
-  updateUserPassword(user: User, hashedPassword: string) {
+  async updateUserPassword(user: User, hashedPassword: string) {
     user.password = hashedPassword;
     user.updatedAt = new Date();
     return AppDataSource.manager.save(user);
