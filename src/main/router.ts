@@ -23,6 +23,7 @@ router.post("/athlete/:id/request", auth, handle(reqCtl.createRequest));
 router.get("/athlete/:athleteId/request/", auth, handle(reqCtl.getRequestByAthlete));
 router.patch("/athlete/:athleteId/request/accept", auth, handle(reqCtl.acceptRequest));
 router.patch("/athlete/:athleteId/request/decline", auth, handle(reqCtl.declineRequest));
+router.get("/athlete/:id/training", auth, handle(trainingCtl.getTrainingByAthlete));
 
 router.post("/coach", registerCtl.registerCoach);
 router.get("/coach/:id", auth, handle(coachCtl.getCoach));

@@ -36,7 +36,7 @@ export class TrainingRepo {
             return result;
           })
         );
-        
+
         const training = new Training();
         training.athletes = athletesSaved;
         training.sessions = sessionsSaved;
@@ -44,6 +44,16 @@ export class TrainingRepo {
         return await transactionalEntityManager.save(training);
       }
     );
+
+    return result;
+  }
+
+  async getTrainingByAthlete(athlete: Athlete) {
+    const result = await AppDataSource.manager.findOne(Training, {
+      relations: ["sessions", "sessions.exercises"],
+      where: { athletes: athlete },
+      order: { createdAt: "DESC" },
+    });
 
     return result;
   }
