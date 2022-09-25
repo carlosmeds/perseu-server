@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
 import { Request } from "./Request.schema";
 import { Team } from "./Team.schema";
 import { User } from "./User.schema";
@@ -17,11 +24,11 @@ export class Athlete {
   @Column({ name: "birthdate" })
   birthdate!: Date;
 
-  @Column({default: 10})
-  height: number
+  @Column()
+  height: number;
 
-  @Column({default: 10})
-  weight: number
+  @Column()
+  weight: number;
 
   @JoinColumn()
   user!: User;
