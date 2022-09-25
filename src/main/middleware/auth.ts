@@ -11,8 +11,7 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
   if (!token) return res.status(401).send("Access denied. No token provided");
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET!);
-    req.body = decoded;
+    jwt.verify(token, JWT_SECRET!);
     next();
   } catch (ex) {
     res.status(400).send("Invalid token");
