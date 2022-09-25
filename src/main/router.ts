@@ -13,10 +13,11 @@ const router: Router = Router();
 
 router.post("/login", handle(loginCtl.login));
 
-router.put("/user/:id/password", auth, handle(userCtl.updatePassword));
+router.patch("/user/:id/password", auth, handle(userCtl.updatePassword));
 
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
+router.put("/athlete/:id", auth, handle(athleteCtl.updateAthlete));
 router.post("/athlete/:id/request", auth, handle(reqCtl.createRequest));
 router.get("/athlete/:athleteId/request/", auth, handle(reqCtl.getRequestByAthlete));
 router.patch("/athlete/:athleteId/request/accept", auth, handle(reqCtl.acceptRequest));

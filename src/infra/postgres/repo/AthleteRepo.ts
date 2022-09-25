@@ -10,6 +10,23 @@ export class AthleteRepo {
     return result;
   }
 
+  async updateAthlete(
+    athlete: Athlete,
+    name: string,
+    document: string,
+    birthdate: Date,
+    height: number,
+    weight: number
+  ) {
+    athlete.name = name;
+    athlete.document = document;
+    athlete.birthdate = new Date(birthdate);
+    athlete.height = height;
+    athlete.weight = weight;
+    athlete.updatedAt = new Date();
+    return AppDataSource.manager.save(athlete);
+  }
+
   async updateAthleteTeam(athlete: Athlete, team: Team) {
     athlete.team = team;
     athlete.updatedAt = new Date();
