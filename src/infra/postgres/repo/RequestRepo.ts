@@ -33,25 +33,28 @@ export class RequestRepo {
 
   async updateRequestStatus(
     athlete: Athlete,
-    team: Team,
     status: RequestStatus
   ) {
-    const request = await AppDataSource.manager.findOneBy(Request, {
-      athlete,
-      team,
+    const [request] = await AppDataSource.manager.find(Request, {
+      relations: ["team"],
+      order: { updatedAt: "DESC" },
+      where: { athlete },
     });
     if (!request) {
       throw new Error("Request not found");
     }
+
     request.status = status;
     request.updatedAt = new Date();
-    await AppDataSource.manager.save(request);
+    const result = await AppDataSource.manager.save(request);
+
+    return result
   }
 
   async getRequestByAthlete(athlete: Athlete, team: Team) {
-    const request = await AppDataSource.manager.findOne(Request, {
+    const [request] = await AppDataSource.manager.find(Request, {
       order: { updatedAt: "DESC" },
-      where: { athlete, team },
+      where: { athlete },
     });
 
     return request;

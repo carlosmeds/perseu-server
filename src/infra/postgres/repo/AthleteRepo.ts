@@ -10,7 +10,7 @@ export class AthleteRepo {
     return result;
   }
 
-  async updateTeam(athlete: Athlete, team: Team) {
+  async updateAthleteTeam(athlete: Athlete, team: Team) {
     athlete.team = team;
     athlete.updatedAt = new Date();
     await AppDataSource.manager.save(athlete);

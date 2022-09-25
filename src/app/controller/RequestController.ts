@@ -73,7 +73,7 @@ class RequestController {
   }
 
   async acceptRequest(req: Request, res: Response) {
-    const { teamId, athleteId } = req.params;
+    const { athleteId } = req.params;
 
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(athleteId));
@@ -83,28 +83,19 @@ class RequestController {
       });
     }
 
-    const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(teamId));
-    if (!team) {
-      return res.status(404).json({
-        message: "Time não encontrado",
-      });
-    }
-
     const requestRepo = new RequestRepo();
-    await requestRepo.updateRequestStatus(
+    const request = await requestRepo.updateRequestStatus(
       athlete,
-      team,
       RequestStatus.ACCEPTED
     );
 
-    await athleteRepo.updateTeam(athlete, team);
+    await athleteRepo.updateAthleteTeam(athlete, request.team);
 
     return res.json({ message: "Request accepted" });
   }
 
   async declineRequest(req: Request, res: Response) {
-    const { teamId, athleteId } = req.params;
+    const { athleteId } = req.params;
 
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(athleteId));
@@ -114,18 +105,9 @@ class RequestController {
       });
     }
 
-    const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(teamId));
-    if (!team) {
-      return res.status(404).json({
-        message: "Time não encontrado",
-      });
-    }
-
     const requestRepo = new RequestRepo();
     await requestRepo.updateRequestStatus(
       athlete,
-      team,
       RequestStatus.DECLINED
     );
 
