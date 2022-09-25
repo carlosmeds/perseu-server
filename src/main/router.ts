@@ -15,6 +15,9 @@ router.post("/login", handle(loginCtl.login));
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
 router.post("/athlete/:id/request", auth, handle(reqCtl.createRequest));
+router.get("/athlete/:athleteId/request/", auth, handle(reqCtl.getRequestByAthlete));
+router.patch("/athlete/:athleteId/request/accept", auth, handle(reqCtl.acceptRequest));
+router.patch("/athlete/:athleteId/request/decline", auth, handle(reqCtl.declineRequest));
 
 router.post("/coach", registerCtl.registerCoach);
 router.get("/coach/:id", auth, handle(coachCtl.getCoach));
@@ -23,8 +26,5 @@ router.post("/team/:id", auth, handle(teamCtl.createTeam));
 router.get("/team/:id", auth, handle(teamCtl.getTeam));
 router.get("/team/:id/athletes", auth, handle(teamCtl.getAthletesByTeam));
 router.get("/team/:id/request", auth, handle(reqCtl.getRequestsByTeam));
-router.get("/athlete/:athleteId/request/", auth, handle(reqCtl.getRequestByAthlete));
-router.patch("/athlete/:athleteId/request/accept", auth, handle(reqCtl.acceptRequest));
-router.patch("/athlete/:athleteId/request/decline", auth, handle(reqCtl.declineRequest));
 
 export { router };
