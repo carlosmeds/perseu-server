@@ -11,6 +11,10 @@ class RegisterController {
     const hashedPassword = await CryptoService.hash(password);
 
     const userRepo = new UserRepo();
+    const userByEmail = await userRepo.getUserByEmail(email);
+    if (userByEmail) {
+      return res.status(403).json({ error: "Email já está em uso" });
+    }
     const user = await userRepo.createUser(email, hashedPassword);
 
     const athleteRepo = new AthleteRepo();
@@ -38,6 +42,10 @@ class RegisterController {
     const hashedPassword = await CryptoService.hash(password);
 
     const userRepo = new UserRepo();
+    const userByEmail = await userRepo.getUserByEmail(email);
+    if (userByEmail) {
+      return res.status(403).json({ error: "Email já está em uso" });
+    }
     const user = await userRepo.createUser(email, hashedPassword);
 
     const coachRepo = new CoachRepo();
