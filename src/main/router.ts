@@ -7,10 +7,13 @@ import { coachController as coachCtl } from "../app/controller/CoachController";
 import { teamController as teamCtl } from "../app/controller/TeamController";
 import { requestController as reqCtl } from "../app/controller/RequestController";
 import { handleErrorAsync as handle } from "./middleware/handleErrorAsync";
+import { userController as userCtl } from "../app/controller/UserController";
 
 const router: Router = Router();
 
 router.post("/login", handle(loginCtl.login));
+
+router.post("/user/:id/password", auth, handle(userCtl.updatePassword));
 
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { Code } from "../service/code.service";
 

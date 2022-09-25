@@ -2,8 +2,20 @@ import { AppDataSource } from "../data-source";
 import { User } from "../schema/User.schema";
 
 export class UserRepo {
-  async getUser(email: string) {
+  updateUserPassword(user: User, hashedPassword: string) {
+    user.password = hashedPassword;
+    user.updatedAt = new Date();
+    return AppDataSource.manager.save(user);
+  }
+
+  async getUserByEmail(email: string) {
     const result = await AppDataSource.manager.findOneBy(User, { email });
+
+    return result;
+  }
+
+  async getUserById(id: number) {
+    const result = await AppDataSource.manager.findOneBy(User, { id });
 
     return result;
   }

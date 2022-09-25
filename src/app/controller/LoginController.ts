@@ -13,7 +13,7 @@ class LoginController {
       }
 
       const userRepo = new UserRepo();
-      const user = await userRepo.getUser(email);
+      const user = await userRepo.getUserByEmail(email);
 
       if (user) {
         const isPasswordCorrect = await CryptoService.compare(password, user.password);
