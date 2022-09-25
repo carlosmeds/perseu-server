@@ -48,8 +48,7 @@ export class AthleteRepo {
     athlete.user = user;
     athlete.height = height;
     athlete.weight = weight;
-    athlete.createdAt = new Date();
-    athlete.updatedAt = new Date();
+
     await AppDataSource.manager.save(athlete);
     return athlete;
   }

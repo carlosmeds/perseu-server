@@ -24,8 +24,6 @@ export class UserRepo {
     const user = new User();
     user.email = email;
     user.password = password;
-    user.createdAt = new Date();
-    user.updatedAt = new Date();
     await AppDataSource.manager.save(user);
     return user;
   }

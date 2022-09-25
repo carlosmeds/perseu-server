@@ -23,9 +23,9 @@ export class Training {
   @JoinTable({ name: "athletes_trainings" })
   athletes: Athlete[];
 
-  @Column({ name: "created_at" })
+  @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })
   createdAt?: Date;
 
-  @Column({ name: "updated_at" })
+  @Column({ name: "updated_at", default: () => "CURRENT_TIMESTAMP(3)" })
   updatedAt?: Date;
 }

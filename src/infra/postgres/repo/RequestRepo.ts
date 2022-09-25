@@ -11,8 +11,6 @@ export class RequestRepo {
     request.athlete = athlete;
     request.team = team;
     request.status = RequestStatus.PENDING;
-    request.createdAt = new Date();
-    request.updatedAt = new Date();
 
     await AppDataSource.manager.save(request);
     return request;

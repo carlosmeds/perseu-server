@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm";
-import { Athlete } from "./Athlete.schema";
 
 @Entity()
 export class User {
@@ -12,9 +11,9 @@ export class User {
   @Column()
   password!: string;
 
-  @Column({ name: "created_at" })
+  @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt?: Date;
 
-  @Column({ name: "updated_at" })
+  @Column({ name: "updated_at", default: () => "CURRENT_TIMESTAMP(3)" })
   updatedAt?: Date;
 }

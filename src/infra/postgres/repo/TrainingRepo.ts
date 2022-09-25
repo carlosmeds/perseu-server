@@ -15,8 +15,6 @@ export class TrainingRepo {
               const exerciseSave = new Exercise();
               exerciseSave.name = name;
               exerciseSave.description = description;
-              exerciseSave.createdAt = new Date();
-              exerciseSave.updatedAt = new Date();
               return await transactionalEntityManager.save(
                 exerciseSave
               );
@@ -25,8 +23,6 @@ export class TrainingRepo {
           const sessionSave = new Session();
           sessionSave.name = session.name;
           sessionSave.exercises = exercises;
-          sessionSave.createdAt = new Date();
-          sessionSave.updatedAt = new Date();
           return await transactionalEntityManager.save(sessionSave);
         })
       );
@@ -44,8 +40,6 @@ export class TrainingRepo {
       training.athletes = athletesSaved;
       training.sessions = sessionsSaved;
       training.sessions = sessionsSaved;
-      training.createdAt = new Date();
-      training.updatedAt = new Date();
       await transactionalEntityManager.save(training);
       return training;
     });

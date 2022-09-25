@@ -12,7 +12,7 @@ import { Team } from "./Team.schema";
 export class Request {
   @PrimaryGeneratedColumn()
   id!: number;
-  
+
   @Column()
   status!: string;
 
@@ -24,9 +24,9 @@ export class Request {
   @JoinColumn()
   team!: Team;
 
-  @Column({ name: "created_at" })
+  @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })
   createdAt?: Date;
 
-  @Column({ name: "updated_at" })
+  @Column({ name: "updated_at", default: () => "CURRENT_TIMESTAMP(3)" })
   updatedAt?: Date;
 }

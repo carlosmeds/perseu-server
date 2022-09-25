@@ -22,8 +22,6 @@ export class CoachRepo {
     coach.birthdate = new Date(birthdate);
     coach.cref = cref;
     coach.user = user;
-    coach.createdAt = new Date();
-    coach.updatedAt = new Date();
     await AppDataSource.manager.save(coach);
     return coach;
   }

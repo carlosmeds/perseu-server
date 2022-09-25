@@ -13,8 +13,6 @@ export class TeamRepo {
       throw new Error("Coach not found");
     }
     team.coach = coach;
-    team.createdAt = new Date();
-    team.updatedAt = new Date();
     await AppDataSource.manager.save(team);
     return team;
   }
