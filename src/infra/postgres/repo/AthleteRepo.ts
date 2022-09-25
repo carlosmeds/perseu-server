@@ -20,6 +20,8 @@ export class AthleteRepo {
     name: string,
     document: string,
     birthdate: Date,
+    height: number,
+    weight: number,
     user: User
   ) {
     const athlete = new Athlete();
@@ -27,6 +29,8 @@ export class AthleteRepo {
     athlete.document = document;
     athlete.birthdate = new Date(birthdate);
     athlete.user = user;
+    athlete.height = height;
+    athlete.weight = weight;
     athlete.createdAt = new Date();
     athlete.updatedAt = new Date();
     await AppDataSource.manager.save(athlete);

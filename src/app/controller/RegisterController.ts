@@ -6,7 +6,8 @@ import { CryptoService } from "../service/crypto.service";
 
 class RegisterController {
   async registerAthlete(req: Request, res: Response) {
-    const { name, document, birthdate, email, password } = req.body;
+    const { name, document, birthdate, height, weight, email, password } =
+      req.body;
     const hashedPassword = await CryptoService.hash(password);
 
     const userRepo = new UserRepo();
@@ -17,6 +18,8 @@ class RegisterController {
       name,
       document,
       birthdate,
+      height,
+      weight,
       user
     );
 
@@ -26,6 +29,8 @@ class RegisterController {
       email: athlete.user.email,
       document: athlete.document,
       birthdate: athlete.birthdate,
+      height: athlete.height,
+      weight: athlete.weight,
     });
   }
   async registerCoach(req: Request, res: Response) {
