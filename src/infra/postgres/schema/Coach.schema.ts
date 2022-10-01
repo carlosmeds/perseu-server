@@ -5,6 +5,7 @@ import {
   JoinColumn,
   OneToOne,
 } from "typeorm";
+import { UserStatus } from "../../../domain/enum/UserStatus";
 import { Team } from "./Team.schema";
 import { User } from "./User.schema";
 
@@ -21,6 +22,9 @@ export class Coach {
 
   @Column({ name: "birthdate" })
   birthdate!: Date;
+
+  @Column({default: UserStatus.COACH_WITHOUT_TEAM })
+  status!: string;
 
   @Column()
   cref: string;

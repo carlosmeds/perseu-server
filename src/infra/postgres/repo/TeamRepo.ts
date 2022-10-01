@@ -1,3 +1,4 @@
+import { UserStatus } from "../../../domain/enum/UserStatus";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
 import { Coach } from "../schema/Coach.schema";
@@ -14,6 +15,10 @@ export class TeamRepo {
     }
     team.coach = coach;
     await AppDataSource.manager.save(team);
+    
+    coach.updatedAt = new Date();
+    coach.status = UserStatus.COACH_WITH_TEAM
+    await AppDataSource.manager.save(coach);
     return team;
   }
 

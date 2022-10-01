@@ -64,7 +64,7 @@ export class AthleteRepo {
         id: result.id,
         name: result.name,
       },
-      athleteObject: result,
+      status: result.status,
       team: {
         id: result?.team?.id,
         name: result?.team?.name,

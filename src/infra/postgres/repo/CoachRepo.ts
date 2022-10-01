@@ -53,6 +53,7 @@ export class CoachRepo {
         id: result.id,
         name: result.name,
       },
+      status: result.status,
       team: {
         id: result?.team?.id,
         name: result?.team?.name,

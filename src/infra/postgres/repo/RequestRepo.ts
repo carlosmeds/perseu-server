@@ -1,4 +1,5 @@
 import { RequestStatus } from "../../../domain/enum/RequestStatus";
+import { UserStatus } from "../../../domain/enum/UserStatus";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
 import { Request } from "../schema/Request.schema";
@@ -10,6 +11,10 @@ export class RequestRepo {
     request.athlete = athlete;
     request.team = team;
     request.status = RequestStatus.PENDING;
+
+    athlete.status = UserStatus.ATHLETE_WITH_PENDING_TEAM;
+    athlete.updatedAt = new Date();
+    await AppDataSource.manager.save(athlete);
 
     await AppDataSource.manager.save(request);
     return request;
@@ -44,6 +49,11 @@ export class RequestRepo {
     request.status = status;
     request.updatedAt = new Date();
     const result = await AppDataSource.manager.save(request);
+
+    const athleteStatus = status === RequestStatus.ACCEPTED ? UserStatus.ATHLETE_WITH_TEAM : UserStatus.ATHLETE_WITHOUT_TEAM;
+    athlete.status = athleteStatus;
+    athlete.updatedAt = new Date();
+    await AppDataSource.manager.save(athlete);
 
     return result
   }

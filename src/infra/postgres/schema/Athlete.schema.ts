@@ -9,6 +9,7 @@ import {
   ManyToMany,
   OneToOne,
 } from "typeorm";
+import { UserStatus } from "../../../domain/enum/UserStatus";
 import { Request } from "./Request.schema";
 import { Team } from "./Team.schema";
 import { Training } from "./Training.schema";
@@ -27,6 +28,9 @@ export class Athlete {
 
   @Column({ name: "birthdate" })
   birthdate!: Date;
+
+  @Column({ default: UserStatus.ATHLETE_WITHOUT_TEAM })
+  status!: string;
 
   @Column()
   height: number;

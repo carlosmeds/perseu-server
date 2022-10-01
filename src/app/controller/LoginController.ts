@@ -6,9 +6,6 @@ import { CryptoService } from "../service/crypto.service";
 import { UserType } from "../../domain/enum/UserType";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
-import { UserStatus } from "../../domain/enum/UserStatus";
-import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
-import { Athlete } from "../../infra/postgres/schema/Athlete.schema";
 
 class LoginController {
   async login(req: Request, res: Response) {
@@ -40,36 +37,19 @@ class LoginController {
         user: { id: user.id, email: user.email },
         ...userTypeDataAndTeam,
       });
+    } else {
+      res.status(400).send("Usuário ou senha inválidos");
     }
   }
 
   static async getUserTypeDataAndTeam(type: string, userId: number) {
     if (type === UserType.ATHLETE) {
       const athleteRepo = new AthleteRepo();
-      const result = await athleteRepo.getAthleteAndTeamByUserId(userId);
-      return {
-        status: result.team.id
-          ? UserStatus.ATHLETE_WITH_TEAM
-          : await LoginController.checkAthleteRequestStatus(result.athleteObject),
-        ...result,
-      };
+      return await athleteRepo.getAthleteAndTeamByUserId(userId);
     } else {
       const coachRepo = new CoachRepo();
-      const result =  await coachRepo.getCoachAndTeamByUserId(userId);
-      return {
-        status: result.team.id ? UserStatus.COACH_WITH_TEAM : UserStatus.COACH_WITHOUT_TEAM,
-        ...result,
-      }
+      return await coachRepo.getCoachAndTeamByUserId(userId);
     }
-  }
-
-  static async checkAthleteRequestStatus(athlete: Athlete) {
-    const requestRepo = new RequestRepo();
-    const athleteRequest = await requestRepo.getRequestByAthlete(athlete);
-    if (athleteRequest) {
-      return UserStatus.ATHLETE_WITH_PENDING_TEAM;
-    }
-    return UserStatus.ATHLETE_WITHOUT_TEAM;
   }
 }
 
