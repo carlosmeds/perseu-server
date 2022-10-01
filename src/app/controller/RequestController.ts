@@ -37,7 +37,7 @@ class RequestController {
       });
     }
     const requestRepo = new RequestRepo();
-    const requests = await requestRepo.getRequestByAthlete(athlete, team);
+    const requests = await requestRepo.getRequestByAthlete(athlete);
     if (!requests) {
       return res.status(400).json({
         message: "Falha ao buscar solicitações",

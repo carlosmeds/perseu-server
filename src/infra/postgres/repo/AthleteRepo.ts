@@ -52,4 +52,23 @@ export class AthleteRepo {
     await AppDataSource.manager.save(athlete);
     return athlete;
   }
+
+  async getAthleteAndTeamByUserId(userId: number) {
+    const [result] = await AppDataSource.manager.find(Athlete, {
+      relations: ["team"],
+      where: { user: { id: userId } },
+    });
+
+    return {
+      athlete: {
+        id: result.id,
+        name: result.name,
+      },
+      athleteObject: result,
+      team: {
+        id: result?.team?.id,
+        name: result?.team?.name,
+      }
+    };
+  }
 }

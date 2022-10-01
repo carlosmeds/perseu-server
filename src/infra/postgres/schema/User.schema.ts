@@ -11,6 +11,9 @@ export class User {
   @Column()
   password!: string;
 
+  @Column({default: "ATHLETE"})
+  type!: string;
+
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt?: Date;
 

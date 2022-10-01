@@ -41,4 +41,22 @@ export class CoachRepo {
     await AppDataSource.manager.save(coach);
     return coach;
   }
+
+  async getCoachAndTeamByUserId(userId: number) {
+    const [result] = await AppDataSource.manager.find(Coach, {
+      relations: ["team"],
+      where: { user: { id: userId } },
+    });
+
+    return {
+      coach: {
+        id: result.id,
+        name: result.name,
+      },
+      team: {
+        id: result?.team?.id,
+        name: result?.team?.name,
+      },
+    };
+  }
 }

@@ -7,6 +7,7 @@ import {
   OneToMany,
   JoinTable,
   ManyToMany,
+  OneToOne,
 } from "typeorm";
 import { Request } from "./Request.schema";
 import { Team } from "./Team.schema";
@@ -33,6 +34,7 @@ export class Athlete {
   @Column()
   weight: number;
 
+  @OneToOne(() => User)
   @JoinColumn()
   user!: User;
 

@@ -25,6 +25,7 @@ export class Coach {
   @Column()
   cref: string;
 
+  @OneToOne(() => User)
   @JoinColumn()
   user!: User;
 

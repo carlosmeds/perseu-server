@@ -1,4 +1,3 @@
-import { request } from "http";
 import { RequestStatus } from "../../../domain/enum/RequestStatus";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
@@ -49,7 +48,7 @@ export class RequestRepo {
     return result
   }
 
-  async getRequestByAthlete(athlete: Athlete, team: Team) {
+  async getRequestByAthlete(athlete: Athlete) {
     const [request] = await AppDataSource.manager.find(Request, {
       order: { updatedAt: "DESC" },
       where: { athlete },

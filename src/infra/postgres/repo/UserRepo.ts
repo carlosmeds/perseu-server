@@ -1,3 +1,4 @@
+import { UserType } from "../../../domain/enum/UserType";
 import { AppDataSource } from "../data-source";
 import { User } from "../schema/User.schema";
 
@@ -20,10 +21,11 @@ export class UserRepo {
     return result;
   }
 
-  async createUser(email: string, password: string) {
+  async createUser(email: string, password: string, userType: UserType) {
     const user = new User();
     user.email = email;
     user.password = password;
+    user.type = userType;
     await AppDataSource.manager.save(user);
     return user;
   }
