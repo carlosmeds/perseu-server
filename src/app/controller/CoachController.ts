@@ -1,29 +1,26 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
+import { notFound, success } from "../../main/presentation/httpHelper";
 
 class CoachController {
-  async getCoach(req: Request, res: Response) {
+  async getCoach(req: Request) {
     const { id } = req.params;
     const coachRepo = new CoachRepo();
     const coach = await coachRepo.getCoach(Number(id));
     if (!coach) {
-      return res.status(404).json({
-        message: "Treinador não encontrado",
-      });
+      return notFound("Treinador não encontrado");
     }
 
-    return res.json(coach);
+    return success(coach);
   }
 
-  async updateCoach(req: Request, res: Response) {
+  async updateCoach(req: Request) {
     const { id } = req.params;
     const { name, document, birthdate, cref } = req.body;
     const coachRepo = new CoachRepo();
     const coach = await coachRepo.getCoach(Number(id));
     if (!coach) {
-      return res.status(404).json({
-        message: "Treinador não encontrado",
-      });
+      return notFound("Treinador não encontrado");
     }
 
     const newCoach = await coachRepo.updateCoach(
@@ -34,7 +31,7 @@ class CoachController {
       cref
     );
 
-    return res.json(newCoach);
+    return success(newCoach);
   }
 }
 

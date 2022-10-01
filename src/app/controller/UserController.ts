@@ -1,17 +1,16 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
+import { badRequest, notFound, success } from "../../main/presentation/httpHelper";
 import { CryptoService } from "../service/crypto.service";
 
 class UserController {
-  async updatePassword(req: Request, res: Response) {
+  async updatePassword(req: Request) {
     const { id } = req.params;
     const { newPassword, oldPassword } = req.body;
     const userRepo = new UserRepo();
     const user = await userRepo.getUserById(Number(id));
     if (!user) {
-      return res.status(400).json({
-        message: "Falha ao buscar usuário",
-      });
+      return notFound("Usuário não encontrado");
     }
     const isPasswordCorrect = await CryptoService.compare(
       oldPassword,
@@ -19,21 +18,13 @@ class UserController {
     );
 
     if (!isPasswordCorrect) {
-      return res.status(400).json({
-        message: "Senha inválida",
-      });
+      return badRequest("Senha inválida");
     }
 
     const hashedPassword = await CryptoService.hash(newPassword);
-    const updatedUser = await userRepo.updateUserPassword(user, hashedPassword);
+    await userRepo.updateUserPassword(user, hashedPassword);
 
-    if (!updatedUser) {
-      return res.status(400).json({
-        message: "Falha ao atualizar senha",
-      });
-    }
-
-    return res.json({ message: "Senha atualizada com sucesso" });
+    return success("Senha atualizada com sucesso");
   }
 }
 export const userController = new UserController();

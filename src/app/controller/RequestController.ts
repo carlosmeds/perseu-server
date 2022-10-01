@@ -1,86 +1,73 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { RequestStatus } from "../../domain/enum/RequestStatus";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
+import { notFound, success } from "../../main/presentation/httpHelper";
 
 class RequestController {
-  async getRequestsByTeam(req: Request, res: Response) {
+  async getRequestsByTeam(req: Request) {
     const { id } = req.params;
     const requestRepo = new RequestRepo();
     const requests = await requestRepo.getRequestsByTeam(Number(id));
     if (!requests) {
-      return res.status(400).json({
-        message: "Falha ao buscar solicitações",
-      });
+      return notFound("Solicitações não encontradas");
     }
 
-    return res.json(requests);
+    return success(requests);
   }
 
-  async getRequestByAthlete(req: Request, res: Response) {
+  async getRequestByAthlete(req: Request) {
     const { teamId, athleteId } = req.params;
 
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(athleteId));
     if (!athlete) {
-      return res.status(404).json({
-        message: "Atleta não encontrado",
-      });
+      return notFound("Atleta não encontrado");
     }
 
     const teamRepo = new TeamRepo();
     const team = await teamRepo.getTeam(Number(teamId));
     if (!team) {
-      return res.status(404).json({
-        message: "Time não encontrado por código",
-      });
+      return notFound("Time não encontrado por código");
     }
     const requestRepo = new RequestRepo();
     const requests = await requestRepo.getRequestByAthlete(athlete);
     if (!requests) {
-      return res.status(400).json({
-        message: "Falha ao buscar solicitações",
-      });
+      return notFound("Solicitações não encontradas");
     }
 
-    return res.json(requests);
+    return success(requests);
   }
 
-  async createRequest(req: Request, res: Response) {
+  async createRequest(req: Request) {
     const { id } = req.params;
     const { code } = req.body;
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(id));
     if (!athlete) {
-      return res.status(404).json({
-        message: "Atleta não encontrado",
-      });
+      return notFound("Atleta não encontrado");
     }
 
     const teamRepo = new TeamRepo();
     const team = await teamRepo.getTeamByCode(code);
     if (!team) {
-      return res.status(404).json({
-        message: "Time não encontrado por código",
-      });
+      return notFound("Time não encontrado por código");
     }
 
     const requestRepo = new RequestRepo();
     await requestRepo.createRequest(athlete, team);
 
-    return res.json({ message: "Request created" });
+    return success({ message: "Solicitação enviada" });
   }
 
-  async acceptRequest(req: Request, res: Response) {
+  async acceptRequest(req: Request) {
     const { athleteId } = req.params;
 
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(athleteId));
     if (!athlete) {
-      return res.status(404).json({
-        message: "Atleta não encontrado",
-      });
+      return notFound("Atleta não encontrado");
     }
 
     const requestRepo = new RequestRepo();
@@ -91,27 +78,22 @@ class RequestController {
 
     await athleteRepo.updateAthleteTeam(athlete, request.team);
 
-    return res.json({ message: "Request accepted" });
+    return success({ message: "Solicitação aceita" });
   }
 
-  async declineRequest(req: Request, res: Response) {
+  async declineRequest(req: Request) {
     const { athleteId } = req.params;
 
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(athleteId));
     if (!athlete) {
-      return res.status(404).json({
-        message: "Atleta não encontrado",
-      });
+      return notFound("Atleta não encontrado");
     }
 
     const requestRepo = new RequestRepo();
-    await requestRepo.updateRequestStatus(
-      athlete,
-      RequestStatus.DECLINED
-    );
+    await requestRepo.updateRequestStatus(athlete, RequestStatus.DECLINED);
 
-    return res.json({ message: "Request declined" });
+    return success({ message: "Solicitação recusada" });
   }
 }
 export const requestController = new RequestController();

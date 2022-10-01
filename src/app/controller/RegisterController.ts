@@ -1,12 +1,13 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { UserType } from "../../domain/enum/UserType";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
+import { forbidden, success } from "../../main/presentation/httpHelper";
 import { CryptoService } from "../service/crypto.service";
 
 class RegisterController {
-  async registerAthlete(req: Request, res: Response) {
+  async registerAthlete(req: Request) {
     const { name, document, birthdate, height, weight, email, password } =
       req.body;
     const hashedPassword = await CryptoService.hash(password);
@@ -14,9 +15,13 @@ class RegisterController {
     const userRepo = new UserRepo();
     const userByEmail = await userRepo.getUserByEmail(email);
     if (userByEmail) {
-      return res.status(403).json({ error: "Email já está em uso" });
+      return forbidden("Email já está em uso");
     }
-    const user = await userRepo.createUser(email, hashedPassword, UserType.ATHLETE);
+    const user = await userRepo.createUser(
+      email,
+      hashedPassword,
+      UserType.ATHLETE
+    );
 
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.createAthlete(
@@ -28,7 +33,7 @@ class RegisterController {
       user
     );
 
-    return res.json({
+    return success({
       id: athlete.id,
       name: athlete.name,
       email: athlete.user.email,
@@ -38,14 +43,15 @@ class RegisterController {
       weight: athlete.weight,
     });
   }
-  async registerCoach(req: Request, res: Response) {
+
+  async registerCoach(req: Request) {
     const { name, document, birthdate, cref, email, password } = req.body;
     const hashedPassword = await CryptoService.hash(password);
 
     const userRepo = new UserRepo();
     const userByEmail = await userRepo.getUserByEmail(email);
     if (userByEmail) {
-      return res.status(403).json({ error: "Email já está em uso" });
+      return forbidden("Email já está em uso");
     }
     const user = await userRepo.createUser(
       email,
@@ -62,7 +68,7 @@ class RegisterController {
       user
     );
 
-    return res.json({
+    return success({
       id: coach.id,
       name: coach.name,
       email: coach.user.email,
