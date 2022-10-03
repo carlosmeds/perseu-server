@@ -59,16 +59,26 @@ export class AthleteRepo {
       where: { user: { id: userId } },
     });
 
+    if (result.team) {
+      return {
+        athlete: {
+          id: result.id,
+          name: result.name,
+        },
+        status: result.status,
+        team: {
+          id: result.team.id,
+          name: result.team.name,
+        },
+      };
+    }
+
     return {
       athlete: {
         id: result.id,
         name: result.name,
       },
       status: result.status,
-      team: {
-        id: result?.team?.id,
-        name: result?.team?.name,
-      }
     };
   }
 }

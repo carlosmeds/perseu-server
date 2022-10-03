@@ -48,16 +48,26 @@ export class CoachRepo {
       where: { user: { id: userId } },
     });
 
+    if (result.team) {
+      return {
+        athlete: {
+          id: result.id,
+          name: result.name,
+        },
+        status: result.status,
+        team: {
+          id: result.team.id,
+          name: result.team.name,
+        },
+      };
+    }
+
     return {
       coach: {
         id: result.id,
         name: result.name,
       },
       status: result.status,
-      team: {
-        id: result?.team?.id,
-        name: result?.team?.name,
-      },
     };
   }
 }
