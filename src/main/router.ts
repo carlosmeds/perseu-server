@@ -13,6 +13,7 @@ import { trainingController as trainingCtl } from "../app/controller/TrainingCon
 const router: Router = Router();
 
 router.post("/login", handle(loginCtl.login));
+router.post("/login/check", handle(loginCtl.checkLogin));
 
 router.patch("/user/:id/password", auth, handle(userCtl.updatePassword));
 
