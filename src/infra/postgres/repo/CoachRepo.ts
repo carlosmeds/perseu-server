@@ -50,7 +50,7 @@ export class CoachRepo {
 
     if (result.team) {
       return {
-        athlete: {
+        coach: {
           id: result.id,
           name: result.name,
         },
