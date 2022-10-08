@@ -1,3 +1,4 @@
+import { UserStatus } from "../../../domain/enum/UserStatus";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
 import { Team } from "../schema/Team.schema";
@@ -80,5 +81,11 @@ export class AthleteRepo {
       },
       status: result.status,
     };
+  }
+
+  async updateAthleteStatus(athlete: Athlete, status: UserStatus) {
+    athlete.status = status;
+    athlete.updatedAt = new Date();
+    await AppDataSource.manager.save(athlete);
   }
 }

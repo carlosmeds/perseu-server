@@ -20,11 +20,7 @@ export class RequestRepo {
     return request;
   }
 
-  async getRequestsByTeam(id: number) {
-    const team = await AppDataSource.manager.findOneBy(Team, { id });
-    if (!team) {
-      throw new Error("Team not found");
-    }
+  async getRequestsByTeam(team: Team) {
     const requests = await AppDataSource.manager.find(Request, {
       relations: ["athlete"],
       where: { team, status: RequestStatus.PENDING },
@@ -33,29 +29,20 @@ export class RequestRepo {
     return requests;
   }
 
-  async updateRequestStatus(
-    athlete: Athlete,
-    status: RequestStatus
-  ) {
-    const [request] = await AppDataSource.manager.find(Request, {
-      relations: ["team"],
-      order: { updatedAt: "DESC" },
-      where: { athlete },
-    });
-    if (!request) {
-      throw new Error("Request not found");
-    }
-
+  async updateRequestStatus(athlete: Athlete, request: Request, status: RequestStatus) {
     request.status = status;
     request.updatedAt = new Date();
     const result = await AppDataSource.manager.save(request);
 
-    const athleteStatus = status === RequestStatus.ACCEPTED ? UserStatus.ATHLETE_WITH_TEAM : UserStatus.ATHLETE_WITHOUT_TEAM;
+    const athleteStatus =
+      status === RequestStatus.ACCEPTED
+        ? UserStatus.ATHLETE_WITH_TEAM
+        : UserStatus.ATHLETE_WITHOUT_TEAM;
     athlete.status = athleteStatus;
     athlete.updatedAt = new Date();
     await AppDataSource.manager.save(athlete);
 
-    return result
+    return result;
   }
 
   async getRequestByAthlete(athlete: Athlete) {
@@ -65,5 +52,9 @@ export class RequestRepo {
     });
 
     return request;
+  }
+
+  async deleteRequestByAthlete(request: Request) {
+    await AppDataSource.manager.remove(request);
   }
 }

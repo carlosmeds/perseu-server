@@ -20,10 +20,13 @@ router.patch("/user/:id/password", auth, handle(userCtl.updatePassword));
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
 router.put("/athlete/:id", auth, handle(athleteCtl.updateAthlete));
+
 router.post("/athlete/:id/request", auth, handle(reqCtl.createRequest));
 router.get("/athlete/:athleteId/request/", auth, handle(reqCtl.getRequestByAthlete));
 router.patch("/athlete/:athleteId/request/accept", auth, handle(reqCtl.acceptRequest));
 router.patch("/athlete/:athleteId/request/decline", auth, handle(reqCtl.declineRequest));
+router.delete("/athlete/:athleteId/request/cancel", auth, handle(reqCtl.cancelRequest));
+
 router.get("/athlete/:id/training", auth, handle(trainingCtl.getTrainingByAthlete));
 
 router.post("/coach", handle(registerCtl.registerCoach));
