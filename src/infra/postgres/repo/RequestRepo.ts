@@ -47,6 +47,7 @@ export class RequestRepo {
 
   async getRequestByAthlete(athlete: Athlete) {
     const [request] = await AppDataSource.manager.find(Request, {
+      relations: ["team"],
       order: { updatedAt: "DESC" },
       where: { athlete },
     });

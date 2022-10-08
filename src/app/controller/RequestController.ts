@@ -85,7 +85,7 @@ class RequestController {
       RequestStatus.ACCEPTED
     );
 
-    await athleteRepo.updateAthleteTeam(athlete, result.team);
+    await athleteRepo.updateAthleteTeam(athlete, request.team);
 
     return success({ message: "Solicitação aceita" });
   }
