@@ -32,5 +32,19 @@ class TeamController {
 
     return success(athletes);
   }
+
+  async updateTeamName(req: Request) {
+    const { id } = req.params;
+    const { name } = req.body;
+    const teamRepo = new TeamRepo();
+    const team = await teamRepo.getTeam(Number(id));
+    if (!team) {
+      return notFound("Time não encontrado");
+    }
+    const result = await teamRepo.updateTeamName(team, name);
+
+    return success(result);
+  }
 }
+
 export const teamController = new TeamController();

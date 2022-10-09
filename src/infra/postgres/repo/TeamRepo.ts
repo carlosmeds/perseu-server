@@ -45,4 +45,10 @@ export class TeamRepo {
 
     return athletes;
   }
+
+  async updateTeamName(team: Team, name: string) {
+    team.name = name;
+    team.updatedAt = new Date();
+    return await AppDataSource.manager.save(team);
+  }
 }
