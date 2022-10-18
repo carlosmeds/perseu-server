@@ -15,6 +15,9 @@ export class Training {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Column()
+  name!: string;
+
   @OneToMany(() => Session, (session) => session.training)
   @JoinColumn()
   sessions: Session[];

@@ -5,9 +5,9 @@ import { notFound, success } from "../../main/presentation/httpHelper";
 
 class TrainingController {
   async createTraining(req: Request) {
-    const { athletes, sessions } = req.body;
+    const { name, athletes, sessions } = req.body;
     const repo = new TrainingRepo();
-    const training = await repo.createTraining(athletes, sessions);
+    const training = await repo.createTraining(name, athletes, sessions);
 
     return success(training);
   }

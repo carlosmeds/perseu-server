@@ -5,7 +5,7 @@ import { Session } from "../schema/Session.schema";
 import { Training } from "../schema/Training.schema";
 
 export class TrainingRepo {
-  async createTraining(athletes: any, sessions: any) {
+  async createTraining(name: string, athletes: any, sessions: any) {
     const result = await AppDataSource.transaction(
       async (transactionalEntityManager) => {
         const sessionsSaved = await Promise.all(
@@ -38,6 +38,7 @@ export class TrainingRepo {
         );
 
         const training = new Training();
+        training.name = name;
         training.athletes = athletesSaved;
         training.sessions = sessionsSaved;
 
