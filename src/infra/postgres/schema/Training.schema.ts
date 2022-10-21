@@ -15,7 +15,7 @@ export class Training {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({default: "Nome do treino"})
   name!: string;
 
   @OneToMany(() => Session, (session) => session.training)
