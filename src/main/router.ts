@@ -42,5 +42,6 @@ router.patch("/team/:id", auth, handle(teamCtl.updateTeamName));
 router.post("/team/:id/training", auth, handle(trainingCtl.createTraining));
 router.get("/team/:id/training", auth, handle(trainingCtl.getTrainingsByTeam));
 
+router.post("/training/:id", auth, handle(trainingCtl.assignTrainingById));
 
 export { router };

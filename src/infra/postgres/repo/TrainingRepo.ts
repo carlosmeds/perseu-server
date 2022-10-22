@@ -51,6 +51,15 @@ export class TrainingRepo {
     return result;
   }
 
+  async getTrainingById(id: number) {
+    const result = await AppDataSource.manager.findOne(Training, {
+      relations: ["sessions", "sessions.exercises", "athletes"],
+      where: { id },
+    });
+
+    return result;
+  }
+
   async getTrainingByAthlete(athlete: Athlete) {
     const result = await AppDataSource.manager.findOne(Training, {
       relations: ["sessions", "sessions.exercises"],
@@ -69,5 +78,11 @@ export class TrainingRepo {
     });
 
     return result;
+  }
+
+  async assignTrainingById(athletes: Athlete[], training: Training) {
+    training.athletes = [...training.athletes, ...athletes];
+
+    return await AppDataSource.manager.save(training);
   }
 }

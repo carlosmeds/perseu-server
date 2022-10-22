@@ -53,5 +53,29 @@ class TrainingController {
 
     return success(trainings);
   }
+
+  async assignTrainingById(req: Request) {
+    const { id } = req.params;
+    const { athletes } = req.body;
+
+    const athleteRepo = new AthleteRepo();
+    const athletesFound = await Promise.all(
+      athletes.map(async (id: any) => {
+        const result = await athleteRepo.getAthlete(Number(id));
+        return result;
+      })
+    );
+
+    const repo = new TrainingRepo();
+    const training = await repo.getTrainingById(Number(id));
+    if (!training) {
+      return notFound("Treino não encontrado");
+    }
+
+    await repo.assignTrainingById(athletesFound, training);
+
+    return success({ message: "Treino atribuído com sucesso" });
+  }
 }
+
 export const trainingController = new TrainingController();
