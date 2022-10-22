@@ -2,10 +2,11 @@ import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
 import { Exercise } from "../schema/Exercise.schema";
 import { Session } from "../schema/Session.schema";
+import { Team } from "../schema/Team.schema";
 import { Training } from "../schema/Training.schema";
 
 export class TrainingRepo {
-  async createTraining(name: string, athletes: any, sessions: any) {
+  async createTraining(team: Team, name: string, athletes: any, sessions: any) {
     const result = await AppDataSource.transaction(
       async (transactionalEntityManager) => {
         const sessionsSaved = await Promise.all(
@@ -39,6 +40,7 @@ export class TrainingRepo {
 
         const training = new Training();
         training.name = name;
+        training.team = team;
         training.athletes = athletesSaved;
         training.sessions = sessionsSaved;
 
@@ -53,6 +55,16 @@ export class TrainingRepo {
     const result = await AppDataSource.manager.findOne(Training, {
       relations: ["sessions", "sessions.exercises"],
       where: { athletes: athlete },
+      order: { createdAt: "DESC" },
+    });
+
+    return result;
+  }
+
+  async getTrainingsByTeam(team: Team) {
+    const result = await AppDataSource.manager.find(Training, {
+      relations: ["sessions", "sessions.exercises"],
+      where: { team: team },
       order: { createdAt: "DESC" },
     });
 

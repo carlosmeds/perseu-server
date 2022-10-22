@@ -6,16 +6,18 @@ import {
   OneToMany,
   JoinTable,
   ManyToMany,
+  ManyToOne,
 } from "typeorm";
 import { Athlete } from "./Athlete.schema";
 import { Session } from "./Session.schema";
+import { Team } from "./Team.schema";
 
 @Entity()
 export class Training {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({default: "Nome do treino"})
+  @Column()
   name!: string;
 
   @OneToMany(() => Session, (session) => session.training)
@@ -25,6 +27,9 @@ export class Training {
   @ManyToMany(() => Athlete)
   @JoinTable({ name: "athletes_trainings" })
   athletes: Athlete[];
+
+  @ManyToOne(() => Team)
+  team: Team;
 
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })
   createdAt?: Date;
