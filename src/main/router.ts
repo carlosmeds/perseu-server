@@ -9,8 +9,11 @@ import { requestController as reqCtl } from "../app/controller/RequestController
 import { handleErrorAsync as handle } from "./middleware/handleErrorAsync";
 import { userController as userCtl } from "../app/controller/UserController";
 import { trainingController as trainingCtl } from "../app/controller/TrainingController";
+import cors from "cors";
 
 const router: Router = Router();
+
+router.options("*", cors());
 
 router.post("/login", handle(loginCtl.login));
 router.post("/login/check", handle(loginCtl.checkLogin));
