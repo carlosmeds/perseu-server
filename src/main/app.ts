@@ -1,5 +1,6 @@
 import express from "express";
 import { router } from "./router";
+const cors = require("cors");
 
 export class App {
   public server: express.Application;
@@ -15,6 +16,7 @@ export class App {
   }
 
   private router() {
+    router.options("*", cors());
     this.server.use(router);
   }
 }
