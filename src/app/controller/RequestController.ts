@@ -112,7 +112,7 @@ class RequestController {
 
   async cancelRequest(req: Request) {
     const { athleteId } = req.params;
-    console.log('cancelar')
+
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(athleteId));
     if (!athlete) {

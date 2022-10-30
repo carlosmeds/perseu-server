@@ -76,6 +76,18 @@ class TrainingController {
 
     return success({ message: "Treino atribuído com sucesso" });
   }
+
+  async getTrainingById(req: Request) {
+    const { id } = req.params;
+
+    const repo = new TrainingRepo();
+    const training = await repo.getTrainingById(Number(id));
+    if (!training) {
+      return notFound("Treino não encontrado");
+    }
+
+    return success(training);
+  }
 }
 
 export const trainingController = new TrainingController();

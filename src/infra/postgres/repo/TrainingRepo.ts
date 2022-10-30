@@ -77,7 +77,12 @@ export class TrainingRepo {
       order: { createdAt: "DESC" },
     });
 
-    return result;
+    return result.map((training) => {
+      return {
+        id: training.id,
+        name: training.name,
+      };
+    });
   }
 
   async assignTrainingById(athletes: Athlete[], training: Training) {
