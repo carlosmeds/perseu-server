@@ -17,6 +17,9 @@ router.post("/login/check", handle(loginCtl.checkLogin));
 router.post("/admin/login", handle(loginCtl.adminLogin));
 
 router.patch("/user/:id/password", auth, handle(userCtl.updatePassword));
+router.get("/user/admin", auth, handle(userCtl.getAdmins));
+router.get("/user/coach", auth, handle(userCtl.getCoaches));
+router.get("/user/athlete", auth, handle(userCtl.getAthletes));
 
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
