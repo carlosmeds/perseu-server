@@ -50,6 +50,10 @@ export class Athlete {
   @JoinColumn()
   requests: Request[];
 
+  @OneToMany(() => Request, (request) => request.athlete)
+  @JoinColumn()
+  checkIns: Request[];
+
   @ManyToMany(() => Training)
   @JoinTable({ name: "athletes_trainings" })
   trainings: Training[];

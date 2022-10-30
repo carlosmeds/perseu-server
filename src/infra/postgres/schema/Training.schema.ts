@@ -9,6 +9,7 @@ import {
   ManyToOne,
 } from "typeorm";
 import { Athlete } from "./Athlete.schema";
+import { CheckIn } from "./CheckInSchema";
 import { Session } from "./Session.schema";
 import { Team } from "./Team.schema";
 
@@ -23,6 +24,10 @@ export class Training {
   @OneToMany(() => Session, (session) => session.training)
   @JoinColumn()
   sessions: Session[];
+
+  @OneToMany(() => CheckIn, (checkIn) => checkIn.training)
+  @JoinColumn()
+  checkIns: CheckIn[];
 
   @ManyToMany(() => Athlete)
   @JoinTable({ name: "athletes_trainings" })

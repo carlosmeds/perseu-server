@@ -9,6 +9,7 @@ import { requestController as reqCtl } from "../app/controller/RequestController
 import { handleErrorAsync as handle } from "./middleware/handleErrorAsync";
 import { userController as userCtl } from "../app/controller/UserController";
 import { trainingController as trainingCtl } from "../app/controller/TrainingController";
+import { checkInController as checkInCtl } from "../app/controller/CheckInController";
 
 const router: Router = Router();
 
@@ -50,5 +51,6 @@ router.get("/team/:id/training", auth, handle(trainingCtl.getTrainingsByTeam));
 
 router.post("/training/:id", auth, handle(trainingCtl.assignTrainingById));
 router.get("/training/:id", auth, handle(trainingCtl.getTrainingById));
+router.post("/training/:id/athlete/:athleteId/check-in", auth, handle(checkInCtl.athleteCheckIn));
 
 export { router };
