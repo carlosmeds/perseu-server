@@ -90,4 +90,10 @@ export class TrainingRepo {
 
     return await AppDataSource.manager.save(training);
   }
+
+  async countTrainingByTeam(team: Team) {
+    return await AppDataSource.manager.count(Training, {
+      where: { team },
+    });
+  }
 }

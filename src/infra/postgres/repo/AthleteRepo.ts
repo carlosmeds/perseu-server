@@ -88,4 +88,10 @@ export class AthleteRepo {
     athlete.updatedAt = new Date();
     await AppDataSource.manager.save(athlete);
   }
+
+  async countAthletesByTeam(team: Team) {
+    return await AppDataSource.manager.count(Athlete, {
+      where: { team },
+    });
+  }
 }

@@ -23,7 +23,7 @@ export class TeamRepo {
   }
 
   async getTeam(id: number) {
-    const result = await AppDataSource.manager.findOneBy(Team, { id });
+    const result = await AppDataSource.manager.findOne(Team, { where: { id }, relations: ["coach"] });
 
     return result;
   }
@@ -67,5 +67,18 @@ export class TeamRepo {
         coach: team.coach.name,
       };
     });
+  }
+
+  async getTeamDetails(id: number) {
+    const team = await AppDataSource.manager.findOneBy(Team, { id });
+    if (!team) {
+      throw new Error("Team not found");
+    }
+    return {
+      id: team.id,
+      name: team.name,
+      code: team.code,
+      coach: team.coach.name,
+    };
   }
 }

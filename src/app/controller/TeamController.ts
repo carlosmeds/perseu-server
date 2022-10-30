@@ -1,5 +1,7 @@
 import { Request } from "express";
+import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
+import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
 import { notFound, success } from "../../main/presentation/httpHelper";
 import { Code } from "../service/code.service";
 
@@ -51,6 +53,26 @@ class TeamController {
     const teams = await teamRepo.getAllTeams();
 
     return success(teams);
+  }
+
+  async getTeamDetails(req: Request) {
+    const { id } = req.params;
+    const teamRepo = new TeamRepo();
+    const team = await teamRepo.getTeam(Number(id));
+    if (!team) {
+      return notFound("Time não encontrado");
+    }
+    const trainingRepo = new TrainingRepo();
+    const trainings = await trainingRepo.countTrainingByTeam(team);
+
+    const athleteRepo = new AthleteRepo();
+    const athletes = await athleteRepo.countAthletesByTeam(team);
+
+    return success({
+      ...team,
+      trainingsCount: trainings,
+      athletesCount: athletes,
+    });
   }
 }
 
