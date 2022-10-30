@@ -14,4 +14,13 @@ export class CheckInRepo {
 
     return AppDataSource.manager.save(checkIn);
   }
+
+  async getCheckInByAthlete(athlete: Athlete) {
+    const result = await AppDataSource.manager.find(CheckIn, {
+      relations: ["training"],
+      where: { athlete },
+    });
+
+    return result;
+  }
 }

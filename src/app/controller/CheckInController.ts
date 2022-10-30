@@ -26,6 +26,21 @@ class CheckInController {
 
     return success(checkIn);
   }
+
+  async getCheckInByAthletes(req: Request) {
+    const { id } = req.params;
+
+    const athleteRepo = new AthleteRepo();
+    const athlete = await athleteRepo.getAthlete(Number(id));
+    if (!athlete) {
+      return notFound("Atleta não encontrado");
+    }
+
+    const checkInRepo = new CheckInRepo();
+    const checkIn = await checkInRepo.getCheckInByAthlete(athlete);
+
+    return success(checkIn);
+  }
 }
 
 export const checkInController = new CheckInController();

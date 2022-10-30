@@ -33,6 +33,7 @@ router.patch("/athlete/:athleteId/request/decline", auth, handle(reqCtl.declineR
 router.delete("/athlete/:athleteId/request/cancel", auth, handle(reqCtl.cancelRequest));
 
 router.get("/athlete/:id/training", auth, handle(trainingCtl.getTrainingByAthlete));
+router.get("/athlete/:id/check-in", auth, handle(checkInCtl.getCheckInByAthletes));
 
 router.post("/coach", handle(registerCtl.registerCoach));
 router.get("/coach/:id", auth, handle(coachCtl.getCoach));
