@@ -14,6 +14,7 @@ const router: Router = Router();
 
 router.post("/login", handle(loginCtl.login));
 router.post("/login/check", handle(loginCtl.checkLogin));
+router.post("/admin/login", handle(loginCtl.adminLogin));
 
 router.patch("/user/:id/password", auth, handle(userCtl.updatePassword));
 

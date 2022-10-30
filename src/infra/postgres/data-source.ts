@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
+import { SeederOptions } from "typeorm-extension";
 import { TYPEORM_HOST, TYPEORM_PORT, TYPEORM_USERNAME, TYPEORM_PASSWORD, TYPEORM_DATABASE, TYPEORM_SYNCHRONIZE } from "../../main/config/env";
 import { Athlete } from "./schema/Athlete.schema";
 import { Coach } from "./schema/Coach.schema";
@@ -9,8 +10,9 @@ import { Session } from "./schema/Session.schema";
 import { Team } from "./schema/Team.schema";
 import { Training } from "./schema/Training.schema";
 import { User } from "./schema/User.schema";
+import { MainSeeder } from "./seeds/MainSeeder";
 
-export const AppDataSource = new DataSource({
+const options: DataSourceOptions & SeederOptions = {
   type: "postgres",
   host: TYPEORM_HOST,
   port: Number(TYPEORM_PORT),
@@ -20,6 +22,7 @@ export const AppDataSource = new DataSource({
   synchronize: Boolean(TYPEORM_SYNCHRONIZE),
   logging: false,
   entities: [Athlete, User, Coach, Team, Request, Exercise, Session, Training],
-  migrations: [],
-  subscribers: [],
-});
+  seeds: [MainSeeder],
+};
+
+export const AppDataSource = new DataSource(options);

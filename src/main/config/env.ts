@@ -14,3 +14,6 @@ export const {
   TYPEORM_DATABASE,
   TYPEORM_SYNCHRONIZE,
 } = env;
+export const {
+  ADMIN_PASSWORD
+} = env;

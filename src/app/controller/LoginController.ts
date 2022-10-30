@@ -66,6 +66,32 @@ class LoginController {
     return badRequest("Token inválido");
   }
 
+  async adminLogin(req: Request) {
+    const { email, password } = req.body;
+
+    const userRepo = new UserRepo();
+    const user = await userRepo.getUserByEmail(email);
+
+    if (user) {
+      const isPasswordCorrect = await CryptoService.compare(
+        password,
+        user.password
+      );
+      if (!isPasswordCorrect) {
+        return badRequest("Usuário ou senha inválidos");
+      }
+
+      const token = JWTService.sign(user.email);
+
+      return success({
+        token,
+        user: { id: user.id, email: user.email },
+      });
+    } else {
+      return badRequest("Usuário ou senha inválidos");
+    }
+  }
+
   static async getUserTypeDataAndTeam(type: string, userId: number) {
     if (type === UserType.ATHLETE) {
       const athleteRepo = new AthleteRepo();
