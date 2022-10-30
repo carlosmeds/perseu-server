@@ -15,9 +15,9 @@ export class TeamRepo {
     }
     team.coach = coach;
     await AppDataSource.manager.save(team);
-    
+
     coach.updatedAt = new Date();
-    coach.status = UserStatus.COACH_WITH_TEAM
+    coach.status = UserStatus.COACH_WITH_TEAM;
     await AppDataSource.manager.save(coach);
     return team;
   }
@@ -29,7 +29,9 @@ export class TeamRepo {
   }
 
   async getTeamByCode(code: string) {
-    const result = await AppDataSource.manager.findOneBy(Team, { code: code.toUpperCase() });
+    const result = await AppDataSource.manager.findOneBy(Team, {
+      code: code.toUpperCase(),
+    });
 
     return result;
   }
@@ -50,5 +52,20 @@ export class TeamRepo {
     team.name = name;
     team.updatedAt = new Date();
     return await AppDataSource.manager.save(team);
+  }
+
+  async getAllTeams() {
+    const teams = await AppDataSource.manager.find(Team, {
+      relations: ["coach"],
+    });
+
+    return teams.map((team) => {
+      return {
+        id: team.id,
+        name: team.name,
+        code: team.code,
+        coach: team.coach.name,
+      };
+    });
   }
 }

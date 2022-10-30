@@ -34,6 +34,7 @@ router.post("/coach", handle(registerCtl.registerCoach));
 router.get("/coach/:id", auth, handle(coachCtl.getCoach));
 router.put("/coach/:id", auth, handle(coachCtl.updateCoach));
 
+router.get("/team", auth, handle(teamCtl.getAllTeams));
 router.post("/team/:id", auth, handle(teamCtl.createTeam));
 router.get("/team/:id", auth, handle(teamCtl.getTeam));
 router.get("/team/:id/athletes", auth, handle(teamCtl.getAthletesByTeam));

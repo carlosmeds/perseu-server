@@ -45,6 +45,13 @@ class TeamController {
 
     return success(result);
   }
+
+  async getAllTeams() {
+    const teamRepo = new TeamRepo();
+    const teams = await teamRepo.getAllTeams();
+
+    return success(teams);
+  }
 }
 
 export const teamController = new TeamController();
