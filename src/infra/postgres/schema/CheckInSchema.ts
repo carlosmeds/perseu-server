@@ -16,6 +16,9 @@ export class CheckIn {
   @Column()
   effort!: number;
 
+  @Column()
+  date!: Date;
+
   @ManyToOne(() => Training, (training) => training.checkIns)
   @JoinColumn()
   training!: Training;

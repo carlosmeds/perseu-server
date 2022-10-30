@@ -7,7 +7,7 @@ import { notFound, success } from "../../main/presentation/httpHelper";
 class CheckInController {
   async athleteCheckIn(req: Request) {
     const { id, athleteId } = req.params;
-    const { effort } = req.body;
+    const { effort, date } = req.body;
 
     const athleteRepo = new AthleteRepo();
     const athlete = await athleteRepo.getAthlete(Number(athleteId));
@@ -22,7 +22,12 @@ class CheckInController {
     }
 
     const checkInRepo = new CheckInRepo();
-    const checkIn = await checkInRepo.athleteCheckIn(training, athlete, effort);
+    const checkIn = await checkInRepo.athleteCheckIn(
+      training,
+      athlete,
+      effort,
+      new Date(date)
+    );
 
     return success(checkIn);
   }
