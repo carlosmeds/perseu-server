@@ -1,38 +1,23 @@
 import { Request } from "express";
+import { GetAthleteUseCase } from "../../domain/usecases/athlete/getAthlete";
+import { UpdateAthleteUseCase } from "../../domain/usecases/athlete/updateAthlete";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
-import { notFound, success } from "../../main/presentation/httpHelper";
 
 class AthleteController {
   async getAthlete(req: Request) {
     const { id } = req.params;
     const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(id));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
 
-    return success(athlete);
+    const getAthleteUseCase = new GetAthleteUseCase(athleteRepo);
+    return await getAthleteUseCase.execute(Number(id));
   }
 
   async updateAthlete(req: Request) {
     const { id } = req.params;
-    const { name, document, birthdate, height, weight } = req.body;
     const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(id));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
 
-    const newAthlete = await athleteRepo.updateAthlete(
-      athlete,
-      name,
-      document,
-      birthdate,
-      height,
-      weight
-    );
-
-    return success(newAthlete);
+    const updateAthleteUseCase = new UpdateAthleteUseCase(athleteRepo);
+    return await updateAthleteUseCase.execute(Number(id), req.body);
   }
 }
 export const athleteController = new AthleteController();
