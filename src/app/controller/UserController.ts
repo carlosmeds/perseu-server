@@ -67,7 +67,7 @@ class UserController {
     });
 
     return success({
-      athletes: result,
+      coaches: result,
       count: total,
       page: pages.page,
       pageSize: pages.pageSize,

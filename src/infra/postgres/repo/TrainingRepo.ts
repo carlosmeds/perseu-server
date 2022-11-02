@@ -61,13 +61,13 @@ export class TrainingRepo {
   }
 
   async getTrainingByAthlete(athlete: Athlete) {
-    const result = await AppDataSource.manager.findOne(Training, {
+    const result = await AppDataSource.manager.find(Training, {
       relations: ["sessions", "sessions.exercises"],
       where: { athletes: athlete },
       order: { createdAt: "DESC" },
     });
 
-    return result;
+    return result[0];
   }
 
   async getTrainingsByTeam(team: Team) {
