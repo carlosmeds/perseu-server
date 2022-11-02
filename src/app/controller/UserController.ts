@@ -1,4 +1,6 @@
 import { Request } from "express";
+import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
+import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
 import {
   badRequest,
@@ -100,6 +102,26 @@ class UserController {
       page: pages.page,
       pageSize: pages.pageSize,
     });
+  }
+
+  async getUsersByTeamId(req: Request) {
+    const { id } = req.params;
+
+    const teamRepo = new TeamRepo();
+    const team = await teamRepo.getTeam(Number(id));
+    if (!team) {
+      return notFound("Time não encontrado");
+    }
+    
+    const userRepo = new UserRepo();
+    const users: any = await userRepo.getUsersByTeamId(team);
+
+    const coachRepo = new CoachRepo();
+    const coach = await coachRepo.getCoach(team.coach.id);
+    
+    users.push({ id: coach?.user.id, name: coach?.name });
+
+    return success(users);
   }
 }
 

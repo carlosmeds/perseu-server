@@ -3,6 +3,7 @@ import { UserType } from "../../../domain/enum/UserType";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
 import { Coach } from "../schema/Coach.schema";
+import { Team } from "../schema/Team.schema";
 import { User } from "../schema/User.schema";
 
 export class UserRepo {
@@ -63,5 +64,21 @@ export class UserRepo {
     });
 
     return result;
+  }
+
+  async getUsersByTeamId(team: Team) {
+    const athletes = await AppDataSource.manager.find(Athlete, {
+      where: { team },
+      relations: ["user"],
+    });
+
+    const result = athletes.map((athlete) => {
+      return {
+        id: athlete.user.id,
+        name: athlete.name,
+      };
+    });
+
+    return [...result];
   }
 }

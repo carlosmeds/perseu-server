@@ -4,7 +4,10 @@ import { User } from "../schema/User.schema";
 
 export class CoachRepo {
   async getCoach(id: number) {
-    const result = await AppDataSource.manager.findOneBy(Coach, { id });
+    const result = await AppDataSource.manager.findOne(Coach, {
+      where: { id },
+      relations: ["user"],
+    });
 
     return result;
   }
