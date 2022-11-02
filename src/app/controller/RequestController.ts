@@ -1,130 +1,93 @@
 import { Request } from "express";
-import { RequestStatus } from "../../domain/enum/RequestStatus";
-import { UserStatus } from "../../domain/enum/UserStatus";
+import { AcceptRequestUseCase } from "../../domain/usecases/request/acceptRequest";
+import { CancelRequestUseCase } from "../../domain/usecases/request/cancelRequest";
+import { CreateRequestUseCase } from "../../domain/usecases/request/createRequest";
+import { DeclineRequestUseCase } from "../../domain/usecases/request/declineRequest";
+import { GetRequestByAthleteUseCase } from "../../domain/usecases/request/getRequestByAthlete";
+import { GetRequestsByTeamUseCase } from "../../domain/usecases/request/getRequestsByTeam";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
-import { notFound, success } from "../../main/presentation/httpHelper";
 
 class RequestController {
   async getRequestsByTeam(req: Request) {
     const { id } = req.params;
     const requestRepo = new RequestRepo();
-
     const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(id));
-    if (!team) {
-      return notFound("Time não encontrado");
-    }
 
-    const requests = await requestRepo.getRequestsByTeam(team);
-    if (!requests) {
-      return notFound("Solicitações não encontradas");
-    }
-
-    return success(requests);
+    const getRequestsByTeamUseCase = new GetRequestsByTeamUseCase(
+      requestRepo,
+      teamRepo
+    );
+    return await getRequestsByTeamUseCase.execute(Number(id));
   }
 
   async getRequestByAthlete(req: Request) {
     const { athleteId } = req.params;
-
     const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(athleteId));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
-
     const requestRepo = new RequestRepo();
-    const request = await requestRepo.getRequestByAthlete(athlete);
-    if (!request) {
-      return notFound("Solicitação não encontradas");
-    }
 
-    return success(request);
+    const getRequestsByTeamUseCase = new GetRequestByAthleteUseCase(
+      requestRepo,
+      athleteRepo
+    );
+    return await getRequestsByTeamUseCase.execute(Number(athleteId));
   }
 
   async createRequest(req: Request) {
     const { id } = req.params;
     const { code } = req.body;
+
     const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(id));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
-
     const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeamByCode(code);
-    if (!team) {
-      return notFound("Time não encontrado por código");
-    }
-
     const requestRepo = new RequestRepo();
-    await requestRepo.createRequest(athlete, team);
 
-    return success({ message: "Solicitação enviada" });
+    const createRequestUseCase = new CreateRequestUseCase(
+      athleteRepo,
+      teamRepo,
+      requestRepo
+    );
+    return await createRequestUseCase.execute(Number(id), code);
   }
 
   async acceptRequest(req: Request) {
     const { athleteId } = req.params;
 
     const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(athleteId));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
-
     const requestRepo = new RequestRepo();
-    const request = await requestRepo.getRequestByAthlete(athlete);
-    if (!request) {
-      return notFound("Solicitação não encontrada");
-    }
 
-    const result = await requestRepo.updateRequestStatus(
-      athlete,
-      request,
-      RequestStatus.ACCEPTED
+    const acceptRequestUseCase = new AcceptRequestUseCase(
+      athleteRepo,
+      requestRepo
     );
-
-    await athleteRepo.updateAthleteTeam(athlete, request.team);
-
-    return success({ message: "Solicitação aceita" });
+    return await acceptRequestUseCase.execute(Number(athleteId));
   }
 
   async declineRequest(req: Request) {
     const { athleteId } = req.params;
 
     const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(athleteId));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
-
     const requestRepo = new RequestRepo();
-    const request = await requestRepo.getRequestByAthlete(athlete);
-    if (!request) {
-      return notFound("Solicitação não encontrada");
-    }
 
-    await requestRepo.updateRequestStatus(athlete, request, RequestStatus.DECLINED);
-
-    return success({ message: "Solicitação recusada" });
+    const declineRequestUseCase = new DeclineRequestUseCase(
+      athleteRepo,
+      requestRepo
+    );
+    return await declineRequestUseCase.execute(Number(athleteId));
   }
 
   async cancelRequest(req: Request) {
     const { athleteId } = req.params;
 
-    const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(athleteId));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
-
     const requestRepo = new RequestRepo();
-    const request = await requestRepo.getRequestByAthlete(athlete);
-    await requestRepo.deleteRequestByAthlete(request);
-    await athleteRepo.updateAthleteStatus(athlete, UserStatus.ATHLETE_WITHOUT_TEAM);
+    const athleteRepo = new AthleteRepo();
 
-    return success({ message: "Solicitação cancelada" });
+    const cancelRequestUseCase = new CancelRequestUseCase(
+      requestRepo,
+      athleteRepo
+    );
+    return await cancelRequestUseCase.execute(Number(athleteId));
   }
 }
+
 export const requestController = new RequestController();

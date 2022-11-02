@@ -1,13 +1,10 @@
 import { Request } from "express";
+import { GetUsersByTeamUseCase } from "../../domain/usecases/user/getUsersByTeam";
+import { UpdatePasswordUseCase } from "../../domain/usecases/user/updatePassword";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
-import {
-  badRequest,
-  notFound,
-  success,
-} from "../../main/presentation/httpHelper";
-import { CryptoService } from "../service/crypto.service";
+import { success } from "../../main/presentation/httpHelper";
 import { Pagination } from "../service/pagination.service";
 
 class UserController {
@@ -15,23 +12,13 @@ class UserController {
     const { id } = req.params;
     const { newPassword, oldPassword } = req.body;
     const userRepo = new UserRepo();
-    const user = await userRepo.getUserById(Number(id));
-    if (!user) {
-      return notFound("Usuário não encontrado");
-    }
-    const isPasswordCorrect = await CryptoService.compare(
-      oldPassword,
-      user.password
+
+    const updatePasswordUseCase = new UpdatePasswordUseCase(userRepo);
+    return await updatePasswordUseCase.execute(
+      Number(id),
+      newPassword,
+      oldPassword
     );
-
-    if (!isPasswordCorrect) {
-      return badRequest("Senha inválida");
-    }
-
-    const hashedPassword = await CryptoService.hash(newPassword);
-    await userRepo.updateUserPassword(user, hashedPassword);
-
-    return success("Senha atualizada com sucesso");
   }
 
   async getAdmins() {
@@ -107,21 +94,12 @@ class UserController {
   async getUsersByTeamId(req: Request) {
     const { id } = req.params;
 
-    const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(id));
-    if (!team) {
-      return notFound("Time não encontrado");
-    }
-    
-    const userRepo = new UserRepo();
-    const users: any = await userRepo.getUsersByTeamId(team);
-
-    const coachRepo = new CoachRepo();
-    const coach = await coachRepo.getCoach(team.coach.id);
-    
-    users.push({ id: coach?.user.id, name: coach?.name });
-
-    return success(users);
+    const getUsersByTeam = new GetUsersByTeamUseCase(
+      new TeamRepo(),
+      new UserRepo(),
+      new CoachRepo()
+    );
+    return await getUsersByTeam.execute(Number(id));
   }
 }
 

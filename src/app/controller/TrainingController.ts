@@ -1,4 +1,7 @@
 import { Request } from "express";
+import { CreateTrainingUseCase } from "../../domain/usecases/training/createTraining";
+import { GetTrainingUseCase } from "../../domain/usecases/training/getTraining";
+import { GetTrainingsByTeamUseCase } from "../../domain/usecases/training/getTrainingsByTeam";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
@@ -7,51 +10,34 @@ import { notFound, success } from "../../main/presentation/httpHelper";
 class TrainingController {
   async createTraining(req: Request) {
     const { id } = req.params;
-    const { name, athletes, sessions } = req.body;
-
     const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(id));
-    if (!team) {
-      return notFound("Time não encontrado");
-    }
+    const trainingRepo = new TrainingRepo();
 
-    const repo = new TrainingRepo();
-    const training = await repo.createTraining(team, name, athletes, sessions);
-
-    return success(training);
+    const createTrainingUseCase = new CreateTrainingUseCase(
+      trainingRepo,
+      teamRepo
+    );
+    return await createTrainingUseCase.execute(Number(id), req.body);
   }
 
   async getTrainingByAthlete(req: Request) {
     const { id } = req.params;
 
     const athleteRepo = new AthleteRepo();
-    const athlete = await athleteRepo.getAthlete(Number(id));
-    if (!athlete) {
-      return notFound("Atleta não encontrado");
-    }
-
     const repo = new TrainingRepo();
-    const training = await repo.getTrainingByAthlete(athlete);
-    if (!training) {
-      return notFound("Treino não encontrado");
-    }
-
-    return success(training);
+    
+    const getTrainingUseCase = new GetTrainingUseCase(repo, athleteRepo);
+    return await getTrainingUseCase.execute(Number(id));
   }
 
   async getTrainingsByTeam(req: Request) {
     const { id } = req.params;
 
     const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(id));
-    if (!team) {
-      return notFound("Time não encontrado");
-    }
-
     const repo = new TrainingRepo();
-    const trainings = await repo.getTrainingsByTeam(team);
-
-    return success(trainings);
+    
+    const getTrainingsByTeamUseCase = new GetTrainingsByTeamUseCase(repo, teamRepo);
+    return await getTrainingsByTeamUseCase.execute(Number(id));
   }
 
   async assignTrainingById(req: Request) {
