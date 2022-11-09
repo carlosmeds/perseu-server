@@ -1,6 +1,8 @@
 export const handleErrorAsync =
   (func: any) => async (req: any, res: any, next: (arg0: unknown) => void) => {
     try {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
       const result = await func(req, res, next);
 
       res.status(result.statusCode).json(result.body);
