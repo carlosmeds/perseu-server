@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { DeactivateTrainingUseCase } from "../../domain/usecases/athleteTraining/deactivateTraining";
 import { AssignTrainingByIdUseCase } from "../../domain/usecases/training/assignTrainingById";
 import { CreateTrainingUseCase } from "../../domain/usecases/training/createTraining";
 import { GetTrainingUseCase } from "../../domain/usecases/training/getTraining";
@@ -66,6 +67,15 @@ class TrainingController {
     }
 
     return success(training);
+  }
+
+  async deactivateTraining(req: Request) {
+    const { id, athleteId } = req.params;
+
+    const deactivateTraining = new DeactivateTrainingUseCase(
+      new AthleteTrainingRepo()
+    );
+    return await deactivateTraining.execute(Number(athleteId), Number(id));
   }
 }
 

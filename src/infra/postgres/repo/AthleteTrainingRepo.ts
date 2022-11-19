@@ -29,4 +29,25 @@ export class AthleteTrainingRepo {
     athleteTraining.lastCheckIn = new Date();
     await AppDataSource.manager.save(athleteTraining);
   }
+
+  async deactivateTraining(athleteTraining: AthleteTraining) {
+    athleteTraining.active = false;
+    await AppDataSource.manager.save(athleteTraining);
+  }
+
+  async getAthleteTraining(athleteId: number, trainingId: number) {
+    const athleteTraining = await AppDataSource.manager.findOne(
+      AthleteTraining,
+      {
+        where: {
+          athlete: { id: athleteId },
+          training: { id: trainingId },
+          active: true,
+        },
+        relations: ["athlete", "training"],
+      }
+    );
+
+    return athleteTraining;
+  }
 }

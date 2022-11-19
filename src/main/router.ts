@@ -83,5 +83,10 @@ router.post(
   auth,
   handle(checkInCtl.athleteCheckIn)
 );
+router.patch(
+  "/training/:id/athlete/:athleteId/deactivate",
+  auth,
+  handle(trainingCtl.deactivateTraining)
+);
 
 export { router };
