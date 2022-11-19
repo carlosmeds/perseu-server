@@ -1,8 +1,10 @@
 import { Request } from "express";
+import { AssignTrainingByIdUseCase } from "../../domain/usecases/training/assignTrainingById";
 import { CreateTrainingUseCase } from "../../domain/usecases/training/createTraining";
 import { GetTrainingUseCase } from "../../domain/usecases/training/getTraining";
 import { GetTrainingsByTeamUseCase } from "../../domain/usecases/training/getTrainingsByTeam";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
+import { AthleteTrainingRepo } from "../../infra/postgres/repo/AthleteTrainingRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
 import { notFound, success } from "../../main/presentation/httpHelper";
@@ -10,12 +12,11 @@ import { notFound, success } from "../../main/presentation/httpHelper";
 class TrainingController {
   async createTraining(req: Request) {
     const { id } = req.params;
-    const teamRepo = new TeamRepo();
-    const trainingRepo = new TrainingRepo();
 
     const createTrainingUseCase = new CreateTrainingUseCase(
-      trainingRepo,
-      teamRepo
+      new TrainingRepo(),
+      new TeamRepo(),
+      new AthleteTrainingRepo()
     );
     return await createTrainingUseCase.execute(Number(id), req.body);
   }
@@ -44,23 +45,12 @@ class TrainingController {
     const { id } = req.params;
     const { athletes } = req.body;
 
-    const athleteRepo = new AthleteRepo();
-    const athletesFound = await Promise.all(
-      athletes.map(async (id: any) => {
-        const result = await athleteRepo.getAthlete(Number(id));
-        return result;
-      })
+    const assignTrainingById = new AssignTrainingByIdUseCase(
+      new TrainingRepo(),
+      new AthleteRepo(),
+      new AthleteTrainingRepo()
     );
-
-    const repo = new TrainingRepo();
-    const training = await repo.getTrainingById(Number(id));
-    if (!training) {
-      return notFound("Treino não encontrado");
-    }
-
-    await repo.assignTrainingById(athletesFound, training);
-
-    return success({ message: "Treino atribuído com sucesso" });
+    return await assignTrainingById.execute(Number(id), athletes);
   }
 
   async getTrainingById(req: Request) {

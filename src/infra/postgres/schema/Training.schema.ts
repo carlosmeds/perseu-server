@@ -4,12 +4,10 @@ import {
   Column,
   JoinColumn,
   OneToMany,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
 } from "typeorm";
-import { Athlete } from "./Athlete.schema";
-import { CheckIn } from "./CheckInSchema";
+import { AthleteTraining } from "./AthleteTraining.schema";
+import { CheckIn } from "./CheckIn.schema";
 import { Session } from "./Session.schema";
 import { Team } from "./Team.schema";
 
@@ -29,9 +27,8 @@ export class Training {
   @JoinColumn()
   checkIns: CheckIn[];
 
-  @ManyToMany(() => Athlete)
-  @JoinTable({ name: "athletes_trainings" })
-  athletes: Athlete[];
+  @OneToMany(() => AthleteTraining, (athleteTraining) => athleteTraining.training)
+  athleteTrainings: AthleteTraining[];
 
   @ManyToOne(() => Team)
   team: Team;
