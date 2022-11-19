@@ -11,7 +11,7 @@ export class GetTrainingUseCase {
       return notFound("Atleta não encontrado");
     }
 
-    const training = await this.repo.getTrainingByAthlete(athlete);
+    const training = await this.repo.getTrainingsByAthlete(athlete);
     if (!training) {
       return notFound("Treino não encontrado");
     }

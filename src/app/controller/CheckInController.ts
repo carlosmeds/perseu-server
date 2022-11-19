@@ -2,6 +2,7 @@ import { Request } from "express";
 import { AthleteCheckInUseCase } from "../../domain/usecases/checkin/athleteCheckIn";
 import { GetCheckInByAthleteUseCase } from "../../domain/usecases/checkin/getCheckInByAthlete";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
+import { AthleteTrainingRepo } from "../../infra/postgres/repo/AthleteTrainingRepo";
 import { CheckInRepo } from "../../infra/postgres/repo/CheckInRepo";
 import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
 
@@ -13,7 +14,8 @@ class CheckInController {
     const athleteCheckInUseCase = new AthleteCheckInUseCase(
       new TrainingRepo(),
       new AthleteRepo(),
-      new CheckInRepo()
+      new CheckInRepo(),
+      new AthleteTrainingRepo()
     );
     return await athleteCheckInUseCase.execute(
       Number(id),

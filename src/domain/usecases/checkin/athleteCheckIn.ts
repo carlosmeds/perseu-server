@@ -1,4 +1,5 @@
 import { AthleteRepo } from "../../../infra/postgres/repo/AthleteRepo";
+import { AthleteTrainingRepo } from "../../../infra/postgres/repo/AthleteTrainingRepo";
 import { CheckInRepo } from "../../../infra/postgres/repo/CheckInRepo";
 import { TrainingRepo } from "../../../infra/postgres/repo/TrainingRepo";
 import { notFound, success } from "../../../main/presentation/httpHelper";
@@ -7,7 +8,8 @@ export class AthleteCheckInUseCase {
   constructor(
     private trainingRepo: TrainingRepo,
     private athleteRepo: AthleteRepo,
-    private checkInRepo: CheckInRepo
+    private checkInRepo: CheckInRepo,
+    private athleteTrainingRepo: AthleteTrainingRepo,
   ) {}
 
   async execute(
@@ -32,6 +34,8 @@ export class AthleteCheckInUseCase {
       effort,
       date
     );
+
+    await this.athleteTrainingRepo.updateLastCheckIn(athlete, training);
 
     return success(checkIn);
   }

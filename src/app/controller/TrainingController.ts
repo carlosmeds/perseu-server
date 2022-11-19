@@ -21,12 +21,12 @@ class TrainingController {
     return await createTrainingUseCase.execute(Number(id), req.body);
   }
 
-  async getTrainingByAthlete(req: Request) {
+  async getTrainingsByAthlete(req: Request) {
     const { id } = req.params;
 
     const athleteRepo = new AthleteRepo();
     const repo = new TrainingRepo();
-    
+
     const getTrainingUseCase = new GetTrainingUseCase(repo, athleteRepo);
     return await getTrainingUseCase.execute(Number(id));
   }
@@ -36,8 +36,11 @@ class TrainingController {
 
     const teamRepo = new TeamRepo();
     const repo = new TrainingRepo();
-    
-    const getTrainingsByTeamUseCase = new GetTrainingsByTeamUseCase(repo, teamRepo);
+
+    const getTrainingsByTeamUseCase = new GetTrainingsByTeamUseCase(
+      repo,
+      teamRepo
+    );
     return await getTrainingsByTeamUseCase.execute(Number(id));
   }
 

@@ -51,14 +51,18 @@ export class TrainingRepo {
     return result;
   }
 
-  async getTrainingByAthlete(athlete: Athlete) {
+  async getTrainingsByAthlete(athlete: Athlete) {
     const result = await AppDataSource.manager.find(AthleteTraining, {
-      relations: ["training", "training.sessions", "training.sessions.exercises"],
-      where: { athlete },
+      relations: [
+        "training",
+        "training.sessions",
+        "training.sessions.exercises",
+      ],
+      where: { athlete, active: true },
       order: { createdAt: "DESC" },
     });
 
-    return result[0];
+    return result;
   }
 
   async getTrainingsByTeam(team: Team) {
