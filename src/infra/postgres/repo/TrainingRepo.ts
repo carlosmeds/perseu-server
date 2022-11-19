@@ -44,7 +44,7 @@ export class TrainingRepo {
 
   async getTrainingById(id: number) {
     const result = await AppDataSource.manager.findOne(Training, {
-      relations: ["sessions", "sessions.exercises", "athletes"],
+      relations: ["sessions", "sessions.exercises", "athleteTrainings"],
       where: { id },
     });
 
