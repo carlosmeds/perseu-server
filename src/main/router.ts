@@ -22,6 +22,7 @@ router.get("/user/admin", auth, handle(userCtl.getAdmins));
 router.get("/user/coach", auth, handle(userCtl.getCoaches));
 router.get("/user/athlete", auth, handle(userCtl.getAthletes));
 router.get("/user/team/:id", auth, handle(userCtl.getUsersByTeamId));
+router.get("/user/:id/name", auth, handle(userCtl.getNameByUserId));
 
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
