@@ -11,11 +11,23 @@ export class GetTrainingUseCase {
       return notFound("Atleta não encontrado");
     }
 
-    const training = await this.repo.getTrainingsByAthlete(athlete);
-    if (!training) {
-      return notFound("Treino não encontrado");
-    }
+    const trainings = await this.repo.getTrainingsByAthlete(athlete);
 
-    return success(training);
+    const result = trainings.sort((a, b) => {
+      if (a.lastCheckIn < b.lastCheckIn) {
+        return -1;
+      }
+      if (a.lastCheckIn == b.lastCheckIn) {
+        if (a.createdAt <= b.createdAt) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+
+      return 1;
+    });
+
+    return success(result);
   }
 }

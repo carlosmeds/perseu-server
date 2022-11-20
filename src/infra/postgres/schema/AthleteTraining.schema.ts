@@ -25,8 +25,8 @@ export class AthleteTraining {
   training: Training;
 
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })
-  createdAt?: Date;
+  createdAt: Date;
 
   @Column({ name: "updated_at", default: () => "CURRENT_TIMESTAMP(3)" })
-  updatedAt?: Date;
+  updatedAt: Date;
 }
