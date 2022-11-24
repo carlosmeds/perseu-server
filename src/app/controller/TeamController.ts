@@ -32,7 +32,6 @@ class TeamController {
     const { id } = req.params;
     const teamRepo = new TeamRepo();
     const athletes = await teamRepo.getAthletesByTeam(Number(id));
-
     return success(athletes);
   }
 

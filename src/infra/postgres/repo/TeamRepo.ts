@@ -23,7 +23,10 @@ export class TeamRepo {
   }
 
   async getTeam(id: number) {
-    const result = await AppDataSource.manager.findOne(Team, { where: { id }, relations: ["coach"] });
+    const result = await AppDataSource.manager.findOne(Team, {
+      where: { id },
+      relations: ["coach"],
+    });
 
     return result;
   }

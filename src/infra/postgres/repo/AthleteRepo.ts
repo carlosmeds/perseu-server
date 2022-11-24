@@ -6,7 +6,10 @@ import { User } from "../schema/User.schema";
 
 export class AthleteRepo {
   async getAthlete(id: number) {
-    const result = await AppDataSource.manager.findOneBy(Athlete, { id });
+    const result = await AppDataSource.manager.findOne(Athlete, {
+      where: { id },
+      relations: ["user"],
+    });
 
     return result;
   }
