@@ -51,6 +51,11 @@ router.delete(
 );
 
 router.get(
+  "/athlete/:id/training/current",
+  auth,
+  handle(trainingCtl.getCurrentTraining)
+);
+router.get(
   "/athlete/:id/training",
   auth,
   handle(trainingCtl.getTrainingsByAthlete)

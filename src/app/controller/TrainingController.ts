@@ -2,7 +2,8 @@ import { Request } from "express";
 import { DeactivateTrainingUseCase } from "../../domain/usecases/athleteTraining/deactivateTraining";
 import { AssignTrainingByIdUseCase } from "../../domain/usecases/training/assignTrainingById";
 import { CreateTrainingUseCase } from "../../domain/usecases/training/createTraining";
-import { GetTrainingUseCase } from "../../domain/usecases/training/getTraining";
+import { GetCurrentTrainingUseCase } from "../../domain/usecases/training/getCurrentTraining";
+import { GetTrainingsUseCase } from "../../domain/usecases/training/getTrainings";
 import { GetTrainingsByTeamUseCase } from "../../domain/usecases/training/getTrainingsByTeam";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { AthleteTrainingRepo } from "../../infra/postgres/repo/AthleteTrainingRepo";
@@ -22,13 +23,23 @@ class TrainingController {
     return await createTrainingUseCase.execute(Number(id), req.body);
   }
 
+  async getCurrentTraining(req: Request) {
+    const { id } = req.params;
+
+    const athleteRepo = new AthleteRepo();
+    const repo = new TrainingRepo();
+
+    const getTrainingUseCase = new GetCurrentTrainingUseCase(repo, athleteRepo);
+    return await getTrainingUseCase.execute(Number(id));
+  }
+
   async getTrainingsByAthlete(req: Request) {
     const { id } = req.params;
 
     const athleteRepo = new AthleteRepo();
     const repo = new TrainingRepo();
 
-    const getTrainingUseCase = new GetTrainingUseCase(repo, athleteRepo);
+    const getTrainingUseCase = new GetTrainingsUseCase(repo, athleteRepo);
     return await getTrainingUseCase.execute(Number(id));
   }
 
