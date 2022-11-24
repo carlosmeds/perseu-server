@@ -22,19 +22,49 @@ router.get("/user/admin", auth, handle(userCtl.getAdmins));
 router.get("/user/coach", auth, handle(userCtl.getCoaches));
 router.get("/user/athlete", auth, handle(userCtl.getAthletes));
 router.get("/user/team/:id", auth, handle(userCtl.getUsersByTeamId));
+router.get("/user/:id/name", auth, handle(userCtl.getNameByUserId));
 
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
 router.put("/athlete/:id", auth, handle(athleteCtl.updateAthlete));
 
 router.post("/athlete/:id/request", auth, handle(reqCtl.createRequest));
-router.get("/athlete/:athleteId/request/", auth, handle(reqCtl.getRequestByAthlete));
-router.patch("/athlete/:athleteId/request/accept", auth, handle(reqCtl.acceptRequest));
-router.patch("/athlete/:athleteId/request/decline", auth, handle(reqCtl.declineRequest));
-router.delete("/athlete/:athleteId/request/cancel", auth, handle(reqCtl.cancelRequest));
+router.get(
+  "/athlete/:athleteId/request/",
+  auth,
+  handle(reqCtl.getRequestByAthlete)
+);
+router.patch(
+  "/athlete/:athleteId/request/accept",
+  auth,
+  handle(reqCtl.acceptRequest)
+);
+router.patch(
+  "/athlete/:athleteId/request/decline",
+  auth,
+  handle(reqCtl.declineRequest)
+);
+router.delete(
+  "/athlete/:athleteId/request/cancel",
+  auth,
+  handle(reqCtl.cancelRequest)
+);
 
-router.get("/athlete/:id/training", auth, handle(trainingCtl.getTrainingByAthlete));
-router.get("/athlete/:id/check-in", auth, handle(checkInCtl.getCheckInByAthlete));
+router.get(
+  "/athlete/:id/training/current",
+  auth,
+  handle(trainingCtl.getCurrentTraining)
+);
+router.get(
+  "/athlete/:id/training",
+  auth,
+  handle(trainingCtl.getTrainingsByAthlete)
+);
+router.get(
+  "/athlete/:id/check-in",
+  auth,
+  handle(checkInCtl.getCheckInByAthlete)
+);
 
 router.post("/coach", handle(registerCtl.registerCoach));
 router.get("/coach/:id", auth, handle(coachCtl.getCoach));
@@ -53,6 +83,15 @@ router.get("/team/:id/training", auth, handle(trainingCtl.getTrainingsByTeam));
 
 router.post("/training/:id", auth, handle(trainingCtl.assignTrainingById));
 router.get("/training/:id", auth, handle(trainingCtl.getTrainingById));
-router.post("/training/:id/athlete/:athleteId/check-in", auth, handle(checkInCtl.athleteCheckIn));
+router.post(
+  "/training/:id/athlete/:athleteId/check-in",
+  auth,
+  handle(checkInCtl.athleteCheckIn)
+);
+router.patch(
+  "/training/:id/athlete/:athleteId/deactivate",
+  auth,
+  handle(trainingCtl.deactivateTraining)
+);
 
 export { router };

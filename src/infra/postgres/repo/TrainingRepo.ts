@@ -1,12 +1,13 @@
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
+import { AthleteTraining } from "../schema/AthleteTraining.schema";
 import { Exercise } from "../schema/Exercise.schema";
 import { Session } from "../schema/Session.schema";
 import { Team } from "../schema/Team.schema";
 import { Training } from "../schema/Training.schema";
 
 export class TrainingRepo {
-  async createTraining(team: Team, name: string, athletes: any, sessions: any) {
+  async createTraining(team: Team, name: string, sessions: any) {
     const result = await AppDataSource.transaction(
       async (transactionalEntityManager) => {
         const sessionsSaved = await Promise.all(
@@ -29,19 +30,9 @@ export class TrainingRepo {
           })
         );
 
-        const athletesSaved = await Promise.all(
-          athletes.map(async (id: any) => {
-            const result = await transactionalEntityManager.findOneBy(Athlete, {
-              id: id,
-            });
-            return result;
-          })
-        );
-
         const training = new Training();
         training.name = name;
         training.team = team;
-        training.athletes = athletesSaved;
         training.sessions = sessionsSaved;
 
         return await transactionalEntityManager.save(training);
@@ -53,21 +44,25 @@ export class TrainingRepo {
 
   async getTrainingById(id: number) {
     const result = await AppDataSource.manager.findOne(Training, {
-      relations: ["sessions", "sessions.exercises", "athletes"],
+      relations: ["sessions", "sessions.exercises", "athleteTrainings"],
       where: { id },
     });
 
     return result;
   }
 
-  async getTrainingByAthlete(athlete: Athlete) {
-    const result = await AppDataSource.manager.find(Training, {
-      relations: ["sessions", "sessions.exercises"],
-      where: { athletes: athlete },
+  async getTrainingsByAthlete(athlete: Athlete) {
+    const result = await AppDataSource.manager.find(AthleteTraining, {
+      relations: [
+        "training",
+        "training.sessions",
+        "training.sessions.exercises",
+      ],
+      where: { athlete, active: true },
       order: { createdAt: "DESC" },
     });
 
-    return result[0];
+    return result;
   }
 
   async getTrainingsByTeam(team: Team) {
@@ -85,15 +80,9 @@ export class TrainingRepo {
     });
   }
 
-  async assignTrainingById(athletes: Athlete[], training: Training) {
-    training.athletes = [...training.athletes, ...athletes];
-
-    return await AppDataSource.manager.save(training);
-  }
-
   async countTrainingByTeam(team: Team) {
     return await AppDataSource.manager.count(Training, {
-      where: { team },
+      where: { team: team },
     });
   }
 }

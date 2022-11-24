@@ -2,7 +2,7 @@ import { AthleteRepo } from "../../../infra/postgres/repo/AthleteRepo";
 import { TrainingRepo } from "../../../infra/postgres/repo/TrainingRepo";
 import { notFound, success } from "../../../main/presentation/httpHelper";
 
-export class GetTrainingUseCase {
+export class GetCurrentTrainingUseCase {
   constructor(private repo: TrainingRepo, private athleteRepo: AthleteRepo) {}
 
   async execute(id: number): Promise<any> {
@@ -11,11 +11,23 @@ export class GetTrainingUseCase {
       return notFound("Atleta não encontrado");
     }
 
-    const training = await this.repo.getTrainingByAthlete(athlete);
-    if (!training) {
-      return notFound("Treino não encontrado");
-    }
+    const trainings = await this.repo.getTrainingsByAthlete(athlete);
 
-    return success(training);
+    const orderedTrainings = trainings.sort((a, b) => {
+      if (a.lastCheckIn < b.lastCheckIn) {
+        return -1;
+      }
+      if (a.lastCheckIn == b.lastCheckIn) {
+        if (a.createdAt <= b.createdAt) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+
+      return 1;
+    });
+
+    return success(orderedTrainings[0].training);
   }
 }

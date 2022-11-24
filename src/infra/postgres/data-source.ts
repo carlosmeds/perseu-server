@@ -1,9 +1,17 @@
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
-import { TYPEORM_HOST, TYPEORM_PORT, TYPEORM_USERNAME, TYPEORM_PASSWORD, TYPEORM_DATABASE, TYPEORM_SYNCHRONIZE } from "../../main/config/env";
+import {
+  TYPEORM_HOST,
+  TYPEORM_PORT,
+  TYPEORM_USERNAME,
+  TYPEORM_PASSWORD,
+  TYPEORM_DATABASE,
+  TYPEORM_SYNCHRONIZE,
+} from "../../main/config/env";
 import { Athlete } from "./schema/Athlete.schema";
-import { CheckIn } from "./schema/CheckInSchema";
+import { AthleteTraining } from "./schema/AthleteTraining.schema";
+import { CheckIn } from "./schema/CheckIn.schema";
 import { Coach } from "./schema/Coach.schema";
 import { Exercise } from "./schema/Exercise.schema";
 import { Request } from "./schema/Request.schema";
@@ -22,7 +30,18 @@ const options: DataSourceOptions & SeederOptions = {
   database: TYPEORM_DATABASE,
   synchronize: Boolean(TYPEORM_SYNCHRONIZE),
   logging: false,
-  entities: [Athlete, User, Coach, Team, Request, Exercise, Session, Training, CheckIn],
+  entities: [
+    Athlete,
+    User,
+    Coach,
+    Team,
+    Request,
+    Exercise,
+    Session,
+    Training,
+    CheckIn,
+    AthleteTraining,
+  ],
   seeds: [MainSeeder],
 };
 

@@ -1,6 +1,8 @@
 import { Request } from "express";
+import { GetNameByUserIdUseCase } from "../../domain/usecases/user/getNameByUserId";
 import { GetUsersByTeamUseCase } from "../../domain/usecases/user/getUsersByTeam";
 import { UpdatePasswordUseCase } from "../../domain/usecases/user/updatePassword";
+import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
@@ -100,6 +102,17 @@ class UserController {
       new CoachRepo()
     );
     return await getUsersByTeam.execute(Number(id));
+  }
+
+  async getNameByUserId(req: Request) {
+    const { id } = req.params;
+
+    const getNameByUserId = new GetNameByUserIdUseCase(
+      new UserRepo(),
+      new AthleteRepo(),
+      new CoachRepo()
+    );
+    return await getNameByUserId.execute(Number(id));
   }
 }
 

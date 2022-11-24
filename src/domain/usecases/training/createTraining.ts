@@ -1,9 +1,10 @@
+import { AthleteTrainingRepo } from "../../../infra/postgres/repo/AthleteTrainingRepo";
 import { TeamRepo } from "../../../infra/postgres/repo/TeamRepo";
 import { TrainingRepo } from "../../../infra/postgres/repo/TrainingRepo";
 import { notFound, success } from "../../../main/presentation/httpHelper";
 
 export class CreateTrainingUseCase {
-  constructor(private trainingRepo: TrainingRepo, private teamRepo: TeamRepo) {}
+  constructor(private trainingRepo: TrainingRepo, private teamRepo: TeamRepo, private athleteTrainingRepo: AthleteTrainingRepo) {}
 
   async execute(id: number, data: any): Promise<any> {
     const { name, athletes, sessions } = data;
@@ -16,9 +17,10 @@ export class CreateTrainingUseCase {
     const training = await this.trainingRepo.createTraining(
       team,
       name,
-      athletes,
       sessions
     );
+
+    await this.athleteTrainingRepo.assignTrainingById(athletes, training);
 
     return success(training);
   }
