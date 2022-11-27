@@ -5,20 +5,17 @@ import { Coach } from "../schema/Coach.schema";
 import { Team } from "../schema/Team.schema";
 
 export class TeamRepo {
-  async createTeam(coachId: number, name: string, code: string) {
+  async createTeam(coach: Coach, name: string, code: string) {
     const team = new Team();
     team.name = name;
     team.code = code;
-    const coach = await AppDataSource.manager.findOneBy(Coach, { id: coachId });
-    if (!coach) {
-      throw new Error("Coach not found");
-    }
     team.coach = coach;
     await AppDataSource.manager.save(team);
 
     coach.updatedAt = new Date();
     coach.status = UserStatus.COACH_WITH_TEAM;
     await AppDataSource.manager.save(coach);
+
     return team;
   }
 
@@ -39,11 +36,7 @@ export class TeamRepo {
     return result;
   }
 
-  async getAthletesByTeam(id: number) {
-    const team = await AppDataSource.manager.findOneBy(Team, { id });
-    if (!team) {
-      throw new Error("Team not found");
-    }
+  async getAthletesByTeam(team: Team) {
     const athletes = await AppDataSource.manager.findBy(Athlete, {
       team,
     });
@@ -70,18 +63,5 @@ export class TeamRepo {
         coach: team.coach.name,
       };
     });
-  }
-
-  async getTeamDetails(id: number) {
-    const team = await AppDataSource.manager.findOneBy(Team, { id });
-    if (!team) {
-      throw new Error("Team not found");
-    }
-    return {
-      id: team.id,
-      name: team.name,
-      code: team.code,
-      coach: team.coach.name,
-    };
   }
 }
