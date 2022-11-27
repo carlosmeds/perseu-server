@@ -94,4 +94,8 @@ export class AthleteRepo {
       where: { team },
     });
   }
+
+  async countAthletes() {
+    return await AppDataSource.manager.count(Athlete);
+  }
 }

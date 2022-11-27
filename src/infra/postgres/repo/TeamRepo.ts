@@ -64,4 +64,8 @@ export class TeamRepo {
       };
     });
   }
+
+  async countTeams() {
+    return await AppDataSource.manager.count(Team);
+  }
 }

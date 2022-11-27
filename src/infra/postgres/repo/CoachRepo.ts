@@ -73,4 +73,9 @@ export class CoachRepo {
       status: result.status,
     };
   }
+
+  async countCoaches() {
+    const result = await AppDataSource.manager.count(Coach);
+    return result;
+  }
 }

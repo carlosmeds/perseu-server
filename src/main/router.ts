@@ -10,12 +10,15 @@ import { handleErrorAsync as handle } from "./middleware/handleErrorAsync";
 import { userController as userCtl } from "../app/controller/UserController";
 import { trainingController as trainingCtl } from "../app/controller/TrainingController";
 import { checkInController as checkInCtl } from "../app/controller/CheckInController";
+import { adminController as adminCtl } from "../app/controller/AdminController";
 
 const router: Router = Router();
 
 router.post("/login", handle(loginCtl.login));
 router.post("/login/check", handle(loginCtl.checkLogin));
+
 router.post("/admin/login", handle(loginCtl.adminLogin));
+router.get("/admin/entities/count", auth, handle(adminCtl.countEntities));
 
 router.patch("/user/:id/password", auth, handle(userCtl.updatePassword));
 router.get("/user/admin", auth, handle(userCtl.getAdmins));
