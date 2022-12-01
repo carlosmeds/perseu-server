@@ -1,8 +1,6 @@
 import { RequestStatus } from "../../../../domain/enum/RequestStatus";
 import { UserStatus } from "../../../../domain/enum/UserStatus";
 
-//TODO adicionar createdAt e updatedAt
-
 export const requestsToSeed = [
   {
     requestStatus: RequestStatus.ACCEPTED,

@@ -12,7 +12,6 @@ export class RequestSeeder implements Seeder {
     _factoryManager: SeederFactoryManager
   ): Promise<void> {
     for (const requestToSeed of requestsToSeed) {
-      console.log(requestToSeed);
       const athlete = await dataSource.manager.findOneBy(Athlete, {
         id: requestToSeed.athleteId,
       });
