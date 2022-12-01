@@ -15,7 +15,7 @@ export class AthleteSeeder implements Seeder {
       const user = new User();
       user.email = athleteToSeed.email;
       user.password = await CryptoService.hash("1234");
-      user.type = UserType.COACH;
+      user.type = UserType.ATHLETE;
       user.createdAt = athleteToSeed.createdAt;
       user.updatedAt = athleteToSeed.createdAt;
 
