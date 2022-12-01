@@ -3,6 +3,7 @@ import { runSeeder, Seeder, SeederFactoryManager } from "typeorm-extension";
 import { AdminSeeder } from "./AdminSeeder";
 import { AthleteSeeder } from "./AthleteSeeder";
 import { CoachSeeder } from "./CoachSeeder";
+import { RequestSeeder } from "./RequestSeeder";
 
 export class MainSeeder implements Seeder {
   async run(
@@ -12,5 +13,6 @@ export class MainSeeder implements Seeder {
     await runSeeder(dataSource, AdminSeeder);
     await runSeeder(dataSource, CoachSeeder);
     await runSeeder(dataSource, AthleteSeeder);
+    await runSeeder(dataSource, RequestSeeder);
   }
 }
