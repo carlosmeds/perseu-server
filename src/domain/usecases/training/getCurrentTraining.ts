@@ -13,6 +13,10 @@ export class GetCurrentTrainingUseCase {
 
     const trainings = await this.repo.getTrainingsByAthlete(athlete);
 
+    if (!trainings.length) {
+      return notFound("Nenhum treino atribuído");
+    }
+
     const orderedTrainings = trainings.sort((a, b) => {
       if (a.lastCheckIn < b.lastCheckIn) {
         return -1;
