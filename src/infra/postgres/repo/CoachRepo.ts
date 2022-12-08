@@ -6,7 +6,7 @@ export class CoachRepo {
   async getCoach(id: number) {
     const result = await AppDataSource.manager.findOne(Coach, {
       where: { id },
-      relations: ["user"],
+      relations: ["user", "team"],
     });
 
     return result;
