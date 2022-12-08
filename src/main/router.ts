@@ -11,6 +11,7 @@ import { userController as userCtl } from "../app/controller/UserController";
 import { trainingController as trainingCtl } from "../app/controller/TrainingController";
 import { checkInController as checkInCtl } from "../app/controller/CheckInController";
 import { adminController as adminCtl } from "../app/controller/AdminController";
+import { groupController as groupCtl } from "../app/controller/GroupController";
 
 const router: Router = Router();
 
@@ -96,5 +97,7 @@ router.patch(
   auth,
   handle(trainingCtl.deactivateTraining)
 );
+
+router.post("/team/:id/group", auth, handle(groupCtl.createGroup));
 
 export { router };

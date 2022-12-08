@@ -6,6 +6,8 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
+  JoinTable,
+  ManyToMany,
 } from "typeorm";
 import { UserStatus } from "../../../domain/enum/UserStatus";
 import { CheckIn } from "./CheckIn.schema";
@@ -13,6 +15,7 @@ import { AthleteTraining } from "./AthleteTraining.schema";
 import { Request } from "./Request.schema";
 import { Team } from "./Team.schema";
 import { User } from "./User.schema";
+import { Group } from "./Group.schema";
 
 @Entity()
 export class Athlete {
@@ -53,7 +56,14 @@ export class Athlete {
   @JoinColumn()
   checkIns: CheckIn[];
 
-  @OneToMany(() => AthleteTraining, (athleteTraining) => athleteTraining.athlete)
+  @ManyToMany(() => Group)
+  @JoinTable()
+  group: Group[];
+
+  @OneToMany(
+    () => AthleteTraining,
+    (athleteTraining) => athleteTraining.athlete
+  )
   athleteTraining: AthleteTraining[];
 
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })

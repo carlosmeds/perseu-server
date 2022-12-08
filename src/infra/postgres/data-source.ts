@@ -14,6 +14,7 @@ import { AthleteTraining } from "./schema/AthleteTraining.schema";
 import { CheckIn } from "./schema/CheckIn.schema";
 import { Coach } from "./schema/Coach.schema";
 import { Exercise } from "./schema/Exercise.schema";
+import { Group } from "./schema/Group.schema";
 import { Request } from "./schema/Request.schema";
 import { Session } from "./schema/Session.schema";
 import { Team } from "./schema/Team.schema";
@@ -41,6 +42,7 @@ const options: DataSourceOptions & SeederOptions = {
     Training,
     CheckIn,
     AthleteTraining,
+    Group,
   ],
   seeds: [MainSeeder],
 };
