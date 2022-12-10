@@ -99,5 +99,6 @@ router.patch(
 );
 
 router.post("/team/:id/group", auth, handle(groupCtl.createGroup));
+router.get("/athlete/:id/group", auth, handle(groupCtl.getGroupsByAthlete));
 
 export { router };
