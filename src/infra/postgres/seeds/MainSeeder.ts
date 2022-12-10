@@ -4,6 +4,7 @@ import { AdminSeeder } from "./AdminSeeder";
 import { AthleteSeeder } from "./AthleteSeeder";
 import { AthleteTrainingSeeder } from "./AthleteTrainingSeeder";
 import { CoachSeeder } from "./CoachSeeder";
+import { GroupSeeder } from "./GroupSeeder";
 import { RequestSeeder } from "./RequestSeeder";
 import { TrainingSeeder } from "./TrainingSeeder";
 
@@ -18,5 +19,6 @@ export class MainSeeder implements Seeder {
     await runSeeder(dataSource, RequestSeeder);
     await runSeeder(dataSource, TrainingSeeder);
     await runSeeder(dataSource, AthleteTrainingSeeder);
+    await runSeeder(dataSource, GroupSeeder);
   }
 }

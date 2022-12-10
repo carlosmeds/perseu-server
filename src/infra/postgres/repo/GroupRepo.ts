@@ -11,7 +11,8 @@ export class GroupRepo {
   ) {
     const group = new Group();
     group.name = name;
-    group.athlete = athletes;
+    group.athletes = athletes;
+    group.team = team;
 
     return await AppDataSource.manager.save(group);
   }

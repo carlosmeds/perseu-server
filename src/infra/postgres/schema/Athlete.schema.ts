@@ -57,7 +57,7 @@ export class Athlete {
   checkIns: CheckIn[];
 
   @ManyToMany(() => Group)
-  @JoinTable()
+  @JoinTable({ name: "group_athlete" })
   group: Group[];
 
   @OneToMany(

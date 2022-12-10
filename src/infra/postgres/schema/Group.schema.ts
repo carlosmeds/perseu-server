@@ -4,8 +4,10 @@ import {
   Column,
   ManyToMany,
   JoinTable,
+  ManyToOne,
 } from "typeorm";
 import { Athlete } from "./Athlete.schema";
+import { Team } from "./Team.schema";
 
 @Entity()
 export class Group {
@@ -16,8 +18,11 @@ export class Group {
   name!: string;
 
   @ManyToMany(() => Athlete)
-  @JoinTable()
-  athlete: Athlete[];
+  @JoinTable({ name: "group_athlete" })
+  athletes: Athlete[];
+
+  @ManyToOne(() => Team)
+  team: Team;
 
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })
   createdAt?: Date;
