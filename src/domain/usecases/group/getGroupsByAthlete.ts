@@ -3,10 +3,7 @@ import { GroupRepo } from "../../../infra/postgres/repo/GroupRepo";
 import { notFound, success } from "../../../main/presentation/httpHelper";
 
 export class GetGroupsByAthleteUseCase {
-  constructor(
-    private groupRepo: GroupRepo,
-    private athleteRepo: AthleteRepo
-  ) {}
+  constructor(private groupRepo: GroupRepo, private athleteRepo: AthleteRepo) {}
 
   async execute(id: number): Promise<any> {
     const athlete = await this.athleteRepo.getAthlete(id);
@@ -15,8 +12,8 @@ export class GetGroupsByAthleteUseCase {
       return notFound("Atleta não encontrado");
     }
 
-    const groups = await this.groupRepo.getGroupsByAthlete(athlete)
+    const groups = await this.groupRepo.getGroupsByAthlete(athlete);
 
-    return success(groups);
+    return success(groups.map(({ name, id }) => ({ name, id })));
   }
 }

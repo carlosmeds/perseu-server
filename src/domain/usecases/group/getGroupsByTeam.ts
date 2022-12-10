@@ -14,6 +14,6 @@ export class GetGroupsByTeamUseCase {
 
     const groups = await this.groupRepo.getGroupsByTeam(team);
 
-    return success(groups);
+    return success(groups.map(({ name, id }) => ({ name, id })));
   }
 }

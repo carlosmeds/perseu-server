@@ -11,6 +11,10 @@ export class GetGroupByIdUseCase {
       return notFound("Grupo não encontrado");
     }
 
-    return success(group);
+    return success({
+      id: group.id,
+      name: group.name,
+      athletes: group.athletes.map(({ id, name }) => ({ id, name })),
+    });
   }
 }
