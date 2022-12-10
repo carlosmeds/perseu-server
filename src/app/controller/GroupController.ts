@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { CreateGroupUseCase } from "../../domain/usecases/group/createGroup";
 import { GetGroupsByAthleteUseCase } from "../../domain/usecases/group/getGroupsByAthlete";
+import { GetGroupsByTeamUseCase } from "../../domain/usecases/group/getGroupsByTeam";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { GroupRepo } from "../../infra/postgres/repo/GroupRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
@@ -29,6 +30,19 @@ class GroupController {
       athleteRepo
     );
     return await getGroupsByAthleteUseCase.execute(Number(id));
+  }
+
+  async getGroupsByTeam(req: Request) {
+    const { id } = req.params;
+
+    const groupRepo = new GroupRepo();
+    const teamRepo = new TeamRepo();
+
+    const getGroupsByTeamUseCase = new GetGroupsByTeamUseCase(
+      groupRepo,
+      teamRepo
+    );
+    return await getGroupsByTeamUseCase.execute(Number(id));
   }
 }
 

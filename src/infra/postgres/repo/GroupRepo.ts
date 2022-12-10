@@ -19,4 +19,11 @@ export class GroupRepo {
       where: { athletes: { id: athlete.id} },
     });
   }
+
+  async getGroupsByTeam(team: Team) {
+    return await AppDataSource.manager.find(Group, {
+      relations: ["team"],
+      where: { team },
+    });
+  }
 }
