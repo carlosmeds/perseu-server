@@ -101,5 +101,6 @@ router.patch(
 router.post("/team/:id/group", auth, handle(groupCtl.createGroup));
 router.get("/team/:id/group", auth, handle(groupCtl.getGroupsByTeam));
 router.get("/athlete/:id/group", auth, handle(groupCtl.getGroupsByAthlete));
+router.get("/group/:id", auth, handle(groupCtl.getGroupById));
 
 export { router };
