@@ -2,7 +2,7 @@ import { Request } from "express";
 import { CreateGroupUseCase } from "../../domain/usecases/group/createGroup";
 import { GetGroupsByAthleteUseCase } from "../../domain/usecases/group/getGroupsByAthlete";
 import { GetGroupsByTeamUseCase } from "../../domain/usecases/group/getGroupsByTeam";
-import { GetGroupByIdUseCase } from "../../domain/usecases/group/getGroupDetails";
+import { GetGroupByIdUseCase } from "../../domain/usecases/group/getGroupById";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { GroupRepo } from "../../infra/postgres/repo/GroupRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";

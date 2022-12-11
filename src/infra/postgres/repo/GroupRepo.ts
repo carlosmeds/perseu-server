@@ -30,7 +30,7 @@ export class GroupRepo {
   async getGroupById(id: number) {
     return await AppDataSource.manager.findOne(Group, {
       where: { id },
-      relations: ["athletes"],
+      relations: ["athletes", "athletes.user"],
     });
   }
 }
