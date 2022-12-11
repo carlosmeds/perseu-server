@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { RegisterAdminUseCase } from "../../domain/usecases/register/registerAdmin";
 import { RegisterAthleteUseCase } from "../../domain/usecases/register/registerAthlete";
 import { RegisterCoachUseCase } from "../../domain/usecases/register/registerCoach";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
@@ -20,6 +21,11 @@ class RegisterController {
       new CoachRepo()
     );
     return await registerCoachUseCase.execute(req.body);
+  }
+
+  async registerAdmin(req: Request) {
+    const registerAdminUseCase = new RegisterAdminUseCase(new UserRepo());
+    return await registerAdminUseCase.execute(req.body);
   }
 }
 
