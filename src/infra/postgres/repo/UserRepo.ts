@@ -1,4 +1,4 @@
-import { Like } from "typeorm";
+import { IsNull, Like } from "typeorm";
 import { UserType } from "../../../domain/enum/UserType";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
@@ -18,11 +18,18 @@ export class UserRepo {
 
     return result;
   }
-
+  
   async getUserById(id: number) {
-    const result = await AppDataSource.manager.findOneBy(User, { id });
+    const result = await AppDataSource.manager.findOne(User, {
+      where: { id, deletedAt: IsNull() },
+    });
 
     return result;
+  }
+
+  async deactivateUser(user: User) {
+    user.deletedAt = new Date();
+    return await AppDataSource.manager.save(user);
   }
 
   async createUser(email: string, password: string, userType: UserType) {

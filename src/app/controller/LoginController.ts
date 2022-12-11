@@ -72,7 +72,7 @@ class LoginController {
     const userRepo = new UserRepo();
     const user = await userRepo.getUserByEmail(email);
 
-    if (user && user.type === UserType.ADMIN) {
+    if ((user && user.type === UserType.ADMIN) && !user.deletedAt) {
       const isPasswordCorrect = await CryptoService.compare(
         password,
         user.password

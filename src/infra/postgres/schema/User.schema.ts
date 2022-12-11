@@ -11,8 +11,11 @@ export class User {
   @Column()
   password!: string;
 
-  @Column({default: "ATHLETE"})
+  @Column({ default: "ATHLETE" })
   type!: string;
+
+  @Column({ nullable: true})
+  deletedAt?: Date;
 
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt?: Date;

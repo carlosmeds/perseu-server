@@ -1,5 +1,6 @@
 import { Request } from "express";
 import { CountEntitiesUseCase } from "../../domain/usecases/admin/countEntities";
+import { DeactivateAdminUseCase } from "../../domain/usecases/admin/deactivateAdmin";
 import { GetAdminByIdUseCase } from "../../domain/usecases/admin/getAdminById";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
@@ -22,6 +23,13 @@ class AdminController {
 
     const getAdminByIdUseCase = new GetAdminByIdUseCase(new UserRepo());
     return await getAdminByIdUseCase.execute(Number(id));
+  }
+
+  async deactivateAdmin(req: Request) {
+    const { id } = req.params;
+
+    const deactivateAdminUseCase = new DeactivateAdminUseCase(new UserRepo());
+    return await deactivateAdminUseCase.execute(Number(id));
   }
 }
 
