@@ -44,6 +44,7 @@ export class UserRepo {
   async getAdmins() {
     const admins = await AppDataSource.manager.findBy(User, {
       type: UserType.ADMIN,
+      deletedAt: IsNull(),
     });
 
     return admins;

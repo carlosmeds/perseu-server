@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { GetAdminsUseCase } from "../../domain/usecases/user/getAdmins";
 import { GetNameByUserIdUseCase } from "../../domain/usecases/user/getNameByUserId";
 import { GetUsersByTeamUseCase } from "../../domain/usecases/user/getUsersByTeam";
 import { UpdatePasswordUseCase } from "../../domain/usecases/user/updatePassword";
@@ -25,16 +26,9 @@ class UserController {
 
   async getAdmins() {
     const userRepo = new UserRepo();
-    const admins = await userRepo.getAdmins();
-    const result = admins.map((admin) => {
-      return {
-        id: admin.id,
-        email: admin.email,
-        createdAt: admin.createdAt,
-      };
-    });
 
-    return success(result);
+    const getAdminsUseCase = new GetAdminsUseCase(userRepo);
+    return await getAdminsUseCase.execute();
   }
 
   async getCoaches(req: Request) {
