@@ -8,7 +8,7 @@ export class JWTService {
 
   static sign(email: any) {
     return jwt.sign({ email }, JWT_SECRET!, {
-      expiresIn: "2h",
+      expiresIn: "10h",
     });
   }
 

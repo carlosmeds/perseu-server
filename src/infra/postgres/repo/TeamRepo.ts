@@ -37,8 +37,9 @@ export class TeamRepo {
   }
 
   async getAthletesByTeam(team: Team) {
-    const athletes = await AppDataSource.manager.findBy(Athlete, {
-      team,
+    const athletes = await AppDataSource.manager.find(Athlete, {
+      where: { team },
+      order: { name: "ASC" },
     });
 
     return athletes;
