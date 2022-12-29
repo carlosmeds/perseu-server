@@ -12,12 +12,12 @@ import { trainingController as trainingCtl } from "../app/controller/TrainingCon
 import { checkInController as checkInCtl } from "../app/controller/CheckInController";
 import { adminController as adminCtl } from "../app/controller/AdminController";
 import { groupController as groupCtl } from "../app/controller/GroupController";
+import { notificationController as notificationCtl } from "../app/controller/NotificationController";
 
 const router: Router = Router();
 
 router.post("/login", handle(loginCtl.login));
 router.post("/login/check", handle(loginCtl.checkLogin));
-
 
 router.post("/admin/login", handle(loginCtl.adminLogin));
 router.post("/admin", handle(registerCtl.registerAdmin));
@@ -31,6 +31,11 @@ router.get("/user/coach", auth, handle(userCtl.getCoaches));
 router.get("/user/athlete", auth, handle(userCtl.getAthletes));
 router.get("/user/team/:id", auth, handle(userCtl.getUsersByTeamId));
 router.get("/user/:id/name", auth, handle(userCtl.getNameByUserId));
+router.post(
+  "/user/:id/notification/token",
+  auth,
+  handle(notificationCtl.saveToken)
+);
 
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
