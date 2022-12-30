@@ -6,7 +6,7 @@ export class GetCurrentTrainingUseCase {
   constructor(private repo: TrainingRepo, private athleteRepo: AthleteRepo) {}
 
   async execute(id: number): Promise<any> {
-    const athlete = await this.athleteRepo.getAthlete(Number(id));
+    const athlete = await this.athleteRepo.getAthlete(id);
     if (!athlete) {
       return notFound("Atleta não encontrado");
     }

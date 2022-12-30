@@ -1,7 +1,9 @@
 import { Request } from "express";
 import { CreateTeamUseCase } from "../../domain/usecases/team/createTeam";
 import { GetAthletesByTeamUseCase } from "../../domain/usecases/team/getAthletesByTeam";
+import { GetTeamUseCase } from "../../domain/usecases/team/getTeam";
 import { GetTeamDetailsUseCase } from "../../domain/usecases/team/getTeamDetails";
+import { UpdateTeamNameUseCase } from "../../domain/usecases/team/updateTeamName";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
@@ -22,13 +24,9 @@ class TeamController {
 
   async getTeam(req: Request) {
     const { id } = req.params;
-    const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(id));
-    if (!team) {
-      return notFound("Time não encontrado");
-    }
 
-    return success(team);
+    const getTeamUseCase = new GetTeamUseCase(new TeamRepo());
+    return await getTeamUseCase.execute(Number(id));
   }
 
   async getAthletesByTeam(req: Request) {
@@ -43,13 +41,9 @@ class TeamController {
     const { id } = req.params;
     const { name } = req.body;
     const teamRepo = new TeamRepo();
-    const team = await teamRepo.getTeam(Number(id));
-    if (!team) {
-      return notFound("Time não encontrado");
-    }
-    const result = await teamRepo.updateTeamName(team, name);
 
-    return success(result);
+    const updateTeamNameUseCase = new UpdateTeamNameUseCase(teamRepo);
+    return await updateTeamNameUseCase.execute(Number(id), name);
   }
 
   async getAllTeams() {

@@ -7,7 +7,7 @@ export class UpdateAthleteUseCase {
   async execute(id: number, data: any): Promise<any> {
     const { name, document, birthdate, height, weight } = data;
 
-    const athlete = await this.athleteRepo.getAthlete(Number(id));
+    const athlete = await this.athleteRepo.getAthlete(id);
     if (!athlete) {
       return notFound("Atleta não encontrado");
     }

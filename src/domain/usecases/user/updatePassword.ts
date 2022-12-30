@@ -14,7 +14,7 @@ export class UpdatePasswordUseCase {
     newPassword: string,
     oldPassword: string
   ): Promise<any> {
-    const user = await this.userRepo.getUserById(Number(id));
+    const user = await this.userRepo.getUserById(id);
     if (!user) {
       return notFound("Usuário não encontrado");
     }

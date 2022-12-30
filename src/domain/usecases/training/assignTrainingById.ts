@@ -11,7 +11,7 @@ export class AssignTrainingByIdUseCase {
   ) {}
 
   async execute(id: number, athletes: string[]): Promise<any> {
-    const training = await this.trainingRepo.getTrainingById(Number(id));
+    const training = await this.trainingRepo.getTrainingById(id);
     if (!training) {
       return notFound("Treino não encontrado");
     }

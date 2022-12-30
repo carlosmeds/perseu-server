@@ -3,6 +3,7 @@ import { DeactivateTrainingUseCase } from "../../domain/usecases/athleteTraining
 import { AssignTrainingByIdUseCase } from "../../domain/usecases/training/assignTrainingById";
 import { CreateTrainingUseCase } from "../../domain/usecases/training/createTraining";
 import { GetCurrentTrainingUseCase } from "../../domain/usecases/training/getCurrentTraining";
+import { GetTrainingByIdUseCase } from "../../domain/usecases/training/getTrainingById";
 import { GetTrainingsUseCase } from "../../domain/usecases/training/getTrainings";
 import { GetTrainingsByTeamUseCase } from "../../domain/usecases/training/getTrainingsByTeam";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
@@ -71,13 +72,8 @@ class TrainingController {
   async getTrainingById(req: Request) {
     const { id } = req.params;
 
-    const repo = new TrainingRepo();
-    const training = await repo.getTrainingById(Number(id));
-    if (!training) {
-      return notFound("Treino não encontrado");
-    }
-
-    return success(training);
+    const getTrainingByIdUseCase = new GetTrainingByIdUseCase(new TrainingRepo());
+    return await getTrainingByIdUseCase.execute(Number(id));
   }
 
   async deactivateTraining(req: Request) {

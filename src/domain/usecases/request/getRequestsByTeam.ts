@@ -4,8 +4,8 @@ import { notFound, success } from "../../../main/presentation/httpHelper";
 
 export class GetRequestsByTeamUseCase {
   constructor(private requestRepo: RequestRepo, private teamRepo: TeamRepo) {}
-  async execute(id: Number) {
-    const team = await this.teamRepo.getTeam(Number(id));
+  async execute(id: number) {
+    const team = await this.teamRepo.getTeam(id);
     if (!team) {
       return notFound("Time não encontrado");
     }

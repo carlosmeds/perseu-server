@@ -23,7 +23,7 @@ export class AthleteCheckInUseCase {
       return notFound("Atleta não encontrado");
     }
 
-    const training = await this.trainingRepo.getTrainingById(Number(id));
+    const training = await this.trainingRepo.getTrainingById(id);
     if (!training) {
       return notFound("Treino não encontrado");
     }

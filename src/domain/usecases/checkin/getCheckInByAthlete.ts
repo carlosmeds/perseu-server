@@ -6,7 +6,7 @@ export class GetCheckInByAthleteUseCase {
   constructor(private athleteRepo: AthleteRepo, private checkInRepo: CheckInRepo) {}
 
   async execute(id: number): Promise<any> {
-    const athlete = await this.athleteRepo.getAthlete(Number(id));
+    const athlete = await this.athleteRepo.getAthlete(id);
     if (!athlete) {
       return notFound("Atleta não encontrado");
     }

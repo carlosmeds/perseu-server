@@ -9,7 +9,7 @@ export class CreateTrainingUseCase {
   async execute(id: number, data: any): Promise<any> {
     const { name, athletes, sessions } = data;
 
-    const team = await this.teamRepo.getTeam(Number(id));
+    const team = await this.teamRepo.getTeam(id);
     if (!team) {
       return notFound("Time não encontrado");
     }
