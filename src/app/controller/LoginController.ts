@@ -6,7 +6,7 @@ import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
 import { badRequest, success } from "../../main/presentation/httpHelper";
 import { JWTService } from "../service/jwt.service";
-
+import { SendNotificationRepo } from "../../infra/firebase/repo/sendNotificationRepo";
 class LoginController {
   async login(req: Request) {
     const { email, password } = req.body;
@@ -72,7 +72,7 @@ class LoginController {
     const userRepo = new UserRepo();
     const user = await userRepo.getUserByEmail(email);
 
-    if ((user && user.type === UserType.ADMIN) && !user.deletedAt) {
+    if (user && user.type === UserType.ADMIN && !user.deletedAt) {
       const isPasswordCorrect = await CryptoService.compare(
         password,
         user.password
