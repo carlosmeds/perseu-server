@@ -9,7 +9,10 @@ export class TeamRepo {
     const team = new Team();
     team.name = name;
     team.code = code;
+
+    delete coach.team;
     team.coach = coach;
+
     await AppDataSource.manager.save(team);
 
     coach.updatedAt = new Date();

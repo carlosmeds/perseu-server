@@ -4,18 +4,15 @@ import { TeamRepo } from "../../../infra/postgres/repo/TeamRepo";
 import { notFound, success } from "../../../main/presentation/httpHelper";
 
 export class CreateTeamUseCase {
-  constructor(
-    private teamRepo: TeamRepo,
-    private coachRepo: CoachRepo,
-  ) {}
+  constructor(private teamRepo: TeamRepo, private coachRepo: CoachRepo) {}
   async execute(id: number, name: string) {
     const code = Code.generate();
 
     const coach = await this.coachRepo.getCoach(id);
     if (!coach) {
-        return notFound("Treinador não encontrado");
+      return notFound("Treinador não encontrado");
     }
-    
+
     const team = await this.teamRepo.createTeam(coach, name, code);
 
     return success(team);

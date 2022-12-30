@@ -34,7 +34,7 @@ export class Coach {
   user!: User;
 
   @OneToOne(() => Team, (team) => team.coach)
-  team: Team;
+  team?: Team;
 
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })
   createdAt?: Date;
