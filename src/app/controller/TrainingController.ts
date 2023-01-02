@@ -10,7 +10,6 @@ import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { AthleteTrainingRepo } from "../../infra/postgres/repo/AthleteTrainingRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
-import { notFound, success } from "../../main/presentation/httpHelper";
 
 class TrainingController {
   async createTraining(req: Request) {

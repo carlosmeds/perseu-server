@@ -1,7 +1,11 @@
+import { NotificationService } from "../../../app/service/notification.service";
 import { AthleteRepo } from "../../../infra/postgres/repo/AthleteRepo";
 import { AthleteTrainingRepo } from "../../../infra/postgres/repo/AthleteTrainingRepo";
 import { TrainingRepo } from "../../../infra/postgres/repo/TrainingRepo";
-import { notFound, successMessage } from "../../../main/presentation/httpHelper";
+import {
+  notFound,
+  successMessage,
+} from "../../../main/presentation/httpHelper";
 
 export class AssignTrainingByIdUseCase {
   constructor(
@@ -27,6 +31,10 @@ export class AssignTrainingByIdUseCase {
 
       if (athlete) {
         await this.athleteTrainingRepo.assignTrainingById([athlete], training);
+        await NotificationService.send(athlete!.user.id, {
+          title: "Bora treinar?",
+          body: `Você recebeu um novo treino: ${training.name}`,
+        });
       }
     });
     await Promise.all(assignPromise);
