@@ -22,8 +22,7 @@ export class CreateGroupUseCase {
       .map(async (athleteId: string) => {
         return await this.athleteRepo.getAthlete(Number(athleteId));
       })
-      .filter((athlete: Athlete) => athlete);
-    const athletes = await Promise.all(promise);
+    const athletes = (await Promise.all(promise)).filter((athlete) => athlete);
 
     const group = await this.groupRepo.createGroup(name, team, athletes);
 

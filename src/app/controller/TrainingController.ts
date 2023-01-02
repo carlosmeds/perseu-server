@@ -18,7 +18,8 @@ class TrainingController {
     const createTrainingUseCase = new CreateTrainingUseCase(
       new TrainingRepo(),
       new TeamRepo(),
-      new AthleteTrainingRepo()
+      new AthleteTrainingRepo(),
+      new AthleteRepo()
     );
     return await createTrainingUseCase.execute(Number(id), req.body);
   }
@@ -71,7 +72,9 @@ class TrainingController {
   async getTrainingById(req: Request) {
     const { id } = req.params;
 
-    const getTrainingByIdUseCase = new GetTrainingByIdUseCase(new TrainingRepo());
+    const getTrainingByIdUseCase = new GetTrainingByIdUseCase(
+      new TrainingRepo()
+    );
     return await getTrainingByIdUseCase.execute(Number(id));
   }
 
