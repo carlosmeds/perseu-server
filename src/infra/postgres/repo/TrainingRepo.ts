@@ -10,25 +10,26 @@ export class TrainingRepo {
   async createTraining(team: Team, name: string, sessions: any) {
     const result = await AppDataSource.transaction(
       async (transactionalEntityManager) => {
-        const sessionsSaved = await Promise.all(
-          sessions.map(async (session: any) => {
-            const exercises = await Promise.all(
-              session.exercises.map(async (exercise: any) => {
-                const { name, description } = exercise;
-                const exerciseSave = new Exercise();
-                exerciseSave.name = name;
-                exerciseSave.description = description;
+        const promiseSessions = sessions.map(async (session: any) => {
+          const promiseExercises = session.exercises.map(
+            async (exercise: any) => {
+              const { name, description } = exercise;
+              const exerciseSave = new Exercise();
+              exerciseSave.name = name;
+              exerciseSave.description = description;
 
-                return await transactionalEntityManager.save(exerciseSave);
-              })
-            );
-            const sessionSave = new Session();
-            sessionSave.name = session.name;
-            sessionSave.exercises = exercises;
+              return await transactionalEntityManager.save(exerciseSave);
+            }
+          );
 
-            return await transactionalEntityManager.save(sessionSave);
-          })
-        );
+          const exercises = await Promise.all(promiseExercises);
+          const sessionSave = new Session();
+          sessionSave.name = session.name;
+          sessionSave.exercises = exercises;
+
+          return await transactionalEntityManager.save(sessionSave);
+        });
+        const sessionsSaved = await Promise.all(promiseSessions);
 
         const training = new Training();
         training.name = name;
