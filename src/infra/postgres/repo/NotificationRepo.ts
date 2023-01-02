@@ -8,6 +8,14 @@ export class NotificationRepo {
     notification.user = user;
     notification.value = token;
 
-    await AppDataSource.manager.upsert(Notification, notification, ['user']);
+    await AppDataSource.manager.upsert(Notification, notification, ["user"]);
+  }
+
+  async getToken(user: User) {
+    const result = await AppDataSource.manager.findOne(Notification, {
+      where: { user },
+    });
+
+    return result?.value;
   }
 }

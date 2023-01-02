@@ -1,20 +1,17 @@
 import { firebaseApp } from "../firebaseApp";
 
 export class SendNotificationRepo {
-  send() {
+  send(title: string, body: string, token: string) {
     let message = {
       android: {
-        notification: {
-          title: "title",
-          body: "body",
-        },
+        notification: { title, body },
       },
-      token: "",
+      token,
     };
 
-    firebaseApp.send(message, function (err: any, resp: any) {
+    firebaseApp.send(message, (err: any) => {
       if (err) {
-        throw err;
+        console.log("Error sending notification: ", err)
       } else {
         console.log("Successfully sent notification");
       }

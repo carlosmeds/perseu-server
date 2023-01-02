@@ -32,8 +32,9 @@ export class TeamRepo {
   }
 
   async getTeamByCode(code: string) {
-    const result = await AppDataSource.manager.findOneBy(Team, {
-      code: code.toUpperCase(),
+    const result = await AppDataSource.manager.findOne(Team, {
+      where: { code },
+      relations: ["coach"],
     });
 
     return result;

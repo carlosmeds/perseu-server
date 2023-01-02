@@ -6,6 +6,7 @@ import { DeclineRequestUseCase } from "../../domain/usecases/request/declineRequ
 import { GetRequestByAthleteUseCase } from "../../domain/usecases/request/getRequestByAthlete";
 import { GetRequestsByTeamUseCase } from "../../domain/usecases/request/getRequestsByTeam";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
+import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
 import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 
@@ -38,14 +39,11 @@ class RequestController {
     const { id } = req.params;
     const { code } = req.body;
 
-    const athleteRepo = new AthleteRepo();
-    const teamRepo = new TeamRepo();
-    const requestRepo = new RequestRepo();
-
     const createRequestUseCase = new CreateRequestUseCase(
-      athleteRepo,
-      teamRepo,
-      requestRepo
+      new AthleteRepo(),
+      new TeamRepo(),
+      new RequestRepo(),
+      new CoachRepo()
     );
     return await createRequestUseCase.execute(Number(id), code);
   }
