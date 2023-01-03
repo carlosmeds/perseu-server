@@ -36,6 +36,7 @@ router.post("/user/:id/notification/token", auth, handle(notificationCtl.saveTok
 router.post("/athlete", handle(registerCtl.registerAthlete));
 router.get("/athlete/:id", auth, handle(athleteCtl.getAthlete));
 router.put("/athlete/:id", auth, handle(athleteCtl.updateAthlete));
+router.delete("/athlete/:id", auth, handle(athleteCtl.deleteAthlete));
 
 router.post("/athlete/:id/request", auth, handle(reqCtl.createRequest));
 router.get("/athlete/:athleteId/request/", auth, handle(reqCtl.getRequestByAthlete));
