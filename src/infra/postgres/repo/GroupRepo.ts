@@ -1,3 +1,4 @@
+import { IsNull } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
 import { Group } from "../schema/Group.schema";
@@ -15,7 +16,6 @@ export class GroupRepo {
 
   async getGroupsByAthlete(athlete: Athlete) {
     return await AppDataSource.manager.find(Group, {
-      relations: ["athletes"],
       where: { athletes: { id: athlete.id } },
     });
   }
@@ -29,7 +29,7 @@ export class GroupRepo {
 
   async getGroupById(id: number) {
     return await AppDataSource.manager.findOne(Group, {
-      where: { id },
+      where: { id, athletes: { deletedAt: IsNull() } },
       relations: ["athletes", "athletes.user"],
     });
   }

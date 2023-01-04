@@ -1,3 +1,4 @@
+import { IsNull } from "typeorm";
 import { notFound } from "../../../main/presentation/httpHelper";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
@@ -40,7 +41,7 @@ export class AthleteTrainingRepo {
       AthleteTraining,
       {
         where: {
-          athlete: { id: athleteId },
+          athlete: { id: athleteId, deletedAt: IsNull() },
           training: { id: trainingId },
           active: true,
         },

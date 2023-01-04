@@ -12,7 +12,7 @@ export class AdminLoginUseCase {
   async execute(email: string, password: string): Promise<any> {
     const user = await this.userRepo.getUserByEmail(email);
 
-    if (user && user.type === UserType.ADMIN && !user.deletedAt) {
+    if (user && user.type === UserType.ADMIN) {
       const isPasswordCorrect = await CryptoService.compare(
         password,
         user.password

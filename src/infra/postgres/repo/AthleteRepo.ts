@@ -100,11 +100,13 @@ export class AthleteRepo {
 
   async countAthletesByTeam(team: Team) {
     return await AppDataSource.manager.count(Athlete, {
-      where: { team },
+      where: { team, deletedAt: IsNull() },
     });
   }
 
   async countAthletes() {
-    return await AppDataSource.manager.count(Athlete);
+    return await AppDataSource.manager.count(Athlete, {
+      where: { deletedAt: IsNull() },
+    });
   }
 }

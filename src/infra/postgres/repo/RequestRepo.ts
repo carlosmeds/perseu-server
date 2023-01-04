@@ -1,3 +1,4 @@
+import { IsNull } from "typeorm";
 import { RequestStatus } from "../../../domain/enum/RequestStatus";
 import { UserStatus } from "../../../domain/enum/UserStatus";
 import { AppDataSource } from "../data-source";
@@ -23,7 +24,7 @@ export class RequestRepo {
   async getRequestsByTeam(team: Team) {
     const requests = await AppDataSource.manager.find(Request, {
       relations: ["athlete"],
-      where: { team, status: RequestStatus.PENDING },
+      where: { team, status: RequestStatus.PENDING, athlete: { deletedAt: IsNull() } },
     });
 
     return requests;

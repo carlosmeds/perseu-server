@@ -25,7 +25,7 @@ export class CheckInRepo {
   async getCheckInByAthlete(athlete: Athlete) {
     const result = await AppDataSource.manager.find(CheckIn, {
       relations: ["training"],
-      where: { athlete },
+      where: { athlete, training: { team: athlete.team } },
     });
 
     return result;

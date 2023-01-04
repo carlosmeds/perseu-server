@@ -59,7 +59,7 @@ export class TrainingRepo {
         "training.sessions",
         "training.sessions.exercises",
       ],
-      where: { athlete, active: true },
+      where: { athlete, active: true, training: { team: athlete.team } },
       order: { createdAt: "DESC" },
     });
 

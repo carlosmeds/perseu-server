@@ -1,3 +1,4 @@
+import { IsNull } from "typeorm";
 import { UserStatus } from "../../../domain/enum/UserStatus";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
@@ -42,7 +43,7 @@ export class TeamRepo {
 
   async getAthletesByTeam(team: Team) {
     const athletes = await AppDataSource.manager.find(Athlete, {
-      where: { team },
+      where: { team, deletedAt: IsNull() },
       order: { name: "ASC" },
     });
 
