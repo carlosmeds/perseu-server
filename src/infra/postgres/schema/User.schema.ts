@@ -14,7 +14,7 @@ export class User {
   @Column({ default: "ATHLETE" })
   type!: string;
 
-  @Column({ nullable: true})
+  @Column({ name: "deleted_at", nullable: true})
   deletedAt?: Date;
 
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(6)" })

@@ -1,3 +1,4 @@
+import { IsNull } from "typeorm";
 import { UserStatus } from "../../../domain/enum/UserStatus";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
@@ -7,7 +8,7 @@ import { User } from "../schema/User.schema";
 export class AthleteRepo {
   async getAthlete(id: number) {
     const result = await AppDataSource.manager.findOne(Athlete, {
-      where: { id },
+      where: { id, deletedAt: IsNull() },
       relations: ["user"],
     });
 
@@ -29,6 +30,11 @@ export class AthleteRepo {
     athlete.weight = weight;
     athlete.updatedAt = new Date();
     return AppDataSource.manager.save(athlete);
+  }
+
+  async deactivateAthlete(athlete: Athlete) {
+    athlete.deletedAt = new Date();
+    return await AppDataSource.manager.save(athlete);
   }
 
   async updateAthleteTeam(athlete: Athlete, team: Team) {
@@ -94,11 +100,13 @@ export class AthleteRepo {
 
   async countAthletesByTeam(team: Team) {
     return await AppDataSource.manager.count(Athlete, {
-      where: { team },
+      where: { team, deletedAt: IsNull() },
     });
   }
 
   async countAthletes() {
-    return await AppDataSource.manager.count(Athlete);
+    return await AppDataSource.manager.count(Athlete, {
+      where: { deletedAt: IsNull() },
+    });
   }
 }

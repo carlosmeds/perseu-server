@@ -14,11 +14,14 @@ export class UserRepo {
   }
 
   async getUserByEmail(email: string) {
-    const result = await AppDataSource.manager.findOneBy(User, { email });
+    const result = await AppDataSource.manager.findOneBy(User, {
+      email,
+      deletedAt: IsNull(),
+    });
 
     return result;
   }
-  
+
   async getUserById(id: number) {
     const result = await AppDataSource.manager.findOne(User, {
       where: { id, deletedAt: IsNull() },

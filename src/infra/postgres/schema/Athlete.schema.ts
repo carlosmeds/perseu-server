@@ -66,6 +66,9 @@ export class Athlete {
   )
   athleteTraining: AthleteTraining[];
 
+  @Column({ name: "deleted_at", nullable: true })
+  deletedAt?: Date;
+
   @Column({ name: "created_at", default: () => "CURRENT_TIMESTAMP(3)" })
   createdAt?: Date;
 
