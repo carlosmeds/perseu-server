@@ -8,6 +8,7 @@ import {
   notFound,
   successMessage,
 } from "../../../main/presentation/httpHelper";
+import { UserStatus } from "../../enum/UserStatus";
 
 export class CreateRequestUseCase {
   constructor(
@@ -24,6 +25,10 @@ export class CreateRequestUseCase {
 
     if (athlete.team) {
       return badRequest("Atleta já está em um time");
+    }
+
+    if (athlete.status === UserStatus.ATHLETE_WITH_PENDING_TEAM) {
+      return badRequest("Atleta já solicitou para entrar em um time");
     }
 
     const team = await this.teamRepo.getTeamByCode(code.toUpperCase());
