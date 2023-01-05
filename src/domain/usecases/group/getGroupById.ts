@@ -14,7 +14,7 @@ export class GetGroupByIdUseCase {
     return success({
       id: group.id,
       name: group.name,
-      athletes: group.athletes.map(({ user, name }) => ({ userId: user.id, name })),
+      athletes: group.athletes.map(({ user, name }) => ({ id: user.id, name })),
     });
   }
 }
