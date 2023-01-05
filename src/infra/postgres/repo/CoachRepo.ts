@@ -1,5 +1,7 @@
+import { UserStatus } from "../../../domain/enum/UserStatus";
 import { AppDataSource } from "../data-source";
 import { Coach } from "../schema/Coach.schema";
+import { Team } from "../schema/Team.schema";
 import { User } from "../schema/User.schema";
 
 export class CoachRepo {
@@ -77,5 +79,18 @@ export class CoachRepo {
   async countCoaches() {
     const result = await AppDataSource.manager.count(Coach);
     return result;
+  }
+
+  async updateCoachTeam(coach: Coach, team: Team) {
+    coach.team = team;
+    coach.status = UserStatus.COACH_WITH_TEAM;
+    coach.updatedAt = new Date();
+    return await AppDataSource.manager.save(coach);
+  }
+
+  async removeCoachTeam(coach: Coach) {
+    coach.status = UserStatus.COACH_WITHOUT_TEAM;
+    coach.updatedAt = new Date();
+    return await AppDataSource.manager.save(coach);
   }
 }

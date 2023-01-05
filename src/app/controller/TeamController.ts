@@ -3,6 +3,7 @@ import { CreateTeamUseCase } from "../../domain/usecases/team/createTeam";
 import { GetAthletesByTeamUseCase } from "../../domain/usecases/team/getAthletesByTeam";
 import { GetTeamUseCase } from "../../domain/usecases/team/getTeam";
 import { GetTeamDetailsUseCase } from "../../domain/usecases/team/getTeamDetails";
+import { SwitchCoachUseCase } from "../../domain/usecases/team/switchCoach";
 import { UpdateTeamNameUseCase } from "../../domain/usecases/team/updateTeamName";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
@@ -65,6 +66,17 @@ class TeamController {
       athleteRepo
     );
     return await getTeamDetailsUseCase.execute(Number(id));
+  }
+
+  async switchCoach(req: Request) {
+    const { id } = req.params;
+    const { newCoachId } = req.body;
+
+    const switchCoachUseCase = new SwitchCoachUseCase(
+      new TeamRepo(),
+      new CoachRepo()
+    );
+    return await switchCoachUseCase.execute(Number(id), Number(newCoachId));
   }
 }
 
