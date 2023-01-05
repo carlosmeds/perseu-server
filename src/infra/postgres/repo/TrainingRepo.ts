@@ -90,9 +90,10 @@ export class TrainingRepo {
   async getTrainingsByTeams() {
     return await AppDataSource.manager
       .createQueryBuilder(Training, "t")
-      .select("t.teamId", "teamId")
+      .leftJoin("t.team", "te")
+      .select("te.name", "name")
       .addSelect("count(*)", "count")
-      .groupBy("t.teamId")
+      .groupBy("te.name")
       .getRawMany();
   }
 }
