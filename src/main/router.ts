@@ -23,7 +23,7 @@ router.post("/admin/login", handle(loginCtl.adminLogin));
 router.post("/admin", handle(registerCtl.registerAdmin));
 router.get("/admin/:id", handle(adminCtl.getAdminById));
 router.delete("/admin/:id", auth, handle(adminCtl.deactivateAdmin));
-router.get("/admin/entities/count", auth, handle(adminCtl.countEntities));
+router.get("/admin/entities/stats", auth, handle(adminCtl.getStats));
 
 router.patch("/user/:id/password", auth, handle(userCtl.updatePassword));
 router.get("/user/admin", auth, handle(userCtl.getAdmins));

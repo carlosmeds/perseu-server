@@ -86,4 +86,13 @@ export class TrainingRepo {
       where: { team: team },
     });
   }
+
+  async getTrainingsByTeams() {
+    return await AppDataSource.manager
+      .createQueryBuilder(Training, "t")
+      .select("t.teamId", "teamId")
+      .addSelect("count(*)", "count")
+      .groupBy("t.teamId")
+      .getRawMany();
+  }
 }

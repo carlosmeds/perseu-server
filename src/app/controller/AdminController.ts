@@ -1,18 +1,22 @@
 import { Request } from "express";
-import { CountEntitiesUseCase } from "../../domain/usecases/admin/countEntities";
+import { GetStatsUseCase } from "../../domain/usecases/admin/getStats";
 import { DeactivateAdminUseCase } from "../../domain/usecases/admin/deactivateAdmin";
 import { GetAdminByIdUseCase } from "../../domain/usecases/admin/getAdminById";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
+import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
+import { CheckInRepo } from "../../infra/postgres/repo/CheckInRepo";
 
 class AdminController {
-  async countEntities() {
-    const countEntitiesUseCase = new CountEntitiesUseCase(
+  async getStats() {
+    const countEntitiesUseCase = new GetStatsUseCase(
       new AthleteRepo(),
       new CoachRepo(),
-      new TeamRepo()
+      new TeamRepo(),
+      new TrainingRepo(),
+      new CheckInRepo()
     );
 
     return await countEntitiesUseCase.execute();

@@ -30,4 +30,14 @@ export class CheckInRepo {
 
     return result;
   }
+
+  async getCheckInsByTeams() {
+    return await AppDataSource.manager
+      .createQueryBuilder(CheckIn, "c")
+      .leftJoinAndSelect("c.training", "t")
+      .select("t.teamId", "teamId")
+      .addSelect("count(*)", "count")
+      .groupBy("t.teamId")
+      .getRawMany();
+  }
 }
