@@ -48,6 +48,7 @@ router.get("/athlete/:id/training/current", auth, handle(trainingCtl.getCurrentT
 router.get("/athlete/:id/training", auth, handle(trainingCtl.getTrainingsByAthlete));
 router.get("/athlete/:id/check-in", auth, handle(checkInCtl.getCheckInByAthlete));
 
+router.get("/coach/no-team", auth, handle(coachCtl.getCoachesWithoutTeam));
 router.post("/coach", handle(registerCtl.registerCoach));
 router.get("/coach/:id", auth, handle(coachCtl.getCoach));
 router.put("/coach/:id", auth, handle(coachCtl.updateCoach));

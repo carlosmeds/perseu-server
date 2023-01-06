@@ -93,4 +93,15 @@ export class CoachRepo {
     coach.updatedAt = new Date();
     return await AppDataSource.manager.save(coach);
   }
+
+  async getCoachesWithoutTeam() {
+    const coaches = await AppDataSource.manager.query(`
+      SELECT c.* 
+      FROM coach c
+      LEFT JOIN team t ON t."coachId" = c.id 
+      WHERE t.id IS null`
+    );
+
+    return coaches;
+  }
 }
