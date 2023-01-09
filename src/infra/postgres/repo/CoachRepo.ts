@@ -91,6 +91,12 @@ export class CoachRepo {
   async removeCoachTeam(coach: Coach) {
     coach.status = UserStatus.COACH_WITHOUT_TEAM;
     coach.updatedAt = new Date();
+
+    await AppDataSource.manager.query(
+      'UPDATE team SET "coachId" = null WHERE id = $1',
+      [coach.id]
+    );
+
     return await AppDataSource.manager.save(coach);
   }
 
@@ -99,8 +105,7 @@ export class CoachRepo {
       SELECT c.* 
       FROM coach c
       LEFT JOIN team t ON t."coachId" = c.id 
-      WHERE t.id IS null`
-    );
+      WHERE t.id IS null`);
 
     return coaches;
   }

@@ -16,7 +16,7 @@ export class GroupRepo {
 
   async getGroupsByAthlete(athlete: Athlete) {
     return await AppDataSource.manager.find(Group, {
-      where: { athletes: { id: athlete.id } },
+      where: { athletes: { id: athlete.id }, team: athlete.team },
     });
   }
 

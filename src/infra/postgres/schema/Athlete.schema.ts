@@ -46,7 +46,7 @@ export class Athlete {
 
   @ManyToOne(() => Team, (team) => team.athletes)
   @JoinColumn()
-  team: Team;
+  team?: Team;
 
   @OneToMany(() => Request, (request) => request.athlete)
   @JoinColumn()

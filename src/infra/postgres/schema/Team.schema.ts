@@ -30,4 +30,7 @@ export class Team {
 
   @Column({ name: "updated_at", default: () => "CURRENT_TIMESTAMP(3)" })
   updatedAt?: Date;
+
+  @Column({ name: "deleted_at", nullable: true })
+  deletedAt?: Date;
 }

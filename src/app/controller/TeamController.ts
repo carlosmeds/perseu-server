@@ -1,5 +1,6 @@
 import { Request } from "express";
 import { CreateTeamUseCase } from "../../domain/usecases/team/createTeam";
+import { DeleteTeamUseCase } from "../../domain/usecases/team/deleteTeam";
 import { GetAthletesByTeamUseCase } from "../../domain/usecases/team/getAthletesByTeam";
 import { GetTeamUseCase } from "../../domain/usecases/team/getTeam";
 import { GetTeamDetailsUseCase } from "../../domain/usecases/team/getTeamDetails";
@@ -7,6 +8,7 @@ import { SwitchCoachUseCase } from "../../domain/usecases/team/switchCoach";
 import { UpdateTeamNameUseCase } from "../../domain/usecases/team/updateTeamName";
 import { AthleteRepo } from "../../infra/postgres/repo/AthleteRepo";
 import { CoachRepo } from "../../infra/postgres/repo/CoachRepo";
+import { RequestRepo } from "../../infra/postgres/repo/RequestRepo";
 import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
 import { notFound, success } from "../../main/presentation/httpHelper";
@@ -77,6 +79,18 @@ class TeamController {
       new CoachRepo()
     );
     return await switchCoachUseCase.execute(Number(id), Number(newCoachId));
+  }
+
+  async deleteTeam(req: Request) {
+    const { id } = req.params;
+
+    const deleteTeamUseCase = new DeleteTeamUseCase(
+      new TeamRepo(),
+      new CoachRepo(),
+      new AthleteRepo(),
+      new RequestRepo()
+    );
+    return await deleteTeamUseCase.execute(Number(id));
   }
 }
 

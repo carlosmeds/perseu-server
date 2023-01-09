@@ -80,4 +80,9 @@ export class TeamRepo {
   async countTeams() {
     return await AppDataSource.manager.count(Team);
   }
+
+  async deleteTeam(team: Team) {
+    team.deletedAt = new Date();
+    return await AppDataSource.manager.save(team);
+  }
 }

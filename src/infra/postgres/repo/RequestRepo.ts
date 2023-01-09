@@ -59,4 +59,8 @@ export class RequestRepo {
   async deleteRequestByAthlete(request: Request) {
     await AppDataSource.manager.remove(request);
   }
+
+  async deleteFromTeam(team: Team) {
+    await AppDataSource.manager.delete(Request, { team });
+  }
 }

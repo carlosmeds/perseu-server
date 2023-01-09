@@ -109,4 +109,26 @@ export class AthleteRepo {
       where: { deletedAt: IsNull() },
     });
   }
+
+  async getTeamByAthlete(id: number) {
+    const result = await AppDataSource.manager.findOne(Athlete, {
+      where: { id, deletedAt: IsNull() },
+      relations: ["team"],
+    });
+
+    return result;
+  }
+
+  async removeAthleteFromTeam(athlete: Athlete) {
+    athlete.team = undefined;
+    athlete.status = UserStatus.ATHLETE_WITHOUT_TEAM;
+    athlete.updatedAt = new Date();
+
+    await AppDataSource.manager.query(
+      'UPDATE athlete SET "teamId" = null WHERE id = $1',
+      [athlete.id]
+    );
+
+    await AppDataSource.manager.save(athlete);
+  }
 }
