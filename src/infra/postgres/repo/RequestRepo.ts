@@ -50,7 +50,7 @@ export class RequestRepo {
     const [request] = await AppDataSource.manager.find(Request, {
       relations: ["team"],
       order: { updatedAt: "DESC" },
-      where: { athlete },
+      where: { athlete: { id: athlete.id } },
     });
 
     return request;
