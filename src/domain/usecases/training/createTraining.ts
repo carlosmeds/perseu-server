@@ -38,7 +38,7 @@ export class CreateTrainingUseCase {
     await this.athleteTrainingRepo.assignTrainingById(athletes, training);
     const promiseNotify = athletes.map(async (athlete: any) => {
       await NotificationService.send(athlete!.user.id, {
-        title: "Bora treinar?",
+        title: "Novo treino",
         body: `Você recebeu um novo treino: ${training.name}`,
       });
     });

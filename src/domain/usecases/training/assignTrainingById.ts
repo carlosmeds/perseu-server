@@ -32,7 +32,7 @@ export class AssignTrainingByIdUseCase {
       if (athlete) {
         await this.athleteTrainingRepo.assignTrainingById([athlete], training);
         await NotificationService.send(athlete!.user.id, {
-          title: "Bora treinar?",
+          title: "Novo treino",
           body: `Você recebeu um novo treino: ${training.name}`,
         });
       }
