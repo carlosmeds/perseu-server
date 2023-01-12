@@ -34,7 +34,7 @@ export class TeamRepo {
 
   async getTeamByCode(code: string) {
     const result = await AppDataSource.manager.findOne(Team, {
-      where: { code },
+      where: { code, deletedAt: IsNull() },
       relations: ["coach"],
     });
 
