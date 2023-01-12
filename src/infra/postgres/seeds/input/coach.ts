@@ -15,7 +15,7 @@ export const coachesToSeed = [
     },
   },
   {
-    email: "klopp@.liverpool.com",
+    email: "klopp@liverpool.com",
     name: "Jürgen Klopp",
     document: "42775666850",
     birthdate: new Date("08/15/1975"),
