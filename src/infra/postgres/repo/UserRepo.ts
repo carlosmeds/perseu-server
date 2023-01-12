@@ -1,4 +1,4 @@
-import { IsNull, Like } from "typeorm";
+import { ILike, IsNull } from "typeorm";
 import { UserType } from "../../../domain/enum/UserType";
 import { AppDataSource } from "../data-source";
 import { Athlete } from "../schema/Athlete.schema";
@@ -56,7 +56,7 @@ export class UserRepo {
   async getCoaches(page: number, pageSize: number, keyword: string) {
     const result = await AppDataSource.manager.findAndCount(Coach, {
       relations: ["user", "team"],
-      where: { name: Like("%" + keyword + "%") },
+      where: { name: ILike("%" + keyword + "%") },
       take: pageSize,
       skip: page,
       order: { createdAt: "ASC" },
@@ -68,7 +68,7 @@ export class UserRepo {
   async getAthletes(page: number, pageSize: number, keyword: string) {
     const result = await AppDataSource.manager.findAndCount(Athlete, {
       relations: ["user", "team"],
-      where: { name: Like("%" + keyword + "%") },
+      where: { name: ILike("%" + keyword + "%") },
       take: pageSize,
       skip: page,
       order: { createdAt: "ASC" },
