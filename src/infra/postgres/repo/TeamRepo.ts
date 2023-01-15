@@ -25,7 +25,7 @@ export class TeamRepo {
 
   async getTeam(id: number) {
     const result = await AppDataSource.manager.findOne(Team, {
-      where: { id },
+      where: { id, deletedAt: IsNull() },
       relations: ["coach"],
     });
 
@@ -65,6 +65,7 @@ export class TeamRepo {
   async getAllTeams() {
     const teams = await AppDataSource.manager.find(Team, {
       relations: ["coach"],
+      where: { deletedAt: IsNull() },
     });
 
     return teams.map((team) => {

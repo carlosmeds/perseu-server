@@ -93,7 +93,7 @@ export class CoachRepo {
     coach.updatedAt = new Date();
 
     await AppDataSource.manager.query(
-      'UPDATE team SET "coachId" = null WHERE id = $1',
+      'UPDATE team SET "coachId" = null WHERE "coachId" = $1',
       [coach.id]
     );
 
