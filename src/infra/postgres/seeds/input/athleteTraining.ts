@@ -184,13 +184,13 @@ export const athleteTrainingsToSeed = [
   },
   {
     athleteId: 7,
-    trainingId: 1,
+    trainingId: 4,
     active: true,
     checkIn: [],
   },
   {
     athleteId: 8,
-    trainingId: 4,
+    trainingId: 5,
     active: false,
     checkIn: [
       {
@@ -201,13 +201,13 @@ export const athleteTrainingsToSeed = [
   },
   {
     athleteId: 9,
-    trainingId: 4,
+    trainingId: 5,
     active: true,
     checkIn: [],
   },
   {
     athleteId: 10,
-    trainingId: 4,
+    trainingId: 5,
     active: true,
     checkIn: [
       {
@@ -222,7 +222,7 @@ export const athleteTrainingsToSeed = [
   },
   {
     athleteId: 11,
-    trainingId: 5,
+    trainingId: 6,
     active: true,
     checkIn: [
       {
@@ -233,7 +233,7 @@ export const athleteTrainingsToSeed = [
   },
   {
     athleteId: 12,
-    trainingId: 5,
+    trainingId: 6,
     active: false,
     checkIn: [
       {
@@ -244,7 +244,7 @@ export const athleteTrainingsToSeed = [
   },
   {
     athleteId: 13,
-    trainingId: 1,
+    trainingId: 6,
     active: true,
     checkIn: [],
   },

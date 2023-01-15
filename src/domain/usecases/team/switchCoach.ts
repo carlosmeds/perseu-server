@@ -13,8 +13,7 @@ export class SwitchCoachUseCase {
     if (!team) {
       return notFound("Time não encontrado");
     }
-    
-    const oldCoach = team.coach;
+
     const newCoach = await this.coachRepo.getCoach(newCoachId);
     if (!newCoach) {
       return notFound("Treinador não encontrado");
