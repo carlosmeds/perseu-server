@@ -15,6 +15,15 @@ export class AthleteRepo {
     return result;
   }
 
+  async getAthleteForAdmin(id: number) {
+    const result = await AppDataSource.manager.findOne(Athlete, {
+      where: { id },
+      relations: ["user"],
+    });
+
+    return result;
+  }
+
   async updateAthlete(
     athlete: Athlete,
     name: string,

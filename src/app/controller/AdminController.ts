@@ -8,6 +8,7 @@ import { TeamRepo } from "../../infra/postgres/repo/TeamRepo";
 import { UserRepo } from "../../infra/postgres/repo/UserRepo";
 import { TrainingRepo } from "../../infra/postgres/repo/TrainingRepo";
 import { CheckInRepo } from "../../infra/postgres/repo/CheckInRepo";
+import { getAthleteForAdminUseCase } from "../../domain/usecases/admin/getAthleteForAdmin";
 
 class AdminController {
   async getStats() {
@@ -34,6 +35,13 @@ class AdminController {
 
     const deactivateAdminUseCase = new DeactivateAdminUseCase(new UserRepo());
     return await deactivateAdminUseCase.execute(Number(id));
+  }
+
+  async getAthleteForAdmin(req: Request) {
+    const { id } = req.params;
+
+    const getAthleteUseCase = new getAthleteForAdminUseCase(new AthleteRepo());
+    return await getAthleteUseCase.execute(Number(id));
   }
 }
 
