@@ -26,7 +26,6 @@ export class SwitchCoachUseCase {
     await this.teamRepo.updateTeamCoach(team, newCoach)
 
     await this.coachRepo.updateCoachTeam(newCoach, team);
-    await this.coachRepo.removeCoachTeam(oldCoach);
 
     return successMessage("Treinador trocado com sucesso");
   }
