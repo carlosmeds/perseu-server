@@ -1,10 +1,10 @@
 export const trainingsToSeed = [
   {
-    name: "Pré-jogo",
+    name: "Treino I - Arremessadores",
     sessions: [
       {
         name: "Alongamento",
-        description: "Alongar o corpo para evitar lesões",
+        description: "Alongar o corpo para evitar lesões, fazer cada alongamento com duração de um minuto",
         exercises: [
           {
             name: "Alongar membros inferiores",
@@ -17,38 +17,106 @@ export const trainingsToSeed = [
         ],
       },
       {
-        name: "Aquecimento",
-        description: "Realizar movimentos com a bola",
+        name: "Aquecimento articular",
+        description: "Realizar cada movimento 20 vezes",
         exercises: [
           {
-            name: "Dois toques",
+            name: "Flexão de tornozelo",
             description:
-              "Com um colega, realizar dois toques na bola. O jogador que errar deve correr até a linha de fundo e voltar",
+              "Ficar com o pé inteiro no chão e logo em seguida subir nas pontas dos pés",
           },
           {
-            name: "Bobinho",
+            name: "Flexão de joelho",
             description:
-              "Durante 5 minutos, realizar passes curtos e rápidos com cinco jogadores, em um círculo, sendo que um deve ser o bobinho",
+              "Com um pé encostado no chão, dar um chute no ar com a outra perna para estender o tendão",
           },
           {
-            name: "Inversões",
+            name: "Rotação de tronco",
             description:
-              "Realizar inversões com um colega no lado inverso do campo, durante 5 minutos",
+              "Com os braços esticados e os pés apontados para frente, rotacionar o tronco o máximo que conseguir",
+          },
+          {
+            name: "Rotação de ombros",
+            description:
+              "Rotacionar os ombros para frente e para trás com os braços esticados",
           },
         ],
       },
       {
         name: "Exercícios aeróbicos",
-        description: "Preparar corpo para o jogo",
+        description: "Preparar corpo para os treinos específicos",
         exercises: [
           {
-            name: "Corrida",
-            description: "Trotar por 5 minutos ao redor do campo",
+            name: "Trote e Caminhada",
+            description: "Trotar 4 vezes de 100m por 50m de caminhada",
+          },
+        ],
+      },
+      {
+        name: "Mobilidades",
+        description: "Repetir cada um desses exercícios por 10 vezes",
+        exercises: [
+          {
+            name: "Deslocamento lateral",
+            description: "Deslocar-se lateralmente com as mãos na cintura",
           },
           {
-            name: "Bicicleta",
-            description:
-              "Durante 20 minutos, pedalar na bicicleta. Alterar velocidade",
+            name: "Reverências",
+            description: "Com a barra nas costas e os joelhos semi-flexionados, descer o tronco até atingir um posição de 90 graus",
+          },
+          {
+            name: "Chute lateral",
+            description: "Deitado com a barriga para cima, rotacionar o quadril e tentar chutar o pé na mão",
+          },
+        ],
+      },
+      {
+        name: "Exercícios educativos",
+        description: "Exercícios educativos voltados para molinete",
+        exercises: [
+          {
+            name: "Molinetes curtos",
+            description: "3x de 10 repetições para cada lado, com anilha de 20 kg",
+          },
+          {
+            name: "Molinetes alternados",
+            description: "5x de 10 repetições molinetes alternando o lado com anilha de 20 kg",
+          },
+          {
+            name: "Giros",
+            description: "10x de 10 giros (1 molinete + 1 giro) com anilha de 10 kg",
+          },
+        ],
+      },
+      {
+        name: "Saltos",
+        description: "Saltos verticais e horizontais",
+        exercises: [
+          {
+            name: "Salto ram",
+            description: "4x de 5 repetições",
+          },
+          {
+            name: "Salto com barreiras altas",
+            description: "4x de 5 repetições",
+          },
+          {
+            name: "Jump com alteres na mão",
+            description: "6x de 5 repetições",
+          },
+        ],
+      },
+      {
+        name: "Pós-treino",
+        description: "Exercícios para relaxar o corpo",
+        exercises: [
+          {
+            name: "Caminhada na grama",
+            description: "10 minutos de caminhada na grama",
+          },
+          {
+            name: "Alongamento leve",
+            description: "Alongar por 45 segs cada parte do corpo",
           },
         ],
       },
