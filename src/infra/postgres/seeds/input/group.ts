@@ -1,21 +1,21 @@
 export const groupsToSeed = [
   {
-    name: "Craques",
+    name: "Arremessadores e Lançadores",
     teamId: 1,
     athletes: [1, 2, 3],
   },
   {
-    name: "Defesa",
+    name: "Velocistas",
     teamId: 1,
     athletes: [5, 6, 7],
   },
   {
-    name: "Batedores de pênalti",
+    name: "Fundistas",
     teamId: 1,
     athletes: [1, 3, 6, 7],
   },
   {
-    name: "Brazucas",
+    name: "Saltadores",
     teamId: 2,
     athletes: [9, 10],
   },
