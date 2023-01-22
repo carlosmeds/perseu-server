@@ -1,6 +1,6 @@
 export const athletesToSeed = [
   {
-    email: "kevin@city.com",
+    email: "kevin@gmail.com",
     name: "Kevin de Bruyne",
     document: "22908632110",
     birthdate: new Date("02/01/1980"),
@@ -9,7 +9,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-09-22 16:18:01.685"),
   },
   {
-    email: "haaland@city.com",
+    email: "haaland@gmail.com",
     name: "Erling Haaland",
     document: "49959430995",
     birthdate: new Date("06/18/2004"),
@@ -18,7 +18,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-10-21 09:50:54.431"),
   },
   {
-    email: "bernardo@city.com",
+    email: "bernardo@gmail.com",
     name: "Bernardo Silva",
     document: "96454760545",
     birthdate: new Date("09/13/2000"),
@@ -27,7 +27,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-10-11 14:30:24.347"),
   },
   {
-    email: "jack@city.com",
+    email: "jack@gmail.com",
     name: "Jack Grealish",
     document: "30103057536",
     birthdate: new Date("03/24/2004"),
@@ -36,7 +36,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-10-17 17:18:21.322"),
   },
   {
-    email: "john@city.com",
+    email: "john@gmail.com",
     name: "John Stones",
     document: "72436841063",
     birthdate: new Date("10/11/1971"),
@@ -45,7 +45,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-09-15 15:28:34.094"),
   },
   {
-    email: "manuel@city.com",
+    email: "manuel@gmail.com",
     name: "Manuel Akanji",
     document: "76444951186",
     birthdate: new Date("02/15/1971"),
@@ -54,7 +54,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-27 12:48:58.319"),
   },
   {
-    email: "ruben@city.com",
+    email: "ruben@gmail.com",
     name: "Rúben Dias",
     document: "79034580270",
     birthdate: new Date("09/11/1983"),
@@ -63,7 +63,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-07 02:38:00.922"),
   },
   {
-    email: "luis@liverpool.com",
+    email: "luis@gmail.com",
     name: "Luis Díaz",
     document: "65693997804",
     birthdate: new Date("05/02/1959"),
@@ -72,7 +72,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-04 02:56:03.425"),
   },
   {
-    email: "roberto@liverpool.com",
+    email: "roberto@gmail.com",
     name: "Roberto Firmino",
     document: "58832267870",
     birthdate: new Date("01/17/1969"),
@@ -81,7 +81,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-08-30 22:45:32.878"),
   },
   {
-    email: "alisson@liverpool.com",
+    email: "alisson@gmail.com",
     name: "Alisson Becker",
     document: "98264410405",
     birthdate: new Date("11/14/1986"),
@@ -90,7 +90,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-10-30 16:22:12.448"),
   },
   {
-    email: "marcus@united.com",
+    email: "marcus@gmail.com",
     name: "Marcus Rashford",
     document: "07221890102",
     birthdate: new Date("10/01/1947"),
@@ -99,7 +99,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-16 14:39:39.109"),
   },
   {
-    email: "david@united.com",
+    email: "david@gmail.com",
     name: "David de Gea",
     document: "96094625706",
     birthdate: new Date("09/23/1964"),
@@ -108,7 +108,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-10-10 04:13:19.998"),
   },
   {
-    email: "bruno@united.com",
+    email: "bruno@gmail.com",
     name: "Bruno Fernandes",
     document: "322110920",
     birthdate: new Date("03/01/1972"),
@@ -117,7 +117,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-10-17 23:08:19.477"),
   },
   {
-    email: "fred@united.com",
+    email: "fred@gmail.com",
     name: "Fred Rodrigues",
     document: "52250791210",
     birthdate: new Date("10/01/1978"),
@@ -126,7 +126,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-26 11:11:14.349"),
   },
   {
-    email: "messi@psg.com",
+    email: "messi@gmail.com",
     name: "Lionel Messi",
     document: "96377402368",
     birthdate: new Date("04/09/1980"),
@@ -135,7 +135,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-24 12:00:11.685"),
   },
   {
-    email: "kante@chelsea.com",
+    email: "kante@gmail.com",
     name: "N'Golo Kanté",
     document: "96377402368",
     birthdate: new Date("03/06/1967"),
@@ -144,7 +144,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-28 02:20:14.602"),
   },
   {
-    email: "rodrygo@real.com",
+    email: "rodrygo@gmail.com",
     name: "Rodrygo Silva",
     document: "82143997779",
     birthdate: new Date("06/10/1949"),
@@ -153,7 +153,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-08-22 11:50:53.096"),
   },
   {
-    email: "gabriel@arsenal.com",
+    email: "gabriel@gmail.com",
     name: "Gabriel Martinelli",
     document: "55414916730",
     birthdate: new Date("10/11/1962"),
@@ -162,7 +162,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-09-20 10:19:31.233"),
   },
   {
-    email: "lukaku@inter.com",
+    email: "lukaku@gmail.com",
     name: "Romelu Lukaku",
     document: "51533020167",
     birthdate: new Date("06/23/1978"),
@@ -171,7 +171,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-11-27 14:40:08.321"),
   },
   {
-    email: "thomas@bayern.com",
+    email: "thomas@gmail.com",
     name: "Thomas Müller",
     document: "74642468889",
     birthdate: new Date("04/12/1971"),
@@ -180,7 +180,7 @@ export const athletesToSeed = [
     createdAt: new Date("2022-07-23 07:20:01.033"),
   },
   {
-    email: "luka@real.com",
+    email: "luka@gmail.com",
     name: "Luka Modrić",
     document: "27898169484",
     birthdate: new Date("08/21/1952"),
