@@ -124,7 +124,7 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Treino de posse de bola",
+    name: "Treino II - Arremessadores",
     sessions: [
       {
         name: "Toques rápidos",
@@ -153,7 +153,7 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Finalização e defesa",
+    name: "Treino I - Marchadores",
     sessions: [
       {
         name: "Finalização de longe",
@@ -204,7 +204,7 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Pós-jogo",
+    name: "Treino II - Marchadores",
     sessions: [
       {
         name: "Corrida",
@@ -240,7 +240,7 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Treino tático",
+    name: "Treino III - Marchadores",
     sessions: [
       {
         name: "Defesa x ataque",
@@ -259,10 +259,10 @@ export const trainingsToSeed = [
         ],
       },
     ],
-    teamId: 2,
+    teamId: 1,
   },
   {
-    name: "Treino de pressão",
+    name: "Treino I - Lançadores",
     sessions: [
       {
         name: "Treinar pressão no ataque",
@@ -291,6 +291,134 @@ export const trainingsToSeed = [
         ],
       },
     ],
-    teamId: 3,
+    teamId: 1,
+  },
+  {
+    name: "Treino II - Lançadores",
+    sessions: [
+      {
+        name: "Treinar pressão no ataque",
+        description: "Coordenar pressão no ataque",
+        exercises: [
+          {
+            name: "Pressão na zaga",
+            description:
+              "Durante 10 minutos, zaga deve manter posse de bola. Evitar chutões",
+          },
+          {
+            name: "Pressão pós-perda",
+            description:
+              "Meio-campo deve manter bola, enquanto zagueiros e atacantes pressionam",
+          },
+        ],
+      },
+      {
+        name: "Pressão com ligações rápidas",
+        description: "Evitar contra-ataques",
+        exercises: [
+          {
+            name: "Pressão contra ligações rápidas",
+            description: "Defesa deve lançar para atacantes. Pressionar para lançamento falhar",
+          },
+        ],
+      },
+    ],
+    teamId: 1,
+  },
+  {
+    name: "Treino I - Velocistas",
+    sessions: [
+      {
+        name: "Treinar pressão no ataque",
+        description: "Coordenar pressão no ataque",
+        exercises: [
+          {
+            name: "Pressão na zaga",
+            description:
+              "Durante 10 minutos, zaga deve manter posse de bola. Evitar chutões",
+          },
+          {
+            name: "Pressão pós-perda",
+            description:
+              "Meio-campo deve manter bola, enquanto zagueiros e atacantes pressionam",
+          },
+        ],
+      },
+      {
+        name: "Pressão com ligações rápidas",
+        description: "Evitar contra-ataques",
+        exercises: [
+          {
+            name: "Pressão contra ligações rápidas",
+            description: "Defesa deve lançar para atacantes. Pressionar para lançamento falhar",
+          },
+        ],
+      },
+    ],
+    teamId: 1,
+  },
+  {
+    name: "Treino II - Velocistas",
+    sessions: [
+      {
+        name: "Treinar pressão no ataque",
+        description: "Coordenar pressão no ataque",
+        exercises: [
+          {
+            name: "Pressão na zaga",
+            description:
+              "Durante 10 minutos, zaga deve manter posse de bola. Evitar chutões",
+          },
+          {
+            name: "Pressão pós-perda",
+            description:
+              "Meio-campo deve manter bola, enquanto zagueiros e atacantes pressionam",
+          },
+        ],
+      },
+      {
+        name: "Pressão com ligações rápidas",
+        description: "Evitar contra-ataques",
+        exercises: [
+          {
+            name: "Pressão contra ligações rápidas",
+            description: "Defesa deve lançar para atacantes. Pressionar para lançamento falhar",
+          },
+        ],
+      },
+    ],
+    teamId: 1,
+  },
+  {
+    name: "Treino III - Velocistas",
+    sessions: [
+      {
+        name: "Treinar pressão no ataque",
+        description: "Coordenar pressão no ataque",
+        exercises: [
+          {
+            name: "Pressão na zaga",
+            description:
+              "Durante 10 minutos, zaga deve manter posse de bola. Evitar chutões",
+          },
+          {
+            name: "Pressão pós-perda",
+            description:
+              "Meio-campo deve manter bola, enquanto zagueiros e atacantes pressionam",
+          },
+        ],
+      },
+      {
+        name: "Pressão com ligações rápidas",
+        description: "Evitar contra-ataques",
+        exercises: [
+          {
+            name: "Pressão contra ligações rápidas",
+            description: "Defesa deve lançar para atacantes. Pressionar para lançamento falhar",
+          },
+        ],
+      },
+    ],
+    teamId: 1,
   },
 ];

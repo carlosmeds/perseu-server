@@ -2,8 +2,8 @@ import { UserStatus } from "../../../../domain/enum/UserStatus";
 
 export const coachesToSeed = [
   {
-    email: "pep@gmail.com",
-    name: "Pep Guardiola",
+    email: "jose@gmail.com",
+    name: "José",
     document: "23016610086",
     birthdate: new Date("04/05/1962"),
     cref: "057515-G/SP",
