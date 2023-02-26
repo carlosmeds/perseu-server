@@ -25,7 +25,7 @@ export class DeleteTeamUseCase {
 
     await this.teamRepo.deleteTeam(team);
  
-    await this.coachRepo.removeCoachTeam(team.coach);
+    await this.teamRepo.removeCoachFromTeam(team.coach);
 
     await this.requestRepo.deleteFromTeam(team);
 

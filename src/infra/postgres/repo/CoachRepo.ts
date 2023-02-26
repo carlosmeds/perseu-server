@@ -81,22 +81,10 @@ export class CoachRepo {
     return result;
   }
 
-  async updateCoachTeam(coach: Coach, team: Team) {
+  async updateTeamFromCoach(coach: Coach,  status: UserStatus, team?: Team) {
     coach.team = team;
-    coach.status = UserStatus.COACH_WITH_TEAM;
+    coach.status = status;
     coach.updatedAt = new Date();
-    return await AppDataSource.manager.save(coach);
-  }
-
-  async removeCoachTeam(coach: Coach) {
-    coach.status = UserStatus.COACH_WITHOUT_TEAM;
-    coach.updatedAt = new Date();
-
-    await AppDataSource.manager.query(
-      'UPDATE team SET "coachId" = null WHERE "coachId" = $1',
-      [coach.id]
-    );
-
     return await AppDataSource.manager.save(coach);
   }
 

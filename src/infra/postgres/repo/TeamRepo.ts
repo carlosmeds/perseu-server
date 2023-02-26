@@ -86,4 +86,16 @@ export class TeamRepo {
     team.deletedAt = new Date();
     return await AppDataSource.manager.save(team);
   }
+
+  async removeCoachFromTeam(coach: Coach) {
+    coach.status = UserStatus.COACH_WITHOUT_TEAM;
+    coach.updatedAt = new Date();
+
+    await AppDataSource.manager.query(
+      'UPDATE team SET "coachId" = null WHERE "coachId" = $1',
+      [coach.id]
+    );
+
+    return await AppDataSource.manager.save(coach);
+  }
 }
