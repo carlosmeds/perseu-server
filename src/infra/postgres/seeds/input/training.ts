@@ -1,6 +1,6 @@
 export const trainingsToSeed = [
   {
-    name: "Pré-jogo",
+    name: "Levantamento de peso",
     sessions: [
       {
         name: "Alongamento",
