@@ -180,7 +180,7 @@ export const athletesToSeed = [
     createdAt: new Date("2023-01-23 07:20:01.033"),
   },
   {
-    email: "Lucas@gmail.com",
+    email: "lucas@gmail.com",
     name: "Lucas Duarte",
     document: "27898169484",
     birthdate: new Date("08/21/2002"),

@@ -17,29 +17,30 @@ export const trainingsToSeed = [
         ],
       },
       {
-        name: "Aquecimento",
-        description: "Realizar movimentos com a bola",
+        name: "Levantamento de halteres",
+        description:
+          "Utilizar os halteres para erguer peso com foco no peitoral e braços",
         exercises: [
           {
-            name: "Dois toques",
+            name: "Elevação lateral",
             description:
-              "Com um colega, realizar dois toques na bola. O jogador que errar deve correr até a linha de fundo e voltar",
+              "Elevar os halteres para os lados, com os cotovelos flexionados, até a altura dos ombros",
           },
           {
-            name: "Bobinho",
+            name: "Rosca direta",
             description:
-              "Durante 5 minutos, realizar passes curtos e rápidos com cinco jogadores, em um círculo, sendo que um deve ser o bobinho",
+              "Segurar os halteres com as palmas voltadas para o corpo, com os cotovelos flexionados, e levantar os halteres até a altura dos ombros",
           },
           {
-            name: "Inversões",
+            name: "Elevação frontal",
             description:
-              "Realizar inversões com um colega no lado inverso do campo, durante 5 minutos",
+              "Segurar os halteres com as palmas voltadas para o corpo, com os cotovelos flexionados, e levantar os halteres até a altura dos ombros",
           },
         ],
       },
       {
         name: "Exercícios aeróbicos",
-        description: "Preparar corpo para o jogo",
+        description: "Exercícios aeróbicos para melhorar a resistência",
         exercises: [
           {
             name: "Corrida",
@@ -56,28 +57,33 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Treino de posse de bola",
+    name: "Corrida de velocidade",
     sessions: [
       {
-        name: "Toques rápidos",
-        description: "Toques rápidos em campo reduzido",
+        name: "Corrida de 400 metros",
+        description: "Corrida de 400 metros para melhorar a velocidade",
         exercises: [
           {
-            name: "Toques rápidos com dois times de 6 jogadores",
+            name: "Tiro de largada",
             description:
-              "Enquadramento de 4x4. 2x2 no meio. Um time deve manter a posse de bola",
+              "Tiro de largada para correr 400 metros. Correr o mais rápido possível três vezes",
           },
         ],
       },
       {
-        name: "Transição",
+        name: "Corrida de 800 metros",
         description:
-          "Esse treino é para treinar a transição de ataque para defesa",
+          "Corrida de 800 metros para melhorar a velocidade e resistência",
         exercises: [
           {
-            name: "Transição de ataque para defesa",
+            name: "Tiro de largada",
             description:
-              "No início do campo, um time deve atacar e o outro defender. Quando o time atacante perder a bola, o time defensor deve chegar ao fim do campo",
+              "Tiro de largada para correr 800 metros. Correr em velocidade média três vezes",
+          },
+          {
+            name: "Corrida completa",
+            description:
+              "Tiro de largada para correr os 800 metros. Correr o mais rápido possível três vezes",
           },
         ],
       },
@@ -85,50 +91,50 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Finalização e defesa",
+    name: "Arremeso de peso",
     sessions: [
       {
-        name: "Finalização de longe",
-        description: "Buscar melhorar a finalização de longe",
+        name: "Arremesso de peso pesado",
+        description: "Arremesso de peso pesado para melhorar a força",
         exercises: [
           {
-            name: "Finalização de fora da área",
-            description: "Alternar chutes do meio e do lado do campo",
+            name: "Arremesso de peso de 10kg",
+            description: "Arremessar peso de 10kg 10 vezes",
           },
           {
-            name: "Finalização de fora da área em movimento",
+            name: "Arremesso de peso de 15kg",
             description:
-              "Alternar chutes do meio e do lado do campo. Um jogador deve correr em direção ao gol e receber o passe",
+              "Arremessar peso de 15kg 10 vezes",
           },
         ],
       },
       {
-        name: "Bolas paradas",
-        description: "Melhora a finalização de bolas paradas",
+        name: "Arremesso de martelo",
+        description: "Arremesso de martelo para melhorar equilíbrio e força",
         exercises: [
           {
-            name: "Pênaltis",
-            description: "Dividir em dois times. Alternar pênaltis",
+            name: "Arremesso de martelo de 5kg",
+            description: "Arremessar martelo de 5kg 10 vezes",
           },
           {
-            name: "Falta",
-            description: "Focar na finalização no canto do goleiro",
+            name: "Arremesso de martelo de 10kg",
+            description: "Arremessar martelo de 10kg 10 vezes",
           },
           {
-            name: "Escanteio",
+            name: "Arremesso de martelo de 15kg",
             description:
-              "Alternar escanteios de cada lado do campo e utilizar formação combinada",
+              "Arremessar martelo de 15kg 10 vezes",
           },
         ],
       },
       {
-        name: "Finalização de curta distância",
-        description: "Melhorar tomada de decisão na hora de finalizar",
+        name: "Arremesso em pista molhada",
+        description: "Arremesso em pista molhada para melhorar equilíbrio",
         exercises: [
           {
-            name: "Chutes 3x3",
+            name: "Arremesso de peso de 10kg",
             description:
-              "Em gol pequeno, buscar gol no 3x3. Todos devem tocar na bola",
+              "Em pista molhada, arremessar peso de 10kg 10 vezes",
           },
         ],
       },
@@ -136,11 +142,11 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Pós-jogo",
+    name: "Corrida com obstáculos",
     sessions: [
       {
-        name: "Corrida",
-        description: "Corrida leve",
+        name: "Corrida com obstáculos",
+        description: "Corrida com obstáculos para melhorar a resistência. Tomar cuidado com lesões.",
         exercises: [
           {
             name: "Trote leve",
@@ -154,17 +160,17 @@ export const trainingsToSeed = [
         ],
       },
       {
-        name: "Hidro",
-        description: "Realizar hidroginástica para regenerar o corpo",
+        name: "Corrida com obstáculos",
+        description: "Correr com 10 obstáculos e focar no salto",
         exercises: [
           {
-            name: "Membros inferiores",
-            description: "Realizar exercícios com membros inferiores",
+            name: "Corrida com obstáculos",
+            description: "Correr com 10 obstáculos",
           },
           {
-            name: "Costas",
+            name: "Salto com obstáculos",
             description:
-              "Realizar exercícios com membros superiores e costas. Utilizar boia",
+              "Salto com 10 obstáculos. Ir alternando entre os pés",
           },
         ],
       },
@@ -172,21 +178,21 @@ export const trainingsToSeed = [
     teamId: 1,
   },
   {
-    name: "Treino tático",
+    name: "Marcha atlética",
     sessions: [
       {
-        name: "Defesa x ataque",
+        name: "Treino de inferiores",
         description: "",
         exercises: [
           {
-            name: "Defesa com 3 zagueiros",
+            name: "Treino de resistência",
             description:
-              "Defesa deve utilizar esquema com 3 zagueiros e 2 laterais",
+              "Treinar resistência com 30 minutos de corrida leve",
           },
           {
-            name: "Defesa com 1 volante",
+            name: "Treino de velocidade",
             description:
-              "Defesa deve utilizar esquema com  2 zagueiros, 1 volante e 2 laterais",
+              "Durante 10 minutos, correr em velocidade máxima na esteira",
           },
         ],
       },
@@ -194,31 +200,32 @@ export const trainingsToSeed = [
     teamId: 2,
   },
   {
-    name: "Treino de pressão",
+    name: "Revezamento",
     sessions: [
       {
-        name: "Treinar pressão no ataque",
-        description: "Coordenar pressão no ataque",
+        name: "Corrida sincronizada",
+        description: "Coordenar velocidade e ritmo",
         exercises: [
           {
-            name: "Pressão na zaga",
+            name: "Corrida sincronizada com ultrapassagem",
             description:
-              "Durante 10 minutos, zaga deve manter posse de bola. Evitar chutões",
+              "Correr em velocidade média. Correr mais rápido quando ultrapassar o companheiro",
           },
           {
-            name: "Pressão pós-perda",
+            name: "Passagem de bastão em pista reduzida",
             description:
-              "Meio-campo deve manter bola, enquanto zagueiros e atacantes pressionam",
+              "Focar na passagem de bastão. Correr em velocidade média",
           },
         ],
       },
       {
-        name: "Pressão com ligações rápidas",
-        description: "Evitar contra-ataques",
+        name: "Treino de velocidade",
+        description: "Focar em tiros curtos",
         exercises: [
           {
-            name: "Pressão contra ligações rápidas",
-            description: "Defesa deve lançar para atacantes. Pressionar para lançamento falhar",
+            name: "Tiros de 100 metros",
+            description:
+              "10 tiros de 100 metros. Correr o mais rápido possível e com o bastão na mão",
           },
         ],
       },

@@ -5,11 +5,11 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 3,
       },
       {
-        date: new Date("2023-01-04T00:00:00.000Z"),
+        date: new Date("2023-02-04T00:00:00.000Z"),
         effort: 4,
       },
     ],
@@ -20,11 +20,11 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-02T00:00:00.000Z"),
+        date: new Date("2023-02-02T00:00:00.000Z"),
         effort: 5,
       },
       {
-        date: new Date("2023-01-05T00:00:00.000Z"),
+        date: new Date("2023-02-05T00:00:00.000Z"),
         effort: 5,
       },
     ],
@@ -35,7 +35,7 @@ export const athleteTrainingsToSeed = [
     active: false,
     checkIn: [
       {
-        date: new Date("2023-01-03T00:00:00.000Z"),
+        date: new Date("2023-02-03T00:00:00.000Z"),
         effort: 3,
       },
     ],
@@ -46,11 +46,11 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 4,
       },
       {
-        date: new Date("2023-01-05T00:00:00.000Z"),
+        date: new Date("2023-02-05T00:00:00.000Z"),
         effort: 4,
       },
     ],
@@ -61,7 +61,7 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-02T00:00:00.000Z"),
+        date: new Date("2023-02-02T00:00:00.000Z"),
         effort: 5,
       },
     ],
@@ -72,11 +72,11 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 1,
       },
       {
-        date: new Date("2023-01-04T00:00:00.000Z"),
+        date: new Date("2023-02-04T00:00:00.000Z"),
         effort: 4,
       },
     ],
@@ -87,7 +87,7 @@ export const athleteTrainingsToSeed = [
     active: false,
     checkIn: [
       {
-        date: new Date("2023-01-02T00:00:00.000Z"),
+        date: new Date("2023-02-02T00:00:00.000Z"),
         effort: 4,
       },
     ],
@@ -98,7 +98,7 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-06T00:00:00.000Z"),
+        date: new Date("2023-02-06T00:00:00.000Z"),
         effort: 4,
       },
     ],
@@ -109,7 +109,7 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-05T00:00:00.000Z"),
+        date: new Date("2023-02-05T00:00:00.000Z"),
         effort: 5,
       },
     ],
@@ -120,7 +120,7 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 3,
       },
     ],
@@ -131,15 +131,15 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 3,
       },
       {
-        date: new Date("2023-01-04T00:00:00.000Z"),
+        date: new Date("2023-02-04T00:00:00.000Z"),
         effort: 2,
       },
       {
-        date: new Date("2023-01-07T00:00:00.000Z"),
+        date: new Date("2023-02-07T00:00:00.000Z"),
         effort: 4,
       },
     ],
@@ -150,15 +150,15 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-02T00:00:00.000Z"),
+        date: new Date("2023-02-02T00:00:00.000Z"),
         effort: 5,
       },
       {
-        date: new Date("2023-01-05T00:00:00.000Z"),
+        date: new Date("2023-02-05T00:00:00.000Z"),
         effort: 5,
       },
       {
-        date: new Date("2023-01-08T00:00:00.000Z"),
+        date: new Date("2023-02-08T00:00:00.000Z"),
         effort: 5,
       },
     ],
@@ -169,15 +169,15 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-03T00:00:00.000Z"),
+        date: new Date("2023-02-03T00:00:00.000Z"),
         effort: 3,
       },
       {
-        date: new Date("2023-01-06T00:00:00.000Z"),
+        date: new Date("2023-02-06T00:00:00.000Z"),
         effort: 4,
       },
       {
-        date: new Date("2023-01-09T00:00:00.000Z"),
+        date: new Date("2023-02-09T00:00:00.000Z"),
         effort: 5,
       },
     ],
@@ -194,7 +194,7 @@ export const athleteTrainingsToSeed = [
     active: false,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 3,
       },
     ],
@@ -211,11 +211,11 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-02T00:00:00.000Z"),
+        date: new Date("2023-02-02T00:00:00.000Z"),
         effort: 3,
       },
       {
-        date: new Date("2023-01-04T00:00:00.000Z"),
+        date: new Date("2023-02-04T00:00:00.000Z"),
         effort: 5,
       },
     ],
@@ -226,7 +226,7 @@ export const athleteTrainingsToSeed = [
     active: true,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 3,
       },
     ],
@@ -237,7 +237,7 @@ export const athleteTrainingsToSeed = [
     active: false,
     checkIn: [
       {
-        date: new Date("2023-01-01T00:00:00.000Z"),
+        date: new Date("2023-02-01T00:00:00.000Z"),
         effort: 3,
       },
     ],

@@ -7,7 +7,7 @@ export const groupsToSeed = [
   {
     name: "Corredores",
     teamId: 1,
-    athletes: [5, 6, 7],
+    athletes: [6, 7],
   },
   {
     name: "Levantadores de peso",
